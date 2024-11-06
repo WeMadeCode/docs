@@ -71,6 +71,7 @@ module.exports = tseslint.config(
         rules: {
             'prettier/prettier': 'error',
             'simple-import-sort/imports': 'error',
+            '@typescript-eslint/no-explicit-any': 'off',
         },
     },
     frontendMonitorConfig,

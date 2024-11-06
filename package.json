@@ -1,5 +1,5 @@
 {
-    "name": "miaoma-docs",
+    "name": "miaoma-doc",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -7,6 +7,7 @@
     "scripts": {
         "build:watch": "turbo build:watch",
         "build": "turbo build",
+        "dev": "turbo dev",
         "clean": "run-s clean:build clean:caches",
         "clean:build": "pnpm --filter @miaoma/* clean",
         "clean:caches": " rimraf .turbo/cache **/*/.turbo",
@@ -15,6 +16,7 @@
         "lint": "eslint",
         "lint:staged": "lint-staged",
         "spellcheck": "cspell lint --dot --gitignore --color --cache --show-suggestions \"(packages|apps)/**/*.@(html|js|cjs|mjs|ts|tsx|css|scss|md)\"",
+        "typecheck": "turbo typecheck",
         "commit": "git-cz",
         "prepare": "husky"
     },

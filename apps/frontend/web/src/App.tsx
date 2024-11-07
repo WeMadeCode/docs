@@ -7,6 +7,8 @@ import './App.css'
 
 import { locales } from '@miaoma-doc/core'
 import { useCreateMiaomaDoc } from '@miaoma-doc/react'
+import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
+import { Input } from '@miaoma-doc/shadcn-shared-ui/components/ui/input'
 import { useEffect } from 'react'
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
     return (
         <>
             <h1>妙码协同文档 | 妙码学院</h1>
+            <Input />
+            <Button>按钮</Button>
             {/* <MiaomaDocView editor={editor} /> */}
         </>
     )

@@ -19,7 +19,6 @@
         "**/language.ts",
         "**/package.json",
         "**/*.md",
-        "eslint.config.js",
-        "packages/browser-utils/src/metrics/**/*"
+        "eslint.config.js"
     ]
 }

@@ -8,10 +8,10 @@ import '@miaoma-doc/shadcn/style.css'
 
 import { locales } from '@miaoma-doc/core'
 import { useCreateMiaomaDoc } from '@miaoma-doc/react'
-import { MiaomaDocView } from '@miaoma-doc/shadcn'
-import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
-import { Input } from '@miaoma-doc/shadcn-shared-ui/components/ui/input'
 import { useEffect } from 'react'
+import { RouterProvider } from 'react-router-dom'
+
+import { router } from './router'
 
 function App() {
     const editor = useCreateMiaomaDoc({
@@ -25,14 +25,7 @@ function App() {
         })
     }, [editor])
 
-    return (
-        <>
-            <h1>妙码协同文档 | 妙码学院</h1>
-            <Input />
-            <Button>按钮</Button>
-            <MiaomaDocView editor={editor} theme="light" />
-        </>
-    )
+    return <RouterProvider router={router} />
 }
 
 export default App

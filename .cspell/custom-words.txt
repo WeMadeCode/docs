@@ -18,12 +18,15 @@ Heyi
 imba
 jison
 labelledby
+lucide
 marko
+miao
 miaoma
 miaomadoc
 nodeconversions
 nonbreaking
 numberedlist
+nums
 objc
 prosemirror
 remaing

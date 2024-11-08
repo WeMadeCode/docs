@@ -93,7 +93,7 @@ export const zh: Dictionary = {
         },
     },
     placeholders: {
-        default: "输入 '/' 以使用命令",
+        default: '输入 “/” 快速插入内容',
         heading: '标题',
         bulletListItem: '列表',
         numberedListItem: '列表',

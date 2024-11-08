@@ -15,7 +15,8 @@
         "react-dom": "^18.3.1",
         "@miaoma-doc/core": "workspace:*",
         "@miaoma-doc/react": "workspace:*",
-        "@miaoma-doc/shadcn-shared-ui": "workspace:*"
+        "@miaoma-doc/shadcn-shared-ui": "workspace:*",
+        "@miaoma-doc/shadcn": "workspace:*"
     },
     "devDependencies": {
         "@eslint/js": "^9.13.0",

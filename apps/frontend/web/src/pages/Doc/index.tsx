@@ -8,8 +8,12 @@ import '@miaoma-doc/shadcn/style.css'
 import { locales } from '@miaoma-doc/core'
 import { useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
+import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
+import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+
+import { SharePopover } from '@/components/SharePopover'
 
 const pages = [
     {
@@ -70,12 +74,28 @@ export const Doc = () => {
     }, [editor])
 
     return (
-        <div className="w-[1000px] mx-auto">
-            <h1 className="py-9 px-[54px] leading-[3.25rem] text-4xl font-bold">
-                <span className="mr-4">{page?.emoji}</span>
-                <span>{page?.name}</span>
-            </h1>
-            <MiaomaDocView editor={editor} theme="light" />
-        </div>
+        <SidebarInset>
+            <header className="flex flex-row justify-between items-center h-[52px] px-[16px] border-b border-b-zinc-100">
+                <div className="flex flex-row items-center gap-2">
+                    <SidebarTrigger />
+                    <Separator orientation="vertical" className="mr-2 h-4" />
+                    <div className="flex flex-row flex-auto items-center text-sm">
+                        <em className="mr-2">{page?.emoji}</em>
+                        <p className="overflow-hidden whitespace-nowrap max-w-[300px] text-ellipsis" title={page?.name}>
+                            {page?.name}
+                        </p>
+                    </div>
+                </div>
+
+                <SharePopover />
+            </header>
+            <div className="w-[60%] mx-auto">
+                <h1 className="py-12 px-[54px] leading-[3.25rem] text-4xl font-bold">
+                    <span className="mr-4">{page?.emoji}</span>
+                    <span>{page?.name}</span>
+                </h1>
+                <MiaomaDocView editor={editor} theme="light" />
+            </div>
+        </SidebarInset>
     )
 }

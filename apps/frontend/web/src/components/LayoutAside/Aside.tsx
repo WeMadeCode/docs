@@ -113,7 +113,7 @@ export function Aside() {
         navigate(`/account/login?redirect=${window.location.pathname}`)
     }
     return (
-        <Sidebar>
+        <Sidebar variant="inset">
             <SidebarHeader>
                 <div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-2">
                     <a href="/" className="flex items-center gap-2 ">
@@ -155,7 +155,7 @@ export function Aside() {
                                             // className={({ isActive }) => cn(isActive ? 'bg-red-500' : 'bg-green-500')}
                                         >
                                             <span className="text-lg">{item.emoji}</span>
-                                            <span>{item.name}</span>
+                                            <span className="text-xs">{item.name}</span>
                                         </NavLink>
                                     </SidebarMenuButton>
                                     {item.links && (

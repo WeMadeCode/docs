@@ -43,3 +43,4 @@ tempfile
 Textblock
 tiptap
 tmpfiles
+xyflow

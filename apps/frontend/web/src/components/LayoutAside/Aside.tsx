@@ -41,6 +41,7 @@ import {
     Settings,
     StarOff,
     Trash2,
+    Waypoints,
 } from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
@@ -135,6 +136,14 @@ export function Aside() {
                             <NavLink to={`/doc`}>
                                 <FileStack />
                                 <span>全部文档</span>
+                            </NavLink>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <NavLink to={`/doc/graph`}>
+                                <Waypoints />
+                                <span>文档图谱</span>
                             </NavLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -240,7 +249,7 @@ export function Aside() {
                                         <AvatarFallback>{currentUser.username}</AvatarFallback>
                                     </Avatar>
                                     <p className="text-left">
-                                        <p className="text-lg">{currentUser.username}！</p>
+                                        <span className="text-lg">{currentUser.username}！</span>
                                         庆祝一下 🎉
                                     </p>
                                 </>

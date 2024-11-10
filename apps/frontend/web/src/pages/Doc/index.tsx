@@ -10,7 +10,7 @@ import { useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
 import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
 import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
@@ -60,12 +60,10 @@ const pages = [
     },
 ]
 
-const doc = new Y.Doc()
-
-const provider = new WebsocketProvider('ws://localhost:1314', `miaoma-doc`, doc)
-
 export const Doc = () => {
     const params = useParams()
+    const doc = useMemo(() => new Y.Doc(), [])
+    const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${params.id}`, doc)).current
     const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
 
     const page = useMemo(() => {
@@ -90,23 +88,27 @@ export const Doc = () => {
         return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
     }, [])
 
-    const editor = useCreateMiaomaDoc({
-        dictionary: locales.zh,
-        collaboration: {
-            // The Yjs Provider responsible for transporting updates:
-            provider,
-            // Where to store BlockNote data in the Y.Doc:
-            fragment: doc.getXmlFragment('document-store'),
-            // Information (name and color) for this user:
-            user: {
-                name: userName,
-                color: randomColor,
+    const editor = useCreateMiaomaDoc(
+        {
+            dictionary: locales.zh,
+            collaboration: {
+                // The Yjs Provider responsible for transporting updates:
+                provider,
+                // Where to store BlockNote data in the Y.Doc:
+                fragment: doc.getXmlFragment(`document-store-${params.id}`),
+                // Information (name and color) for this user:
+                user: {
+                    name: userName,
+                    color: randomColor,
+                },
+                renderCursor: cursorRender,
             },
-            renderCursor: cursorRender,
         },
-    })
+        [params.id, provider]
+    )
 
     useEffect(() => {
+        provider.connect()
         const changeHandler = () => {
             const states = provider.awareness.getStates()
             const users = new Map<number, { name: string; color: string }>()
@@ -121,6 +123,7 @@ export const Doc = () => {
             }
             setRemoteUsers(users)
         }
+        // @TODO: 这里需要优化，避免频繁更新
         provider.awareness.on('change', changeHandler)
 
         return () => {

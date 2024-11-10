@@ -4,6 +4,8 @@
  *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
  */
 
+import { memo } from 'react'
+
 export interface AvatarListProps {
     remoteUsers: Map<
         number,
@@ -18,7 +20,7 @@ const getIcon = (userName: string) => {
     return `https://robohash.org/${userName}?set=set1&size=100x100`
 }
 
-export function AvatarList(props: AvatarListProps) {
+export const AvatarList = memo((props: AvatarListProps) => {
     const { remoteUsers } = props
     return (
         remoteUsers && (
@@ -34,4 +36,4 @@ export function AvatarList(props: AvatarListProps) {
             </div>
         )
     )
-}
+})

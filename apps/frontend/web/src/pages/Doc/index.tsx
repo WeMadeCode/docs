@@ -10,10 +10,15 @@ import { useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
 import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
 import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { WebsocketProvider } from 'y-websocket'
+import * as Y from 'yjs'
 
 import { SharePopover } from '@/components/SharePopover'
+
+import { AvatarList } from './AvatarList'
+import { cursorRender } from './cursorRender'
 
 const pages = [
     {
@@ -55,17 +60,74 @@ const pages = [
     },
 ]
 
+const doc = new Y.Doc()
+
+const provider = new WebsocketProvider('ws://localhost:1314', `miaoma-doc`, doc)
+
 export const Doc = () => {
     const params = useParams()
+    const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
 
     const page = useMemo(() => {
         return pages.find(page => page.id === params.id)
     }, [params?.id])
 
+    const userName = useMemo(() => {
+        const storedName = sessionStorage.getItem('miaomadoc-user-name')
+        if (storedName) {
+            return storedName
+        } else {
+            const randomName = `heyi-${Math.floor(Math.random() * 1000)}`
+            sessionStorage.setItem('miaomadoc-user-name', randomName)
+            return randomName
+        }
+    }, [])
+
+    const randomColor = useMemo(() => {
+        const r = Math.floor(Math.random() * 256)
+        const g = Math.floor(Math.random() * 256)
+        const b = Math.floor(Math.random() * 256)
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
+    }, [])
+
     const editor = useCreateMiaomaDoc({
         dictionary: locales.zh,
+        collaboration: {
+            // The Yjs Provider responsible for transporting updates:
+            provider,
+            // Where to store BlockNote data in the Y.Doc:
+            fragment: doc.getXmlFragment('document-store'),
+            // Information (name and color) for this user:
+            user: {
+                name: userName,
+                color: randomColor,
+            },
+            renderCursor: cursorRender,
+        },
     })
-    console.log('🚀 ~ App ~ editor:', editor)
+
+    useEffect(() => {
+        const changeHandler = () => {
+            const states = provider.awareness.getStates()
+            const users = new Map<number, { name: string; color: string }>()
+            const cursors = new Map<number, { x: number; y: number; windowSize: { width: number; height: number } }>()
+            for (const [key, value] of states) {
+                // 排除自己
+                if (key === provider.awareness.clientID) {
+                    continue
+                }
+                users.set(key, value.user)
+                cursors.set(key, value.cursor)
+            }
+            setRemoteUsers(users)
+        }
+        provider.awareness.on('change', changeHandler)
+
+        return () => {
+            provider.awareness.off('change', changeHandler)
+            provider.disconnect()
+        }
+    }, [provider])
 
     useEffect(() => {
         editor.onChange(value => {
@@ -87,7 +149,10 @@ export const Doc = () => {
                     </div>
                 </div>
 
-                <SharePopover />
+                <div className="flex flex-row items-center gap-4">
+                    {remoteUsers && <AvatarList remoteUsers={remoteUsers} />}
+                    <SharePopover />
+                </div>
             </header>
             <div className="w-[60%] mx-auto">
                 <h1 className="py-12 px-[54px] leading-[3.25rem] text-4xl font-bold">

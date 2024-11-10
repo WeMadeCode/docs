@@ -23,7 +23,9 @@
         "canvas-confetti": "1.9.3",
         "lucide-react": "0.456.0",
         "@xyflow/react": "12.3.4",
-        "d3-force": "3.0.0"
+        "d3-force": "3.0.0",
+        "yjs": "13.6.20",
+        "y-websocket": "2.0.4"
     },
     "devDependencies": {
         "@types/react": "^18.3.12",

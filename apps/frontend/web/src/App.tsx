@@ -6,25 +6,11 @@
 import './App.css'
 import '@miaoma-doc/shadcn/style.css'
 
-import { locales } from '@miaoma-doc/core'
-import { useCreateMiaomaDoc } from '@miaoma-doc/react'
-import { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 
 import { router } from './router'
 
 function App() {
-    const editor = useCreateMiaomaDoc({
-        dictionary: locales.zh,
-    })
-    console.log('🚀 ~ App ~ editor:', editor)
-
-    useEffect(() => {
-        editor.onChange(value => {
-            console.log(value)
-        })
-    }, [editor])
-
     return <RouterProvider router={router} />
 }
 

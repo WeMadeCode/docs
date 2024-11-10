@@ -1,0 +1,16 @@
+{
+    "name": "@miaoma-doc/y-websocket-server-demo",
+    "version": "1.19.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node server.js"
+    },
+    "keywords": [],
+    "author": "Heyi",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "ws": "^8.18.0",
+        "y-websocket": "^2.0.4"
+    }
+}

@@ -5,8 +5,15 @@
  */
 import '@miaoma-doc/shadcn/style.css'
 
-import { locales } from '@miaoma-doc/core'
-import { useCreateMiaomaDoc } from '@miaoma-doc/react'
+import {
+    defaultBlockSpecs,
+    defaultInlineContentSpecs,
+    filterSuggestionItems,
+    locales,
+    MiaomaDocEditor,
+    MiaomaDocSchema,
+} from '@miaoma-doc/core'
+import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
 import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
 import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
@@ -15,6 +22,7 @@ import { useParams } from 'react-router-dom'
 import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
 
+import { Mention } from '@/blocks/mention'
 import { SharePopover } from '@/components/SharePopover'
 
 import { AvatarList } from './AvatarList'
@@ -60,6 +68,46 @@ const pages = [
     },
 ]
 
+const schema = MiaomaDocSchema.create({
+    inlineContentSpecs: {
+        ...defaultInlineContentSpecs,
+        mention: Mention,
+    },
+    blockSpecs: {
+        ...defaultBlockSpecs,
+    },
+})
+
+// Function which gets all users for the mentions menu.
+const getMentionMenuItems = (editor: MiaomaDocEditor, pageId?: string): DefaultReactSuggestionItem[] => {
+    const items: DefaultReactSuggestionItem[] = []
+
+    for (const page of pages) {
+        if (page.id !== pageId) {
+            items.push({
+                icon: <span>{page.emoji}</span>,
+                title: page.name,
+                onItemClick: () => {
+                    editor.insertInlineContent([
+                        {
+                            // @ts-expect-error mention type
+                            type: 'mention',
+                            props: {
+                                id: page.id,
+                                title: page.name,
+                                icon: page.emoji,
+                            },
+                        },
+                        ' ', // add a space after the mention
+                    ])
+                },
+            })
+        }
+    }
+
+    return items
+}
+
 export const Doc = () => {
     const params = useParams()
     const doc = useMemo(() => new Y.Doc(), [])
@@ -90,6 +138,7 @@ export const Doc = () => {
 
     const editor = useCreateMiaomaDoc(
         {
+            schema,
             dictionary: locales.zh,
             collaboration: {
                 // The Yjs Provider responsible for transporting updates:
@@ -108,7 +157,6 @@ export const Doc = () => {
     )
 
     useEffect(() => {
-        provider.connect()
         const changeHandler = () => {
             const states = provider.awareness.getStates()
             const users = new Map<number, { name: string; color: string }>()
@@ -132,12 +180,6 @@ export const Doc = () => {
         }
     }, [provider])
 
-    useEffect(() => {
-        editor.onChange(value => {
-            console.log(value)
-        })
-    }, [editor])
-
     return (
         <SidebarInset>
             <header className="flex flex-row justify-between items-center h-[52px] px-[16px] border-b border-b-zinc-100">
@@ -151,7 +193,6 @@ export const Doc = () => {
                         </p>
                     </div>
                 </div>
-
                 <div className="flex flex-row items-center gap-4">
                     {remoteUsers && <AvatarList remoteUsers={remoteUsers} />}
                     <SharePopover />
@@ -162,7 +203,15 @@ export const Doc = () => {
                     <span className="mr-4">{page?.emoji}</span>
                     <span>{page?.name}</span>
                 </h1>
-                <MiaomaDocView editor={editor} theme="light" />
+                <MiaomaDocView editor={editor} theme="light">
+                    <SuggestionMenuController
+                        triggerCharacter="@"
+                        getItems={async query => {
+                            // @ts-expect-error getItems type
+                            return filterSuggestionItems(getMentionMenuItems(editor, page?.id), query)
+                        }}
+                    />
+                </MiaomaDocView>
             </div>
         </SidebarInset>
     )

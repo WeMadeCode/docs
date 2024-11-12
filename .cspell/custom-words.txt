@@ -44,3 +44,5 @@ Textblock
 tiptap
 tmpfiles
 xyflow
+xiaoer
+metatype

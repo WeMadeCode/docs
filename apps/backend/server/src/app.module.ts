@@ -10,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import databaseConfig from './config/database'
 import { ApplicationModule } from './modules/application/application.module'
 import { AuthModule } from './modules/auth/auth.module'
+import { WSDemoModule } from './modules/ws-demo/ws-demo.module'
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from './modules/auth/auth.module'
         }),
         AuthModule,
         ApplicationModule,
+        WSDemoModule,
     ],
     providers: [],
 })

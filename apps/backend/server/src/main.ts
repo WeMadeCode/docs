@@ -4,6 +4,7 @@
  *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
  */
 import { NestFactory } from '@nestjs/core'
+import { WsAdapter } from '@nestjs/platform-ws'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 import { AppModule } from './app.module'
@@ -14,6 +15,9 @@ async function bootstrap() {
 
     // 全局过滤器
     app.useGlobalFilters(new HttpExceptionFilter())
+
+    // 修改 ws 默认适配器，nest 默认是基于 @nestjs/platform-socket.io，我们改为 @nestjs/platform-ws
+    app.useWebSocketAdapter(new WsAdapter(app))
 
     app.setGlobalPrefix('api')
 

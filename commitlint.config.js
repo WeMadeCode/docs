@@ -10,6 +10,8 @@ const getPackages = packagePath => fg.sync('*', { cwd: packagePath, onlyDirector
 const scopes = [
     ...getPackages('packages'),
     ...getPackages('apps'),
+    ...getPackages('apps/frontend'),
+    ...getPackages('apps/backend'),
     ...getPackages('demos'),
     'docs',
     'project',

@@ -5,16 +5,7 @@
  */
 import '@miaoma-doc/shadcn/style.css'
 
-import {
-    defaultBlockSpecs,
-    defaultInlineContentSpecs,
-    filterSuggestionItems,
-    locales,
-    MiaomaDocEditor,
-    MiaomaDocSchema,
-} from '@miaoma-doc/core'
-import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
-import { MiaomaDocView } from '@miaoma-doc/shadcn'
+import { PartialBlock } from '@miaoma-doc/core'
 import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
 import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -22,11 +13,11 @@ import { useParams } from 'react-router-dom'
 import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
 
-import { Mention } from '@/blocks/mention'
 import { SharePopover } from '@/components/SharePopover'
 
 import { AvatarList } from './AvatarList'
-import { cursorRender } from './cursorRender'
+import { DocEditor } from './DocEditor'
+// import { cursorRender } from './cursorRender'
 
 const pages = [
     {
@@ -68,97 +59,39 @@ const pages = [
     },
 ]
 
-const schema = MiaomaDocSchema.create({
-    inlineContentSpecs: {
-        ...defaultInlineContentSpecs,
-        mention: Mention,
-    },
-    blockSpecs: {
-        ...defaultBlockSpecs,
-    },
-})
-
-// Function which gets all users for the mentions menu.
-const getMentionMenuItems = (editor: MiaomaDocEditor, pageId?: string): DefaultReactSuggestionItem[] => {
-    const items: DefaultReactSuggestionItem[] = []
-
-    for (const page of pages) {
-        if (page.id !== pageId) {
-            items.push({
-                icon: <span>{page.emoji}</span>,
-                title: page.name,
-                onItemClick: () => {
-                    editor.insertInlineContent([
-                        {
-                            // @ts-expect-error mention type
-                            type: 'mention',
-                            props: {
-                                id: page.id,
-                                title: page.name,
-                                icon: page.emoji,
-                            },
-                        },
-                        ' ', // add a space after the mention
-                    ])
-                },
-            })
-        }
+async function loadFromStorage(pageId: string) {
+    // Gets the previously stored editor contents.
+    const storageString = localStorage.getItem('allPages')
+    if (!storageString) {
+        return ''
     }
-
-    return items
+    const stored = JSON.parse(storageString)
+    const storedPage = stored[pageId]
+    if (!storedPage) {
+        return
+    }
+    return storedPage.blocks
 }
+
+const doc = new Y.Doc()
 
 export const Doc = () => {
     const params = useParams()
-    const doc = useMemo(() => new Y.Doc(), [])
-    const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${params.id}`, doc)).current
-    const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
-
     const page = useMemo(() => {
         return pages.find(page => page.id === params.id)
     }, [params?.id])
 
-    const userName = useMemo(() => {
-        const storedName = sessionStorage.getItem('miaomadoc-user-name')
-        if (storedName) {
-            return storedName
-        } else {
-            const randomName = `heyi-${Math.floor(Math.random() * 1000)}`
-            sessionStorage.setItem('miaomadoc-user-name', randomName)
-            return randomName
-        }
-    }, [])
-
-    const randomColor = useMemo(() => {
-        const r = Math.floor(Math.random() * 256)
-        const g = Math.floor(Math.random() * 256)
-        const b = Math.floor(Math.random() * 256)
-        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
-    }, [])
-
-    const editor = useCreateMiaomaDoc(
-        {
-            schema,
-            dictionary: locales.zh,
-            collaboration: {
-                // The Yjs Provider responsible for transporting updates:
-                provider,
-                // Where to store BlockNote data in the Y.Doc:
-                fragment: doc.getXmlFragment(`document-store-${params.id}`),
-                // Information (name and color) for this user:
-                user: {
-                    name: userName,
-                    color: randomColor,
-                },
-                renderCursor: cursorRender,
-            },
-        },
-        [params.id, provider]
-    )
+    const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${page?.id}`, doc)).current
+    const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
+    /**
+     * 文档初始内容
+     */
+    const [initialContent, setInitialContent] = useState<PartialBlock[] | 'loading'>('loading')
 
     useEffect(() => {
         const changeHandler = () => {
             const states = provider.awareness.getStates()
+            console.log('🚀 ~ changeHandler ~ states:', provider.awareness.doc, doc)
             const users = new Map<number, { name: string; color: string }>()
             const cursors = new Map<number, { x: number; y: number; windowSize: { width: number; height: number } }>()
             for (const [key, value] of states) {
@@ -179,6 +112,16 @@ export const Doc = () => {
             provider.disconnect()
         }
     }, [provider])
+
+    // 加载缓存的文档内容
+    useEffect(() => {
+        if (!page?.id) {
+            return
+        }
+        loadFromStorage(page.id).then(content => {
+            setInitialContent(content)
+        })
+    }, [page?.id])
 
     return (
         <SidebarInset>
@@ -203,15 +146,9 @@ export const Doc = () => {
                     <span className="mr-4">{page?.emoji}</span>
                     <span>{page?.name}</span>
                 </h1>
-                <MiaomaDocView editor={editor} theme="light">
-                    <SuggestionMenuController
-                        triggerCharacter="@"
-                        getItems={async query => {
-                            // @ts-expect-error getItems type
-                            return filterSuggestionItems(getMentionMenuItems(editor, page?.id), query)
-                        }}
-                    />
-                </MiaomaDocView>
+                {page?.id && initialContent !== 'loading' && (
+                    <DocEditor key={page?.id} pageId={page.id} initialContent={initialContent} doc={doc} provider={provider} />
+                )}
             </div>
         </SidebarInset>
     )

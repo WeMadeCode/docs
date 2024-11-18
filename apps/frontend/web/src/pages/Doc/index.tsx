@@ -17,6 +17,7 @@ import { SharePopover } from '@/components/SharePopover'
 
 import { AvatarList } from './AvatarList'
 import { DocEditor } from './DocEditor'
+// import { DocEditorDemo } from './DocEditorDemo'
 // import { cursorRender } from './cursorRender'
 
 const pages = [
@@ -149,6 +150,7 @@ export const Doc = () => {
                 {page?.id && initialContent !== 'loading' && (
                     <DocEditor key={page?.id} pageId={page.id} initialContent={initialContent} doc={doc} provider={provider} />
                 )}
+                {/* <DocEditorDemo /> */}
             </div>
         </SidebarInset>
     )

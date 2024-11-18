@@ -23,7 +23,7 @@ import * as Y from 'yjs'
 
 import { Mention } from '@/blocks/mention'
 
-// import { cursorRender } from './cursorRender'
+import { cursorRender } from './cursorRender'
 
 interface DocEditorProps {
     pageId: string
@@ -122,9 +122,6 @@ async function saveToStorage(pageId: string, jsonBlocks: Block[]) {
     localStorage.setItem('allPages', JSON.stringify({ ...stored, [pageId]: { pageId, blocks: jsonBlocks } }))
 }
 
-// const doc = new Y.Doc()
-// const provider = new WebsocketProvider('ws://localhost:1234', 'miaomadoc', doc)
-
 export function DocEditor(props: DocEditorProps) {
     const { pageId, initialContent, doc, provider } = props
 
@@ -132,41 +129,41 @@ export function DocEditor(props: DocEditorProps) {
         return pages.find(page => page.id === pageId)
     }, [pageId])
 
-    // const userName = useMemo(() => {
-    //     const storedName = sessionStorage.getItem('miaomadoc-user-name')
-    //     if (storedName) {
-    //         return storedName
-    //     } else {
-    //         const randomName = `heyi-${Math.floor(Math.random() * 1000)}`
-    //         sessionStorage.setItem('miaomadoc-user-name', randomName)
-    //         return randomName
-    //     }
-    // }, [])
+    const userName = useMemo(() => {
+        const storedName = sessionStorage.getItem('miaomadoc-user-name')
+        if (storedName) {
+            return storedName
+        } else {
+            const randomName = `heyi-${Math.floor(Math.random() * 1000)}`
+            sessionStorage.setItem('miaomadoc-user-name', randomName)
+            return randomName
+        }
+    }, [])
 
-    // const randomColor = useMemo(() => {
-    //     const r = Math.floor(Math.random() * 256)
-    //     const g = Math.floor(Math.random() * 256)
-    //     const b = Math.floor(Math.random() * 256)
-    //     return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
-    // }, [])
+    const randomColor = useMemo(() => {
+        const r = Math.floor(Math.random() * 256)
+        const g = Math.floor(Math.random() * 256)
+        const b = Math.floor(Math.random() * 256)
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
+    }, [])
 
     const editor = useCreateMiaomaDoc(
         {
             schema,
             dictionary: locales.zh,
-            initialContent,
-            // collaboration: {
-            //     // The Yjs Provider responsible for transporting updates:
-            //     provider,
-            //     // Where to store data in the Y.Doc:
-            //     fragment: doc.getXmlFragment(`document-store-${pageId}`),
-            //     // Information (name and color) for this user:
-            //     user: {
-            //         name: userName,
-            //         color: randomColor,
-            //     },
-            //     renderCursor: cursorRender,
-            // },
+            // initialContent,
+            collaboration: {
+                // The Yjs Provider responsible for transporting updates:
+                provider,
+                // Where to store data in the Y.Doc:
+                fragment: doc.getXmlFragment(`document-store-${pageId}`),
+                // Information (name and color) for this user:
+                user: {
+                    name: userName,
+                    color: randomColor,
+                },
+                renderCursor: cursorRender,
+            },
         },
         [pageId, provider, doc, initialContent]
     )

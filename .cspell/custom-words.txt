@@ -20,6 +20,7 @@ jison
 labelledby
 lucide
 marko
+metatype
 miao
 miaoma
 miaomadoc
@@ -28,6 +29,7 @@ nonbreaking
 numberedlist
 nums
 objc
+pgdb
 prosemirror
 remaing
 selectednode
@@ -43,6 +45,8 @@ tempfile
 Textblock
 tiptap
 tmpfiles
-xyflow
+typeorm
+websockets
 xiaoer
-metatype
+xyflow
+ydoc

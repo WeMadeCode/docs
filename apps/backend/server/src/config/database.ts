@@ -14,7 +14,6 @@ export default () => {
             host: isProd ? '172.28.49.109' : '192.168.31.48',
             port: 5432,
             username: 'postgres',
-            // database: 'miaoma-monitor-dsn',
             database: 'postgres',
             password: 'xiaoer',
             entities: [join(__dirname, '../', '**/**.entity{.ts,.js}')],

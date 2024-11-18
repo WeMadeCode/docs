@@ -8,7 +8,7 @@ import '@miaoma-doc/shadcn/style.css'
 import { PartialBlock } from '@miaoma-doc/core'
 import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
 import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
@@ -75,6 +75,8 @@ async function loadFromStorage(pageId: string) {
 }
 
 const doc = new Y.Doc()
+// const provider = new WebsocketProvider('ws://localhost:8080', `doc-yjs`, doc)
+const provider = new WebsocketProvider('ws://192.168.31.48:8080', `doc-yjs`, doc)
 
 export const Doc = () => {
     const params = useParams()
@@ -82,7 +84,7 @@ export const Doc = () => {
         return pages.find(page => page.id === params.id)
     }, [params?.id])
 
-    const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${page?.id}`, doc)).current
+    // const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${page?.id}`, doc)).current
     const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
     /**
      * 文档初始内容

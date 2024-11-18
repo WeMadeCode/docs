@@ -9,6 +9,7 @@ import { Layout } from '@/layout'
 import { DocList } from '@/views/Doc'
 import { Doc } from '@/views/Doc/[id]'
 import { DocGraph } from '@/views/Doc/Graph'
+import { Login } from '@/views/Login'
 
 import AuthRoute from './AuthRoute'
 
@@ -47,6 +48,6 @@ export const router: PickRouter<A> = createBrowserRouter([
     },
     {
         path: '/account/login',
-        element: <div>登录注册</div>,
+        element: <Login />,
     },
 ])

@@ -25,7 +25,9 @@
         "@xyflow/react": "12.3.4",
         "d3-force": "3.0.0",
         "yjs": "13.6.20",
-        "y-websocket": "2.0.4"
+        "y-websocket": "2.0.4",
+        "react-hook-form": "7.53.2",
+        "bcryptjs": "2.4.3"
     },
     "devDependencies": {
         "@types/react": "^18.3.12",

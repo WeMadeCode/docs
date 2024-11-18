@@ -6,17 +6,17 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 
-import { AdminService } from '../admin/admin.service'
+import { UserService } from '../user/user.service'
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
-        private readonly adminService: AdminService
+        private readonly userService: UserService
     ) {}
 
     async validateUser(username: string, pass: string): Promise<any> {
-        const admin = await this.adminService.validateUser(username, pass)
+        const admin = await this.userService.validateUser(username, pass)
         if (admin) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { password, ...result } = admin

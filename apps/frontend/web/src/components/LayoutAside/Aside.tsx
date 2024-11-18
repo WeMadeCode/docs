@@ -31,6 +31,7 @@ import {
     useSidebar,
 } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useToast } from '@miaoma-doc/shadcn-shared-ui/hooks/use-toast'
+import { useQuery } from '@tanstack/react-query'
 import {
     ArrowUpRight,
     ChevronRight,
@@ -45,6 +46,7 @@ import {
 } from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
+import * as srv from '@/services'
 import { miaoConfetti } from '@/utils/miao-confetti'
 
 const pages = [
@@ -91,16 +93,13 @@ export function Aside() {
     const navigate = useNavigate()
     const { toast } = useToast()
     const { isMobile } = useSidebar()
-    // const { data: currentUser } = useQuery({
-    //     queryKey: ['currentUser'],
-    //     queryFn: async () => {
-    //         const res = await srv.currentUser()
-    //         return res.data
-    //     },
-    // })
-    const currentUser = {
-        username: 'Heyi',
-    }
+    const { data: currentUser } = useQuery({
+        queryKey: ['currentUser'],
+        queryFn: async () => {
+            const res = await srv.currentUser()
+            return res.data
+        },
+    })
 
     const handleConfetti = () => {
         miaoConfetti.firework()

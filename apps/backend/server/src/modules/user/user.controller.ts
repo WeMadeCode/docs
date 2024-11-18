@@ -5,15 +5,15 @@
  */
 import { Body, Controller, Post } from '@nestjs/common'
 
-import { AdminService } from './admin.service'
+import { UserService } from './user.service'
 
-@Controller('admin')
-export class AdminController {
-    constructor(private readonly adminService: AdminService) {}
+@Controller('user')
+export class UserController {
+    constructor(private readonly userService: UserService) {}
 
     @Post('register')
     async add(@Body() body) {
-        const newUser = await this.adminService.register(body)
+        const newUser = await this.userService.register(body)
         return { data: newUser, success: true }
     }
 }

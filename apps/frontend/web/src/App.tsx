@@ -6,12 +6,20 @@
 import './App.css'
 import '@miaoma-doc/shadcn/style.css'
 
+import { Toaster } from '@miaoma-doc/shadcn-shared-ui/components/ui/toaster'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider } from 'react-router-dom'
 
 import { router } from './router'
+import { queryClient } from './utils/query-client'
 
 function App() {
-    return <RouterProvider router={router} />
+    return (
+        <QueryClientProvider client={queryClient}>
+            <Toaster />
+            <RouterProvider router={router} />
+        </QueryClientProvider>
+    )
 }
 
 export default App

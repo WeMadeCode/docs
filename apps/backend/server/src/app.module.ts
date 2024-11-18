@@ -12,6 +12,7 @@ import { ApplicationModule } from './modules/application/application.module'
 import { AuthModule } from './modules/auth/auth.module'
 // import { WSDemoModule } from './modules/ws-demo/ws-demo.module'
 import { DocYjsModule } from './modules/doc-yjs/doc-yjs.module'
+import { UserModule } from './modules/user/user.module'
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { DocYjsModule } from './modules/doc-yjs/doc-yjs.module'
             inject: [ConfigService],
         }),
         AuthModule,
+        UserModule,
         ApplicationModule,
         // WSDemoModule,
         DocYjsModule,

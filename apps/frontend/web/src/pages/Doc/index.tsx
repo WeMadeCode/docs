@@ -5,74 +5,38 @@
  */
 import '@miaoma-doc/shadcn/style.css'
 
-import { PartialBlock } from '@miaoma-doc/core'
+// import { PartialBlock } from '@miaoma-doc/core'
 import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
 import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
+import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
 
 import { SharePopover } from '@/components/SharePopover'
+import * as srv from '@/services'
+import { debounce } from '@/utils/debounce'
+import { queryClient } from '@/utils/query-client'
 
 import { AvatarList } from './AvatarList'
 import { DocEditor } from './DocEditor'
 // import { DocEditorDemo } from './DocEditorDemo'
 // import { cursorRender } from './cursorRender'
 
-const pages = [
-    {
-        id: '1',
-        name: 'Notion 与飞书文档协同方案精析，字节前端专家传授百万年薪架构师级项目重难点',
-        url: '#',
-        emoji: '🔭',
-        links: [{ id: '', name: '服务端渲染（SSR）与前后端同构技术原理揭秘，字节前端专家带你光速进阶全栈', emoji: '🐚', url: '#' }],
-    },
-    {
-        id: '2',
-        name: 'Ant Design 组件库架构设计与开发实践，高级前端专家带你掌握基建面试技巧',
-        url: '#',
-        emoji: '🔦',
-    },
-    {
-        id: '3',
-        name: 'Taro、Tauri 多端开发实践与原理剖析，《Taro 多端开发权威指南》作者带你悟透多端框架原理',
-        url: '#',
-        emoji: '👽',
-    },
-    {
-        id: '4',
-        name: 'Nest 服务端开发与原理深度剖析，《NestJS 实战》作者带你领略框架设计之美',
-        url: '#',
-        emoji: '🥤',
-    },
-    {
-        id: '5',
-        name: 'Babel 与编译原理详解，字节高级前端专家带你从零实现飞书表格公式执行器',
-        url: '#',
-        emoji: '🚀',
-    },
-    {
-        id: '6',
-        name: '服务端渲染（SSR）与前后端同构技术原理揭秘，字节前端专家带你光速进阶全栈',
-        url: '#',
-        emoji: '🐚',
-    },
-]
-
-async function loadFromStorage(pageId: string) {
-    // Gets the previously stored editor contents.
-    const storageString = localStorage.getItem('allPages')
-    if (!storageString) {
-        return ''
-    }
-    const stored = JSON.parse(storageString)
-    const storedPage = stored[pageId]
-    if (!storedPage) {
-        return
-    }
-    return storedPage.blocks
-}
+// async function loadFromStorage(pageId: string) {
+//     // Gets the previously stored editor contents.
+//     const storageString = localStorage.getItem('allPages')
+//     if (!storageString) {
+//         return ''
+//     }
+//     const stored = JSON.parse(storageString)
+//     const storedPage = stored[pageId]
+//     if (!storedPage) {
+//         return
+//     }
+//     return storedPage.blocks
+// }
 
 const doc = new Y.Doc()
 // const provider = new WebsocketProvider('ws://localhost:8080', `doc-yjs`, doc)
@@ -80,16 +44,41 @@ const provider = new WebsocketProvider('ws://192.168.31.48:8080', `doc-yjs`, doc
 
 export const Doc = () => {
     const params = useParams()
-    const page = useMemo(() => {
-        return pages.find(page => page.id === params.id)
-    }, [params?.id])
+    const { data: page } = useQuery({
+        queryKey: ['page', params?.id],
+        queryFn: async () => {
+            if (!params?.id) {
+                return
+            }
+            return (await srv.fetchPageDetail(params?.id)).data
+        },
+        enabled: !!params?.id,
+    })
+    // console.log('🚀 ~ Doc ~ pages:', pages)
+    // const page = useMemo(() => {
+    //     return pages?.find(page => page.pageId === params.id)
+    // }, [params?.id, pages])
 
     // const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${page?.id}`, doc)).current
     const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
+
+    const handleTitleInput = useMemo(() => {
+        return debounce((e: React.FormEvent<HTMLDivElement>) => {
+            if (!page) {
+                return
+            }
+            const title = (e.target as HTMLDivElement).innerText
+            srv.updatePage({
+                pageId: page?.pageId,
+                title,
+            })
+            queryClient.invalidateQueries({ queryKey: ['pages'] })
+        })
+    }, [page])
     /**
      * 文档初始内容
      */
-    const [initialContent, setInitialContent] = useState<PartialBlock[] | 'loading'>('loading')
+    // const [initialContent, setInitialContent] = useState<PartialBlock[] | 'loading'>('loading')
 
     useEffect(() => {
         const changeHandler = () => {
@@ -117,14 +106,14 @@ export const Doc = () => {
     }, [provider])
 
     // 加载缓存的文档内容
-    useEffect(() => {
-        if (!page?.id) {
-            return
-        }
-        loadFromStorage(page.id).then(content => {
-            setInitialContent(content)
-        })
-    }, [page?.id])
+    // useEffect(() => {
+    //     if (!page?.id) {
+    //         return
+    //     }
+    //     loadFromStorage(page.id).then(content => {
+    //         setInitialContent(content)
+    //     })
+    // }, [page?.id])
 
     return (
         <SidebarInset>
@@ -134,8 +123,8 @@ export const Doc = () => {
                     <Separator orientation="vertical" className="mr-2 h-4" />
                     <div className="flex flex-row flex-auto items-center text-sm">
                         <em className="mr-2">{page?.emoji}</em>
-                        <p className="overflow-hidden whitespace-nowrap max-w-[300px] text-ellipsis" title={page?.name}>
-                            {page?.name}
+                        <p className="overflow-hidden whitespace-nowrap max-w-[300px] text-ellipsis" title={page?.title}>
+                            {page?.title}
                         </p>
                     </div>
                 </div>
@@ -145,13 +134,16 @@ export const Doc = () => {
                 </div>
             </header>
             <div className="w-[60%] mx-auto">
-                <h1 className="py-12 px-[54px] leading-[3.25rem] text-4xl font-bold">
+                <h1 className="flex flex-row py-12 px-[54px] leading-[3.25rem] text-4xl font-bold">
                     <span className="mr-4">{page?.emoji}</span>
-                    <span>{page?.name}</span>
+                    <div
+                        contentEditable
+                        className="inline-block flex-1 outline-none"
+                        onInput={handleTitleInput}
+                        dangerouslySetInnerHTML={{ __html: page?.title ?? '' }}
+                    />
                 </h1>
-                {page?.id && initialContent !== 'loading' && (
-                    <DocEditor key={page?.id} pageId={page.id} initialContent={initialContent} doc={doc} provider={provider} />
-                )}
+                {page?.id && <DocEditor key={page?.id} pageId={page.pageId} doc={doc} provider={provider} />}
                 {/* <DocEditorDemo /> */}
             </div>
         </SidebarInset>

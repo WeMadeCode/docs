@@ -6,7 +6,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@miaoma-doc/shadcn-shared-ui/components/ui/avatar'
 import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/collapsible'
+import { Collapsible } from '@miaoma-doc/shadcn-shared-ui/components/ui/collapsible'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -19,80 +19,51 @@ import {
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
+    SidebarGroupAction,
     SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuAction,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem,
     useSidebar,
 } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useToast } from '@miaoma-doc/shadcn-shared-ui/hooks/use-toast'
+import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import {
     ArrowUpRight,
-    ChevronRight,
     FileStack,
     MessageCircleQuestion,
     MoreHorizontal,
+    Plus,
     Search,
     Settings,
     StarOff,
     Trash2,
     Waypoints,
 } from 'lucide-react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 
 import * as srv from '@/services'
 import { miaoConfetti } from '@/utils/miao-confetti'
-
-const pages = [
-    {
-        id: '1',
-        name: 'Notion 与飞书文档协同方案精析，字节前端专家传授百万年薪架构师级项目重难点',
-        url: '#',
-        emoji: '🔭',
-        links: [{ id: '', name: '服务端渲染（SSR）与前后端同构技术原理揭秘，字节前端专家带你光速进阶全栈', emoji: '🐚', url: '#' }],
-    },
-    {
-        id: '2',
-        name: 'Ant Design 组件库架构设计与开发实践，高级前端专家带你掌握基建面试技巧',
-        url: '#',
-        emoji: '🔦',
-    },
-    {
-        id: '3',
-        name: 'Taro、Tauri 多端开发实践与原理剖析，《Taro 多端开发权威指南》作者带你悟透多端框架原理',
-        url: '#',
-        emoji: '👽',
-    },
-    {
-        id: '4',
-        name: 'Nest 服务端开发与原理深度剖析，《NestJS 实战》作者带你领略框架设计之美',
-        url: '#',
-        emoji: '🥤',
-    },
-    {
-        id: '5',
-        name: 'Babel 与编译原理详解，字节高级前端专家带你从零实现飞书表格公式执行器',
-        url: '#',
-        emoji: '🚀',
-    },
-    {
-        id: '6',
-        name: '服务端渲染（SSR）与前后端同构技术原理揭秘，字节前端专家带你光速进阶全栈',
-        url: '#',
-        emoji: '🐚',
-    },
-]
+import { randomEmoji } from '@/utils/randomEmoji'
 
 export function Aside() {
+    const { data: pages, refetch } = useQuery({
+        queryKey: ['pages'],
+        queryFn: async () => {
+            return (await srv.fetchPageList()).data.pages
+        },
+    })
     const navigate = useNavigate()
+    const activeDocParams = useMatch('/doc/:id')?.params
     const { toast } = useToast()
     const { isMobile } = useSidebar()
+
+    /**
+     * 获取当前用户信息
+     */
     const { data: currentUser } = useQuery({
         queryKey: ['currentUser'],
         queryFn: async () => {
@@ -100,6 +71,30 @@ export function Aside() {
             return res.data
         },
     })
+
+    /**
+     * 新建文档
+     */
+    const handleCreate = async () => {
+        const res = await srv.createPage({
+            emoji: randomEmoji(),
+            title: '未命名文档@妙码学院-合一',
+        })
+        navigate(`/doc/${res.data.pageId}`)
+        refetch()
+    }
+
+    /**
+     * 删除文档
+     * @param pageId
+     */
+    const handleDelete = async (pageId: string) => {
+        await srv.removePage(pageId)
+        refetch()
+        if (activeDocParams?.id === pageId) {
+            navigate('/doc')
+        }
+    }
 
     const handleConfetti = () => {
         miaoConfetti.firework()
@@ -150,23 +145,26 @@ export function Aside() {
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>所有文档</SidebarGroupLabel>
+                    <SidebarGroupLabel className="flex flex-row justify-between">
+                        <span>所有文档</span>
+                        <SidebarGroupAction onClick={handleCreate}>
+                            <Plus />
+                        </SidebarGroupAction>
+                    </SidebarGroupLabel>
                     <SidebarMenu>
-                        {pages.map(item => (
-                            <Collapsible key={item.name}>
-                                <SidebarMenuItem key={item.name}>
-                                    <SidebarMenuButton asChild>
-                                        <NavLink
-                                            key={`/doc/${item.id}`}
-                                            to={`/doc/${item.id}`}
-                                            title={item.name}
-                                            // className={({ isActive }) => cn(isActive ? 'bg-red-500' : 'bg-green-500')}
-                                        >
+                        {pages?.map(item => (
+                            <Collapsible key={item.title}>
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        className={cn(activeDocParams?.id === item.pageId && 'bg-zinc-100 font-bold')}
+                                    >
+                                        <NavLink key={`/doc/${item.pageId}`} to={`/doc/${item.pageId}`} title={item.title}>
                                             <span className="text-lg">{item.emoji}</span>
-                                            <span className="text-xs">{item.name}</span>
+                                            <span className="text-xs">{item.title}</span>
                                         </NavLink>
                                     </SidebarMenuButton>
-                                    {item.links && (
+                                    {/* {item.links && (
                                         <>
                                             <CollapsibleTrigger asChild>
                                                 <SidebarMenuAction
@@ -191,7 +189,7 @@ export function Aside() {
                                                 </SidebarMenuSub>
                                             </CollapsibleContent>
                                         </>
-                                    )}
+                                    )} */}
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
                                             <SidebarMenuAction showOnHover>
@@ -204,18 +202,23 @@ export function Aside() {
                                             side={isMobile ? 'bottom' : 'right'}
                                             align={isMobile ? 'end' : 'start'}
                                         >
-                                            <DropdownMenuItem>
+                                            <DropdownMenuItem disabled>
                                                 <StarOff className="text-muted-foreground" />
-                                                <span>Remove from Favorites</span>
+                                                <span>取消收藏</span>
                                             </DropdownMenuItem>
                                             <DropdownMenuSeparator />
-                                            <DropdownMenuItem>
-                                                <ArrowUpRight className="text-muted-foreground" />
-                                                <span>Open in New Tab</span>
+                                            <DropdownMenuItem asChild>
+                                                <NavLink to={`/doc/${item.pageId}`} target="_blank">
+                                                    <ArrowUpRight className="text-muted-foreground" />
+                                                    <span>新标签打开</span>
+                                                </NavLink>
                                             </DropdownMenuItem>
                                             <DropdownMenuSeparator />
-                                            <DropdownMenuItem>
-                                                <Trash2 className="text-muted-foreground" />
+                                            <DropdownMenuItem
+                                                className="data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
+                                                onClick={() => handleDelete(item.pageId)}
+                                            >
+                                                <Trash2 />
                                                 <span>Delete</span>
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>

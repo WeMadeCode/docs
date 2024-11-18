@@ -12,6 +12,9 @@
 .##.....##.##....##.##.......##....##.
 ..#######...######..########.##.....##
 */
+
+import { Page } from './page'
+
 /**
  * 用户相关
  */
@@ -35,5 +38,43 @@ export interface CurrentUserRes {
     data: {
         username: string
         email: string
+    }
+}
+
+/*
+.########.....###.....######...########
+.##.....##...##.##...##....##..##......
+.##.....##..##...##..##........##......
+.########..##.....##.##...####.######..
+.##........#########.##....##..##......
+.##........##.....##.##....##..##......
+.##........##.....##..######...########
+*/
+/**
+ * 页面相关
+ */
+/**
+ * 创建页面
+ */
+export interface CreatePagePayload {
+    emoji: string
+    title: string
+}
+
+/**
+ * 更新页面
+ */
+export interface UpdatePagePayload {
+    pageId: string
+    title: string
+}
+
+/**
+ * 页面列表
+ */
+export interface PageListRes {
+    data: {
+        pages: Page[]
+        count: number
     }
 }

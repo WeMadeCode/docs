@@ -27,7 +27,8 @@
         "yjs": "13.6.20",
         "y-websocket": "2.0.4",
         "react-hook-form": "7.53.2",
-        "bcryptjs": "2.4.3"
+        "bcryptjs": "2.4.3",
+        "date-fns": "4.1.0"
     },
     "devDependencies": {
         "@types/react": "^18.3.12",

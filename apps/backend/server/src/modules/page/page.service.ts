@@ -3,17 +3,20 @@
  *   All rights reserved.
  *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
  */
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Inject, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { PostgresqlPersistence } from 'y-postgresql'
 
 import { PageEntity } from '../../entities/page.entity'
+import { yjsXmlMentionCollect } from '../../utils/yjsXmlMentionCollect'
 
 @Injectable()
 export class PageService {
     constructor(
         @InjectRepository(PageEntity)
-        private readonly pageRepository: Repository<PageEntity>
+        private readonly pageRepository: Repository<PageEntity>,
+        @Inject('YJS_POSTGRESQL_ADAPTER') private readonly yjsPostgresqlAdapter: PostgresqlPersistence
     ) {}
 
     async create(payload) {
@@ -63,5 +66,21 @@ export class PageService {
         }
 
         return res.raw[0]
+    }
+
+    async graph() {
+        const pages = await this.pageRepository.find()
+        const doc = await this.yjsPostgresqlAdapter.getYDoc('doc-yjs')
+        const withLinksPages = pages.map(page => {
+            const pageDoc = doc.getXmlElement(`document-store-${page.pageId}`).toJSON()
+            if (pageDoc) {
+                return {
+                    ...page,
+                    links: yjsXmlMentionCollect(pageDoc),
+                }
+            }
+        })
+
+        return withLinksPages
     }
 }

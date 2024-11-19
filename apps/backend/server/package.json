@@ -65,7 +65,8 @@
         "lib0": "0.2.98",
         "yjs": "13.6.20",
         "y-protocols": "1.0.6",
-        "y-postgresql": "1.0.0"
+        "y-postgresql": "1.0.0",
+        "xml-js": "1.6.11"
     },
     "devDependencies": {
         "pm2": "5.4.2",

@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 import databaseConfig from './config/database'
+import { YjsPostgresqlModule } from './fundamentals/yjs-postgresql/yjs-postgresql.module'
 import { ApplicationModule } from './modules/application/application.module'
 import { AuthModule } from './modules/auth/auth.module'
 // import { WSDemoModule } from './modules/ws-demo/ws-demo.module'
@@ -31,6 +32,7 @@ import { UserModule } from './modules/user/user.module'
         // WSDemoModule,
         DocYjsModule,
         PageModule,
+        YjsPostgresqlModule.forRoot(),
     ],
     providers: [],
 })

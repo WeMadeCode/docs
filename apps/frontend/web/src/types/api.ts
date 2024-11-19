@@ -79,3 +79,13 @@ export interface PageListRes {
         count: number
     }
 }
+
+/**
+ * 页面关系图谱
+ */
+export interface WithLinksPage extends Page {
+    links: string[]
+}
+export interface PageGraphRes {
+    data: WithLinksPage[]
+}

@@ -3,7 +3,7 @@
  *   All rights reserved.
  *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
  */
-import { CreatePagePayload, PageListRes, UpdatePagePayload } from '@/types/api'
+import { CreatePagePayload, PageGraphRes, PageListRes, UpdatePagePayload } from '@/types/api'
 import { request } from '@/utils/request'
 
 /**
@@ -44,4 +44,11 @@ export const createPage = async (data: CreatePagePayload) => {
  */
 export const updatePage = async (data: UpdatePagePayload) => {
     return await request.put('/page', data)
+}
+
+/**
+ * 获取页面图谱
+ */
+export const fetchPageGraph = async (): Promise<PageGraphRes> => {
+    return await request.get('/page/graph')
 }

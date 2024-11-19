@@ -25,7 +25,7 @@ function MentionContent(props: MentionContentProps) {
     }, [pages])
 
     return (
-        <Link to={`/doc/${pageId}`} className={`px-2 py-[2px] mx-1 text-sm bg-purple-200 rounded-full`}>
+        <Link to={`/doc/${pageId}`} className={`px-2 py-[3px] mx-1 bg-purple-200 rounded-full`}>
             <span className="mr-1">{page?.emoji}</span>
             {page?.title}
         </Link>

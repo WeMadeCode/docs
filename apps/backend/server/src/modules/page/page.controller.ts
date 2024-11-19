@@ -28,6 +28,12 @@ import { PageService } from './page.service'
 export class PageController {
     constructor(private readonly pageService: PageService) {}
 
+    @Get('graph')
+    async graph() {
+        const graph = await this.pageService.graph()
+        return { data: graph, success: true }
+    }
+
     @Post()
     @UsePipes(new ZodValidationPipe(createPageSchema))
     async create(@Body() body: CreatePageDto, @Request() req) {

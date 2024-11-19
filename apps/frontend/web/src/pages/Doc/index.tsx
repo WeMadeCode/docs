@@ -40,7 +40,7 @@ import { DocEditor } from './DocEditor'
 
 const doc = new Y.Doc()
 // const provider = new WebsocketProvider('ws://localhost:8080', `doc-yjs`, doc)
-const provider = new WebsocketProvider('ws://192.168.31.48:8080', `doc-yjs`, doc)
+const provider = new WebsocketProvider('ws://192.168.31.48:8080', `doc-yjs`, doc, { connect: false })
 
 export const Doc = () => {
     const params = useParams()
@@ -83,7 +83,7 @@ export const Doc = () => {
     useEffect(() => {
         const changeHandler = () => {
             const states = provider.awareness.getStates()
-            console.log('🚀 ~ changeHandler ~ states:', provider.awareness.doc, doc)
+            // console.log('🚀 ~ changeHandler ~ states:', provider.awareness.doc, doc)
             const users = new Map<number, { name: string; color: string }>()
             const cursors = new Map<number, { x: number; y: number; windowSize: { width: number; height: number } }>()
             for (const [key, value] of states) {
@@ -114,6 +114,12 @@ export const Doc = () => {
     //         setInitialContent(content)
     //     })
     // }, [page?.id])
+
+    useEffect(() => {
+        provider.connect()
+
+        return () => provider.disconnect()
+    }, [])
 
     return (
         <SidebarInset>

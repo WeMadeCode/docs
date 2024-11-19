@@ -46,6 +46,7 @@ export class PageService {
     async list(params: { userId: number }) {
         const [data, count] = await this.pageRepository.findAndCount({
             where: { user: { id: params.userId } },
+            order: { createdAt: 'DESC' },
         })
 
         return {

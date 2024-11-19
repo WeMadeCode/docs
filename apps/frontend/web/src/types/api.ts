@@ -34,11 +34,12 @@ export interface LoginRes {
     }
 }
 
+export interface User {
+    username: string
+    email: string
+}
 export interface CurrentUserRes {
-    data: {
-        username: string
-        email: string
-    }
+    data: User
 }
 
 /*

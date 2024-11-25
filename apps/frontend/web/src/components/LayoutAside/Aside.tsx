@@ -153,8 +153,8 @@ export function Aside() {
                     </SidebarGroupLabel>
                     <SidebarMenu>
                         {pages?.map(item => (
-                            <Collapsible key={item.title}>
-                                <SidebarMenuItem key={item.title}>
+                            <Collapsible key={item.pageId}>
+                                <SidebarMenuItem key={item.pageId}>
                                     <SidebarMenuButton
                                         asChild
                                         className={cn(activeDocParams?.id === item.pageId && 'bg-zinc-100 font-bold')}

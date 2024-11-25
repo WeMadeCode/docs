@@ -40,7 +40,7 @@ import { DocEditor } from './DocEditor'
 
 const doc = new Y.Doc()
 // const provider = new WebsocketProvider('ws://localhost:8080', `doc-yjs`, doc)
-const provider = new WebsocketProvider('ws://192.168.31.48:8080', `doc-yjs`, doc, { connect: false })
+const provider = new WebsocketProvider('ws://192.168.31.63:8080', `doc-yjs`, doc, { connect: false })
 
 export const Doc = () => {
     const params = useParams()

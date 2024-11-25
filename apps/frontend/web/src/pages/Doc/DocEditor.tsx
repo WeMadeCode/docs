@@ -9,20 +9,25 @@ import {
     defaultBlockSpecs,
     defaultInlineContentSpecs,
     filterSuggestionItems,
+    insertOrUpdateBlock,
     locales,
     MiaomaDocEditor,
     MiaomaDocSchema,
     PartialBlock,
 } from '@miaoma-doc/core'
-import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
+import { DefaultReactSuggestionItem, getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
 import { useQuery } from '@tanstack/react-query'
+import { Sparkles } from 'lucide-react'
+import PubSub from 'pubsub-js'
 import { useEffect, useMemo } from 'react'
 // import { yXmlFragmentToProseMirrorFragment, yXmlFragmentToProseMirrorRootNode } from 'y-prosemirror'
 import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
 
+import { AI } from '@/blocks/ai'
 import { Mention } from '@/blocks/mention'
+import { BasicAIChat } from '@/components/BasicAIChat'
 import * as srv from '@/services'
 import { User } from '@/types/api'
 
@@ -42,6 +47,7 @@ const schema = MiaomaDocSchema.create({
     },
     blockSpecs: {
         ...defaultBlockSpecs,
+        ai: AI,
     },
 })
 
@@ -77,6 +83,22 @@ const getMentionMenuItems = async (editor: MiaomaDocEditor, pageId?: string): Pr
 
     return items
 }
+
+// Slash menu item to insert an Alert block
+const insertAI = (editor: typeof schema.MiaomaDocEditor) => ({
+    title: 'MiaoMa AI',
+    subtext: '妙码 AI，让进取的人更具职业价值',
+    onItemClick: () => {
+        const aiAnchorBlock = insertOrUpdateBlock(editor, {
+            type: 'paragraph',
+        })
+        const { id: aiAnchorBlockId } = aiAnchorBlock
+
+        PubSub.publishSync('ai-inserted', aiAnchorBlockId)
+    },
+    aliases: ['alert', 'notification', 'emphasize', 'warning', 'error', 'info', 'success'],
+    icon: <Sparkles color="#6B45FF" size={18} />,
+})
 
 export function DocEditor(props: DocEditorProps) {
     const { pageId, doc, provider } = props
@@ -138,7 +160,7 @@ export function DocEditor(props: DocEditorProps) {
     }, [])
 
     return (
-        <MiaomaDocView editor={editor} theme="light">
+        <MiaomaDocView editor={editor} theme="light" slashMenu={false}>
             <SuggestionMenuController
                 triggerCharacter="@"
                 getItems={async query => {
@@ -147,6 +169,16 @@ export function DocEditor(props: DocEditorProps) {
                     return filterSuggestionItems(items, query)
                 }}
             />
+            {/* Replaces the default Slash Menu. */}
+            <SuggestionMenuController
+                triggerCharacter="/"
+                getItems={async query =>
+                    // Gets all default slash menu items and `insertAI` item.
+                    filterSuggestionItems([insertAI(editor), ...getDefaultReactSlashMenuItems(editor)], query)
+                }
+            />
+            {/* @ts-expect-error editor schema type fix */}
+            <BasicAIChat editor={editor} />
         </MiaomaDocView>
     )
 }

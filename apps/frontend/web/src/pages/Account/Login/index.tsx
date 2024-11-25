@@ -55,7 +55,7 @@ export function Login() {
 
                 localStorage.setItem('token', res.data.access_token)
 
-                const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || '/projects'
+                const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || '/doc'
                 navigate(redirectUrl)
             }
 

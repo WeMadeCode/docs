@@ -1,0 +1,32 @@
+include:
+    - docker-compose.yml
+
+services:
+    # 应用部署相关
+    miaoma-docs-server:
+        image: bitnami/node:latest
+        container_name: miaoma-docs-server
+        ports:
+            - 8082:8082
+        volumes:
+            - ../:/app/docs
+        # command: "node /app/server.js"
+        environment:
+            - NODE_ENV=production
+        working_dir: /app/docs/apps/backend/server
+        command: 'node dist/main.js'
+        depends_on:
+            - miaoma-docs-postgresql
+    miaoma-docs-caddy:
+        image: caddy:latest
+        container_name: miaoma-docs-caddy
+        ports:
+            - 80:80
+            - 443:443
+            - 443:443/udp
+            - 5173:5173
+        volumes:
+            - ./caddy:/etc/caddy
+            # - ../:/app
+            - ../apps/frontend/web/dist:/app/frontend/web/dist
+        # command: ["caddy", "run", "--resume", "--config", "/etc/caddy/Caddyfile"]

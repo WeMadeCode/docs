@@ -12,21 +12,10 @@ const importSort = require('eslint-plugin-simple-import-sort')
 
 const tseslint = require('typescript-eslint')
 
-const ignores = [
-    'dist',
-    'build',
-    '**/*.js',
-    '**/*.mjs',
-    '**/*.d.ts',
-    'eslint.config.js',
-    'commitlint.config.js',
-    'apps/frontend/monitor/src/components/ui/**/*',
-    'packages/browser-utils/src/metrics/**/*',
-]
+const ignores = ['dist', 'build', '**/*.js', '**/*.mjs', '**/*.d.ts', 'eslint.config.js', 'commitlint.config.js']
 
-const frontendMonitorConfig = {
-    files: ['apps/frontend/monitor/**/*.{ts,tsx}'],
-    ignores: ['apps/frontend/monitor/src/components/ui/**/*'],
+const frontendBuilderConfig = {
+    files: ['apps/frontend/builder/**/*.{ts,tsx}'],
     languageOptions: {
         ecmaVersion: 2020,
         globals: globals.browser,
@@ -42,7 +31,7 @@ const frontendMonitorConfig = {
     },
 }
 
-const backendMonitorConfig = {
+const backendBuilderConfig = {
     files: ['apps/backend/**/*.ts'],
     languageOptions: {
         globals: {
@@ -74,6 +63,6 @@ module.exports = tseslint.config(
             '@typescript-eslint/no-explicit-any': 'off',
         },
     },
-    frontendMonitorConfig,
-    backendMonitorConfig
+    frontendBuilderConfig,
+    backendBuilderConfig
 )

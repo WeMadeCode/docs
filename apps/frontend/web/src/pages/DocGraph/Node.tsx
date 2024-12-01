@@ -5,7 +5,7 @@
  */
 import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
 import { Handle, NodeProps, Position } from '@xyflow/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 interface GraphNodeProps extends NodeProps {
     data: {

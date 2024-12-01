@@ -23,7 +23,7 @@ export function BasicAIChat(props: BasicAIChatProps) {
     const ref = useClickOutside(() => setCurrentAIPoweredParagraphBlockId(null))
 
     useEffect(() => {
-        PubSub.subscribe('ai-inserted', (message, blockId) => {
+        PubSub.subscribe('ai-inserted', (_, blockId) => {
             setCurrentAIPoweredParagraphBlockId(blockId)
         })
 

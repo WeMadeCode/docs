@@ -14,7 +14,7 @@
         "docker:stop": "docker compose -p miaoma-docs -f .devcontainer/docker-compose.yml down",
         "docker:deploy": "docker compose -p miaoma-docs -f .devcontainer/docker-compose.deploy.yml up -d",
         "docker:build-deploy": "pnpm build && pnpm docker:deploy",
-        "docker:deploy:stop": "docker compose -f .devcontainer/docker-compose.deploy.yml down",
+        "docker:deploy:stop": "docker compose -p miaoma-docs -f .devcontainer/docker-compose.deploy.yml down",
         "clean": "run-s clean:build clean:caches",
         "clean:build": "pnpm --filter @miaoma/* clean",
         "clean:caches": " rimraf .turbo/cache **/*/.turbo",

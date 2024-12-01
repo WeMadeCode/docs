@@ -39,7 +39,7 @@ export function DocGraph() {
     })
     console.log('🚀 ~ DocGraph ~ pages:', pages)
 
-    const handleNodeClick = (event: React.MouseEvent, node: Node) => {
+    const handleNodeClick = (_: React.MouseEvent, node: Node) => {
         const { id } = node
         setNodes(nodes.map(node => ({ ...node, selected: node.id === id })))
         setEdges(edges.map(edge => ({ ...edge, selected: edge.source === id || edge.target === id })))

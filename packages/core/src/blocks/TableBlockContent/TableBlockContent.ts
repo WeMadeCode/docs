@@ -87,8 +87,8 @@ export const TableBlockContent = createStronglyTypedTiptapNode({
 
                     this.dom = blockContent
                 }
-
-                ignoreMutation(record: MutationRecord): boolean {
+                // Ignore mutations outside the tableWrapperInner
+                ignoreMutation(record: any): boolean {
                     return !(record.target as HTMLElement).closest('.tableWrapper-inner') || super.ignoreMutation(record)
                 }
             }

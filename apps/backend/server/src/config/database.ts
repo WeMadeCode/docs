@@ -5,19 +5,22 @@
  */
 import { join } from 'node:path'
 
+import { Logger } from '@nestjs/common'
+
 export default () => {
-    const isProd = process.env.NODE_ENV === 'production'
-    return {
-        database: {
-            type: 'postgres',
-            // host: 'localhost',
-            host: isProd ? '172.28.49.109' : '192.168.31.251',
-            port: 5432,
-            username: 'postgres',
-            database: 'postgres',
-            password: 'xiaoer',
-            entities: [join(__dirname, '../', '**/**.entity{.ts,.js}')],
-            synchronize: true,
-        },
-    }
+  const isProd = process.env.NODE_ENV === 'production'
+  Logger.log('🚀 ~ database config: ~ isProd:', isProd)
+  return {
+    database: {
+      type: 'postgres',
+      host: 'localhost',
+      // host: isProd ? '172.28.49.109' : '192.168.31.251',
+      port: 5432,
+      username: 'postgres',
+      database: 'postgres',
+      password: 'xiaoer',
+      entities: [join(__dirname, '../', '**/**.entity{.ts,.js}')],
+      synchronize: true,
+    },
+  }
 }

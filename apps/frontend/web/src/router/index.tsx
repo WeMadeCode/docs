@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import { Layout } from '@/layout'
@@ -20,34 +15,34 @@ type PickRouter<T> = T extends (...args: any[]) => infer R ? R : never
 type A = typeof createBrowserRouter
 
 export const router: PickRouter<A> = createBrowserRouter([
-    {
+  {
+    path: '/',
+    element: (
+      <AuthRoute>
+        <Layout />
+      </AuthRoute>
+    ),
+    children: [
+      {
+        path: 'doc',
+        element: <DocList />,
+      },
+      {
+        path: 'doc/:id',
+        element: <Doc />,
+      },
+      {
+        path: 'doc/graph',
+        element: <DocGraph />,
+      },
+      {
         path: '/',
-        element: (
-            <AuthRoute>
-                <Layout />
-            </AuthRoute>
-        ),
-        children: [
-            {
-                path: 'doc',
-                element: <DocList />,
-            },
-            {
-                path: 'doc/:id',
-                element: <Doc />,
-            },
-            {
-                path: 'doc/graph',
-                element: <DocGraph />,
-            },
-            {
-                path: '/',
-                element: <Navigate to="/doc" replace />,
-            },
-        ],
-    },
-    {
-        path: '/account/login',
-        element: <Login />,
-    },
+        element: <Navigate to="/doc" replace />,
+      },
+    ],
+  },
+  {
+    path: '/account/login',
+    element: <Login />,
+  },
 ])

@@ -1,5 +1,5 @@
 {
-  "name": "miaoma-doc",
+  "name": "swift-docs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -28,8 +28,8 @@
     "prepare": "husky"
   },
   "keywords": [],
-  "author": "Heyi",
-  "license": "MiaoMaEdu",
+  "author": "",
+  "license": "MIT",
   "config": {
     "commitizen": {
       "path": "node_modules/cz-git"

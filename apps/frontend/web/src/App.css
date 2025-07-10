@@ -1,9 +1,4 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 body {
-    font-family: 'Inter', 'Source Sans 3', Poppins, apple-system, BlinkMacSystemFont, 'Helvetica Neue', Tahoma, Arial, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: 'Inter', 'Source Sans 3', Poppins, apple-system, BlinkMacSystemFont, 'Helvetica Neue', Tahoma, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { NestFactory } from '@nestjs/core'
 import { WsAdapter } from '@nestjs/platform-ws'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -11,26 +6,26 @@ import { AppModule } from './app.module'
 import { HttpExceptionFilter } from './fundamentals/common/filters/http-exception.filter'
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule)
 
-    // 全局过滤器
-    app.useGlobalFilters(new HttpExceptionFilter())
+  // 全局过滤器
+  app.useGlobalFilters(new HttpExceptionFilter())
 
-    // 修改 ws 默认适配器，nest 默认是基于 @nestjs/platform-socket.io，我们改为 @nestjs/platform-ws
-    app.useWebSocketAdapter(new WsAdapter(app))
+  // 修改 ws 默认适配器，nest 默认是基于 @nestjs/platform-socket.io，我们改为 @nestjs/platform-ws
+  app.useWebSocketAdapter(new WsAdapter(app))
 
-    app.setGlobalPrefix('api')
+  app.setGlobalPrefix('api')
 
-    // 设置swagger文档相关配置
-    const swaggerOptions = new DocumentBuilder()
-        .setTitle('妙码学院企业级文档编辑器 API 文档')
-        .setDescription('妙码学院企业级文档编辑器 API 文档')
-        .setVersion('1.0')
-        .addBearerAuth()
-        .build()
-    const document = SwaggerModule.createDocument(app, swaggerOptions)
-    SwaggerModule.setup('doc', app, document)
+  // 设置swagger文档相关配置
+  const swaggerOptions = new DocumentBuilder()
+    .setTitle('妙码学院企业级文档编辑器 API 文档')
+    .setDescription('妙码学院企业级文档编辑器 API 文档')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build()
+  const document = SwaggerModule.createDocument(app, swaggerOptions)
+  SwaggerModule.setup('doc', app, document)
 
-    await app.listen(8082)
+  await app.listen(8082)
 }
 bootstrap()

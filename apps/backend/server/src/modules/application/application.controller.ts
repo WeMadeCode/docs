@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { Body, Controller, Delete, Get, Post, Put, Request, UseGuards, UsePipes } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { nanoid } from 'nanoid'
@@ -26,36 +21,36 @@ import { ApplicationService } from './application.service'
 @Controller('application')
 @UseGuards(AuthGuard('jwt'))
 export class ApplicationController {
-    constructor(private readonly applicationService: ApplicationService) {}
+  constructor(private readonly applicationService: ApplicationService) {}
 
-    @Post()
-    @UsePipes(new ZodValidationPipe(createApplicationSchema))
-    async create(@Body() body: CreateApplicationDto, @Request() req) {
-        const user = new UserEntity()
-        user.id = req.user.id
-        const application = new ApplicationEntity(body)
-        Reflect.set<ApplicationEntity, 'appId'>(application, 'appId', application.type + nanoid(6))
+  @Post()
+  @UsePipes(new ZodValidationPipe(createApplicationSchema))
+  async create(@Body() body: CreateApplicationDto, @Request() req) {
+    const user = new UserEntity()
+    user.id = req.user.id
+    const application = new ApplicationEntity(body)
+    Reflect.set<ApplicationEntity, 'appId'>(application, 'appId', application.type + nanoid(6))
 
-        const newUser = await this.applicationService.create({ ...application, user })
-        return { data: newUser, success: true }
-    }
+    const newUser = await this.applicationService.create({ ...application, user })
+    return { data: newUser, success: true }
+  }
 
-    @Put()
-    async update(@Body() body) {
-        const newUser = await this.applicationService.update(body)
-        return { data: newUser, success: true }
-    }
+  @Put()
+  async update(@Body() body) {
+    const newUser = await this.applicationService.update(body)
+    return { data: newUser, success: true }
+  }
 
-    @Get()
-    async list(@Request() req) {
-        const list = await this.applicationService.list({ userId: req.user.id })
-        return { data: list, success: true }
-    }
+  @Get()
+  async list(@Request() req) {
+    const list = await this.applicationService.list({ userId: req.user.id })
+    return { data: list, success: true }
+  }
 
-    @Delete()
-    @UsePipes(new ZodValidationPipe(deleteApplicationSchema))
-    async delete(@Body() body: DeleteApplicationDto, @Request() req) {
-        const newUser = await this.applicationService.delete({ appId: body.appId, userId: req.user.id })
-        return { data: newUser, success: true }
-    }
+  @Delete()
+  @UsePipes(new ZodValidationPipe(deleteApplicationSchema))
+  async delete(@Body() body: DeleteApplicationDto, @Request() req) {
+    const newUser = await this.applicationService.delete({ appId: body.appId, userId: req.user.id })
+    return { data: newUser, success: true }
+  }
 }

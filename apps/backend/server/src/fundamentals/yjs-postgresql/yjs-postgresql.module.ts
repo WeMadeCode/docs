@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { DynamicModule, Global, Logger, Module } from '@nestjs/common'
 import { PostgresqlPersistence } from 'y-postgresql'
 import * as Y from 'yjs'
@@ -36,9 +31,7 @@ export class YjsPostgresqlModule {
             Logger.log('🚀 ~ yjs postgresql: ~ options:', options)
             const isProd = process.env.NODE_ENV === 'production'
             Logger.log('🚀 ~ yjs postgresql: ~ isProd:', isProd)
-            /**
-             * 妙码学院出品，作者 @Heyi。
-             */
+
             const pgdb = await PostgresqlPersistence.build(
               {
                 // host: process.env.PG_HOST,
@@ -46,8 +39,8 @@ export class YjsPostgresqlModule {
                 // database: process.env.PG_DATABASE,
                 // user: process.env.PG_USER,
                 // password: process.env.PG_PASSWORD,
-                host: 'localhost',
-                // host: isProd ? '172.28.49.109' : '192.168.31.251',
+                // host: 'localhost',
+                host: isProd ? '172.28.49.109' : 'localhost',
                 port: 5432,
                 user: 'postgres',
                 database: 'postgres',

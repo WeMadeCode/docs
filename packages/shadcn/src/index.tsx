@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import './style.css'
 
 import { BlockSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@miaoma-doc/core'
@@ -35,86 +30,86 @@ import { TableHandle } from './tableHandle/TableHandle'
 import { Toolbar, ToolbarButton, ToolbarSelect } from './toolbar/Toolbar'
 
 export const components: Components = {
-    FormattingToolbar: {
-        Root: Toolbar,
-        Button: ToolbarButton,
-        Select: ToolbarSelect,
+  FormattingToolbar: {
+    Root: Toolbar,
+    Button: ToolbarButton,
+    Select: ToolbarSelect,
+  },
+  FilePanel: {
+    Root: Panel,
+    Button: PanelButton,
+    FileInput: PanelFileInput,
+    TabPanel: PanelTab,
+    TextInput: PanelTextInput,
+  },
+  LinkToolbar: {
+    Root: Toolbar,
+    Button: ToolbarButton,
+  },
+  SideMenu: {
+    Root: SideMenu,
+    Button: SideMenuButton,
+  },
+  SuggestionMenu: {
+    Root: SuggestionMenu,
+    Item: SuggestionMenuItem,
+    EmptyItem: SuggestionMenuEmptyItem,
+    Label: SuggestionMenuLabel,
+    Loader: SuggestionMenuLoader,
+  },
+  GridSuggestionMenu: {
+    Root: GridSuggestionMenu,
+    Item: GridSuggestionMenuItem,
+    EmptyItem: GridSuggestionMenuEmptyItem,
+    Loader: GridSuggestionMenuLoader,
+  },
+  TableHandle: {
+    Root: TableHandle,
+    ExtendButton: ExtendButton,
+  },
+  Generic: {
+    Form: {
+      Root: Form,
+      TextInput: TextInput,
     },
-    FilePanel: {
-        Root: Panel,
-        Button: PanelButton,
-        FileInput: PanelFileInput,
-        TabPanel: PanelTab,
-        TextInput: PanelTextInput,
+    Menu: {
+      Root: Menu,
+      Trigger: MenuTrigger,
+      Dropdown: MenuDropdown,
+      Divider: MenuDivider,
+      Label: MenuLabel,
+      Item: MenuItem,
     },
-    LinkToolbar: {
-        Root: Toolbar,
-        Button: ToolbarButton,
+    Popover: {
+      Root: Popover,
+      Trigger: PopoverTrigger,
+      Content: PopoverContent,
     },
-    SideMenu: {
-        Root: SideMenu,
-        Button: SideMenuButton,
-    },
-    SuggestionMenu: {
-        Root: SuggestionMenu,
-        Item: SuggestionMenuItem,
-        EmptyItem: SuggestionMenuEmptyItem,
-        Label: SuggestionMenuLabel,
-        Loader: SuggestionMenuLoader,
-    },
-    GridSuggestionMenu: {
-        Root: GridSuggestionMenu,
-        Item: GridSuggestionMenuItem,
-        EmptyItem: GridSuggestionMenuEmptyItem,
-        Loader: GridSuggestionMenuLoader,
-    },
-    TableHandle: {
-        Root: TableHandle,
-        ExtendButton: ExtendButton,
-    },
-    Generic: {
-        Form: {
-            Root: Form,
-            TextInput: TextInput,
-        },
-        Menu: {
-            Root: Menu,
-            Trigger: MenuTrigger,
-            Dropdown: MenuDropdown,
-            Divider: MenuDivider,
-            Label: MenuLabel,
-            Item: MenuItem,
-        },
-        Popover: {
-            Root: Popover,
-            Trigger: PopoverTrigger,
-            Content: PopoverContent,
-        },
-    },
+  },
 }
 
 export const MiaomaDocView = <BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema>(
-    props: ComponentProps<typeof MiaomaDocViewRaw<BSchema, ISchema, SSchema>> & {
-        /**
-         * (optional)Provide your own shadcn component overrides
-         */
-        shadCNComponents?: Partial<ShadCNComponents>
-    }
+  props: ComponentProps<typeof MiaomaDocViewRaw<BSchema, ISchema, SSchema>> & {
+    /**
+     * (optional)Provide your own shadcn component overrides
+     */
+    shadCNComponents?: Partial<ShadCNComponents>
+  }
 ) => {
-    const { className, shadCNComponents, ...rest } = props
+  const { className, shadCNComponents, ...rest } = props
 
-    const componentsValue = useMemo(() => {
-        return {
-            ...ShadCNDefaultComponents,
-            ...shadCNComponents,
-        }
-    }, [shadCNComponents])
+  const componentsValue = useMemo(() => {
+    return {
+      ...ShadCNDefaultComponents,
+      ...shadCNComponents,
+    }
+  }, [shadCNComponents])
 
-    return (
-        <ShadCNComponentsContext.Provider value={componentsValue}>
-            <ComponentsContext.Provider value={components}>
-                <MiaomaDocViewRaw className={mergeCSSClasses('bn-shadcn', className || '')} {...rest} />
-            </ComponentsContext.Provider>
-        </ShadCNComponentsContext.Provider>
-    )
+  return (
+    <ShadCNComponentsContext.Provider value={componentsValue}>
+      <ComponentsContext.Provider value={components}>
+        <MiaomaDocViewRaw className={mergeCSSClasses('bn-shadcn', className || '')} {...rest} />
+      </ComponentsContext.Provider>
+    </ShadCNComponentsContext.Provider>
+  )
 }

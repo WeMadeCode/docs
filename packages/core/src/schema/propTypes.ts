@@ -1,13 +1,8 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 // Defines a single prop spec, which includes the default value the prop should
 // take and possible values it can take.
 export type PropSpec<PType extends boolean | number | string> = {
-    values?: readonly PType[]
-    default: PType
+  values?: readonly PType[]
+  default: PType
 }
 
 // Defines multiple block prop specs. The key of each prop is the name of the
@@ -21,17 +16,17 @@ export type PropSchema = Record<string, PropSpec<boolean | number | string>>
 // each prop spec into a union type of its possible values, or a string if no
 // values are specified.
 export type Props<PSchema extends PropSchema> = {
-    [PName in keyof PSchema]: PSchema[PName]['default'] extends boolean
-        ? PSchema[PName]['values'] extends readonly boolean[]
-            ? PSchema[PName]['values'][number]
-            : boolean
-        : PSchema[PName]['default'] extends number
-          ? PSchema[PName]['values'] extends readonly number[]
-              ? PSchema[PName]['values'][number]
-              : number
-          : PSchema[PName]['default'] extends string
-            ? PSchema[PName]['values'] extends readonly string[]
-                ? PSchema[PName]['values'][number]
-                : string
-            : never
+  [PName in keyof PSchema]: PSchema[PName]['default'] extends boolean
+    ? PSchema[PName]['values'] extends readonly boolean[]
+      ? PSchema[PName]['values'][number]
+      : boolean
+    : PSchema[PName]['default'] extends number
+      ? PSchema[PName]['values'] extends readonly number[]
+        ? PSchema[PName]['values'][number]
+        : number
+      : PSchema[PName]['default'] extends string
+        ? PSchema[PName]['values'] extends readonly string[]
+          ? PSchema[PName]['values'][number]
+          : string
+        : never
 }

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { DOMSerializer, Schema } from 'prosemirror-model'
 
 import { PartialBlock } from '../../../blocks/defaultBlocks'
@@ -19,14 +14,14 @@ import { serializeBlocksInternalHTML } from './util/serializeBlocksInternalHTML'
 // means that it can be converted back to the original blocks without any data
 // loss.
 export const createInternalHTMLSerializer = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-    schema: Schema,
-    editor: MiaomaDocEditor<BSchema, I, S>
+  schema: Schema,
+  editor: MiaomaDocEditor<BSchema, I, S>
 ) => {
-    const serializer = DOMSerializer.fromSchema(schema)
+  const serializer = DOMSerializer.fromSchema(schema)
 
-    return {
-        serializeBlocks: (blocks: PartialBlock<BSchema, I, S>[], options: { document?: Document }) => {
-            return serializeBlocksInternalHTML(editor, blocks, serializer, options).outerHTML
-        },
-    }
+  return {
+    serializeBlocks: (blocks: PartialBlock<BSchema, I, S>[], options: { document?: Document }) => {
+      return serializeBlocksInternalHTML(editor, blocks, serializer, options).outerHTML
+    },
+  }
 }

@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { Extension } from '@tiptap/core'
 import { Plugin, PluginKey } from 'prosemirror-state'
 
@@ -15,70 +10,70 @@ import { Plugin, PluginKey } from 'prosemirror-state'
  */
 
 export interface TrailingNodeOptions {
-    node: string
+  node: string
 }
 
 /**
  * Add a trailing node to the document so the user can always click at the bottom of the document and start typing
  */
 export const TrailingNode = Extension.create<TrailingNodeOptions>({
-    name: 'trailingNode',
+  name: 'trailingNode',
 
-    addProseMirrorPlugins() {
-        const plugin = new PluginKey(this.name)
-        // const disabledNodes = Object.entries(this.editor.schema.nodes)
-        //   .map(([, value]) => value)
-        //   .filter((node) => this.options.notAfter.includes(node.name));
+  addProseMirrorPlugins() {
+    const plugin = new PluginKey(this.name)
+    // const disabledNodes = Object.entries(this.editor.schema.nodes)
+    //   .map(([, value]) => value)
+    //   .filter((node) => this.options.notAfter.includes(node.name));
 
-        return [
-            new Plugin({
-                key: plugin,
-                appendTransaction: (_, __, state) => {
-                    const { doc, tr, schema } = state
-                    const shouldInsertNodeAtEnd = plugin.getState(state)
-                    const endPosition = doc.content.size - 2
-                    const type = schema.nodes['blockContainer']
-                    const contentType = schema.nodes['paragraph']
-                    if (!shouldInsertNodeAtEnd) {
-                        return
-                    }
+    return [
+      new Plugin({
+        key: plugin,
+        appendTransaction: (_, __, state) => {
+          const { doc, tr, schema } = state
+          const shouldInsertNodeAtEnd = plugin.getState(state)
+          const endPosition = doc.content.size - 2
+          const type = schema.nodes['blockContainer']
+          const contentType = schema.nodes['paragraph']
+          if (!shouldInsertNodeAtEnd) {
+            return
+          }
 
-                    return tr.insert(endPosition, type.create(undefined, contentType.create()))
-                },
-                state: {
-                    init: (/* _, _state */) => {
-                        // (maybe fix): use same logic as apply() here
-                        // so it works when initializing
-                    },
-                    apply: (tr, value) => {
-                        if (!tr.docChanged) {
-                            return value
-                        }
+          return tr.insert(endPosition, type.create(undefined, contentType.create()))
+        },
+        state: {
+          init: (/* _, _state */) => {
+            // (maybe fix): use same logic as apply() here
+            // so it works when initializing
+          },
+          apply: (tr, value) => {
+            if (!tr.docChanged) {
+              return value
+            }
 
-                        let lastNode = tr.doc.lastChild
+            let lastNode = tr.doc.lastChild
 
-                        if (!lastNode || lastNode.type.name !== 'blockGroup') {
-                            throw new Error('Expected blockGroup')
-                        }
+            if (!lastNode || lastNode.type.name !== 'blockGroup') {
+              throw new Error('Expected blockGroup')
+            }
 
-                        lastNode = lastNode.lastChild
+            lastNode = lastNode.lastChild
 
-                        if (!lastNode || lastNode.type.name !== 'blockContainer') {
-                            throw new Error('Expected blockContainer')
-                        }
+            if (!lastNode || lastNode.type.name !== 'blockContainer') {
+              throw new Error('Expected blockContainer')
+            }
 
-                        const lastContentNode = lastNode.firstChild
+            const lastContentNode = lastNode.firstChild
 
-                        if (!lastContentNode) {
-                            throw new Error('Expected blockContent')
-                        }
+            if (!lastContentNode) {
+              throw new Error('Expected blockContent')
+            }
 
-                        // If last node is not empty (size > 4) or it doesn't contain
-                        // inline content, we need to add a trailing node.
-                        return lastNode.nodeSize > 4 || lastContentNode.type.spec.content !== 'inline*'
-                    },
-                },
-            }),
-        ]
-    },
+            // If last node is not empty (size > 4) or it doesn't contain
+            // inline content, we need to add a trailing node.
+            return lastNode.nodeSize > 4 || lastContentNode.type.spec.content !== 'inline*'
+          },
+        },
+      }),
+    ]
+  },
 })

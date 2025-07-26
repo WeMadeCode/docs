@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { InputRule, isTextSelection } from '@tiptap/core'
 import { TextSelection } from '@tiptap/pm/state'
 import { createHighlightPlugin, Parser } from 'prosemirror-highlight'
@@ -14,314 +9,314 @@ import { createDefaultBlockDOMOutputSpec } from '../defaultBlockHelpers'
 import { defaultSupportedLanguages, SupportedLanguageConfig } from './defaultSupportedLanguages'
 
 interface CodeBlockOptions {
-    defaultLanguage: string
-    indentLineWithTab: boolean
-    supportedLanguages: SupportedLanguageConfig[]
+  defaultLanguage: string
+  indentLineWithTab: boolean
+  supportedLanguages: SupportedLanguageConfig[]
 }
 
 export const defaultCodeBlockPropSchema = {
-    language: {
-        default: 'javascript',
-        values: [...defaultSupportedLanguages.map(lang => lang.id)],
-    },
+  language: {
+    default: 'javascript',
+    values: [...defaultSupportedLanguages.map(lang => lang.id)],
+  },
 } satisfies PropSchema
 
 const CodeBlockContent = createStronglyTypedTiptapNode({
-    name: 'codeBlock',
-    content: 'inline*',
-    group: 'blockContent',
-    marks: '',
-    code: true,
-    defining: true,
-    addOptions() {
-        return {
-            defaultLanguage: 'javascript',
-            indentLineWithTab: true,
-            supportedLanguages: defaultSupportedLanguages,
-        }
-    },
-    addAttributes() {
-        return {
-            language: {
-                default: this.options.defaultLanguage,
-                parseHTML: inputElement => {
-                    let element = inputElement as HTMLElement | null
+  name: 'codeBlock',
+  content: 'inline*',
+  group: 'blockContent',
+  marks: '',
+  code: true,
+  defining: true,
+  addOptions() {
+    return {
+      defaultLanguage: 'javascript',
+      indentLineWithTab: true,
+      supportedLanguages: defaultSupportedLanguages,
+    }
+  },
+  addAttributes() {
+    return {
+      language: {
+        default: this.options.defaultLanguage,
+        parseHTML: inputElement => {
+          let element = inputElement as HTMLElement | null
 
-                    if (element?.tagName === 'DIV' && element?.dataset.contentType === 'codeBlock') {
-                        element = element.children[0] as HTMLElement | null
-                    }
+          if (element?.tagName === 'DIV' && element?.dataset.contentType === 'codeBlock') {
+            element = element.children[0] as HTMLElement | null
+          }
 
-                    if (element?.tagName === 'PRE') {
-                        element = element?.children[0] as HTMLElement | null
-                    }
+          if (element?.tagName === 'PRE') {
+            element = element?.children[0] as HTMLElement | null
+          }
 
-                    const dataLanguage = element?.getAttribute('data-language')
+          const dataLanguage = element?.getAttribute('data-language')
 
-                    if (dataLanguage) {
-                        return dataLanguage.toLowerCase()
-                    }
+          if (dataLanguage) {
+            return dataLanguage.toLowerCase()
+          }
 
-                    const classNames = [...(element?.className.split(' ') || [])]
-                    const languages = classNames
-                        .filter(className => className.startsWith('language-'))
-                        .map(className => className.replace('language-', ''))
-                    const [language] = languages
+          const classNames = [...(element?.className.split(' ') || [])]
+          const languages = classNames
+            .filter(className => className.startsWith('language-'))
+            .map(className => className.replace('language-', ''))
+          const [language] = languages
 
-                    if (!language) {
-                        return null
-                    }
+          if (!language) {
+            return null
+          }
 
-                    return language.toLowerCase()
-                },
-                renderHTML: attributes => {
-                    return attributes.language && attributes.language !== 'text'
-                        ? {
-                              class: `language-${attributes.language}`,
-                          }
-                        : {}
-                },
-            },
-        }
-    },
-    parseHTML() {
-        return [
-            {
-                tag: 'div[data-content-type=' + this.name + ']',
-            },
-            {
-                tag: 'pre',
-                preserveWhitespace: 'full',
-            },
-        ]
-    },
-    renderHTML({ HTMLAttributes }) {
-        const pre = document.createElement('pre')
-        const { dom, contentDOM } = createDefaultBlockDOMOutputSpec(this.name, 'code', this.options.domAttributes?.blockContent || {}, {
-            ...(this.options.domAttributes?.inlineContent || {}),
-            ...HTMLAttributes,
+          return language.toLowerCase()
+        },
+        renderHTML: attributes => {
+          return attributes.language && attributes.language !== 'text'
+            ? {
+                class: `language-${attributes.language}`,
+              }
+            : {}
+        },
+      },
+    }
+  },
+  parseHTML() {
+    return [
+      {
+        tag: 'div[data-content-type=' + this.name + ']',
+      },
+      {
+        tag: 'pre',
+        preserveWhitespace: 'full',
+      },
+    ]
+  },
+  renderHTML({ HTMLAttributes }) {
+    const pre = document.createElement('pre')
+    const { dom, contentDOM } = createDefaultBlockDOMOutputSpec(this.name, 'code', this.options.domAttributes?.blockContent || {}, {
+      ...(this.options.domAttributes?.inlineContent || {}),
+      ...HTMLAttributes,
+    })
+
+    dom.removeChild(contentDOM)
+    dom.appendChild(pre)
+    pre.appendChild(contentDOM)
+
+    return {
+      dom,
+      contentDOM,
+    }
+  },
+  addNodeView() {
+    const supportedLanguages = this.options.supportedLanguages as SupportedLanguageConfig[]
+
+    return ({ editor, node, getPos, HTMLAttributes }) => {
+      const pre = document.createElement('pre')
+      const select = document.createElement('select')
+      const selectWrapper = document.createElement('div')
+      const { dom, contentDOM } = createDefaultBlockDOMOutputSpec(
+        this.name,
+        'code',
+        {
+          ...(this.options.domAttributes?.blockContent || {}),
+          ...HTMLAttributes,
+        },
+        this.options.domAttributes?.inlineContent || {}
+      )
+      const handleLanguageChange = (event: Event) => {
+        const language = (event.target as HTMLSelectElement).value
+
+        editor.commands.command(({ tr }) => {
+          tr.setNodeAttribute(getPos(), 'language', language)
+
+          return true
         })
+      }
 
-        dom.removeChild(contentDOM)
-        dom.appendChild(pre)
-        pre.appendChild(contentDOM)
+      supportedLanguages.forEach(({ id, name }) => {
+        const option = document.createElement('option')
 
-        return {
-            dom,
-            contentDOM,
-        }
-    },
-    addNodeView() {
-        const supportedLanguages = this.options.supportedLanguages as SupportedLanguageConfig[]
+        option.value = id
+        option.text = name
+        select.appendChild(option)
+      })
 
-        return ({ editor, node, getPos, HTMLAttributes }) => {
-            const pre = document.createElement('pre')
-            const select = document.createElement('select')
-            const selectWrapper = document.createElement('div')
-            const { dom, contentDOM } = createDefaultBlockDOMOutputSpec(
-                this.name,
-                'code',
-                {
-                    ...(this.options.domAttributes?.blockContent || {}),
-                    ...HTMLAttributes,
-                },
-                this.options.domAttributes?.inlineContent || {}
-            )
-            const handleLanguageChange = (event: Event) => {
-                const language = (event.target as HTMLSelectElement).value
+      selectWrapper.contentEditable = 'false'
+      select.value = node.attrs.language || this.options.defaultLanguage
+      dom.removeChild(contentDOM)
+      dom.appendChild(selectWrapper)
+      dom.appendChild(pre)
+      pre.appendChild(contentDOM)
+      selectWrapper.appendChild(select)
+      select.addEventListener('change', handleLanguageChange)
 
-                editor.commands.command(({ tr }) => {
-                    tr.setNodeAttribute(getPos(), 'language', language)
+      return {
+        dom,
+        contentDOM,
+        update: newNode => {
+          if (newNode.type !== this.type) {
+            return false
+          }
 
-                    return true
-                })
-            }
+          return true
+        },
+        destroy: () => {
+          select.removeEventListener('change', handleLanguageChange)
+        },
+      }
+    }
+  },
+  addProseMirrorPlugins() {
+    let highlighter: Highlighter | undefined
+    let parser: Parser | undefined
 
-            supportedLanguages.forEach(({ id, name }) => {
-                const option = document.createElement('option')
-
-                option.value = id
-                option.text = name
-                select.appendChild(option)
-            })
-
-            selectWrapper.contentEditable = 'false'
-            select.value = node.attrs.language || this.options.defaultLanguage
-            dom.removeChild(contentDOM)
-            dom.appendChild(selectWrapper)
-            dom.appendChild(pre)
-            pre.appendChild(contentDOM)
-            selectWrapper.appendChild(select)
-            select.addEventListener('change', handleLanguageChange)
-
-            return {
-                dom,
-                contentDOM,
-                update: newNode => {
-                    if (newNode.type !== this.type) {
-                        return false
-                    }
-
-                    return true
-                },
-                destroy: () => {
-                    select.removeEventListener('change', handleLanguageChange)
-                },
-            }
-        }
-    },
-    addProseMirrorPlugins() {
-        let highlighter: Highlighter | undefined
-        let parser: Parser | undefined
-
-        const supportedLanguages = this.options.supportedLanguages as SupportedLanguageConfig[]
-        const lazyParser: Parser = options => {
-            if (!highlighter) {
-                return createHighlighter({
-                    themes: ['github-dark'],
-                    langs: [],
-                }).then(createdHighlighter => {
-                    highlighter = createdHighlighter
-                })
-            }
-
-            const language = options.language
-
-            if (
-                language &&
-                language !== 'text' &&
-                !highlighter.getLoadedLanguages().includes(language) &&
-                supportedLanguages.find(({ id }) => id === language) &&
-                bundledLanguagesInfo.find(({ id }) => id === language)
-            ) {
-                return highlighter.loadLanguage(language as BundledLanguage)
-            }
-
-            if (!parser) {
-                parser = createParser(highlighter)
-            }
-
-            return parser(options)
-        }
-
-        const shikiLazyPlugin = createHighlightPlugin({
-            parser: lazyParser,
-            languageExtractor: node => node.attrs.language,
-            nodeTypes: [this.name],
+    const supportedLanguages = this.options.supportedLanguages as SupportedLanguageConfig[]
+    const lazyParser: Parser = options => {
+      if (!highlighter) {
+        return createHighlighter({
+          themes: ['github-dark'],
+          langs: [],
+        }).then(createdHighlighter => {
+          highlighter = createdHighlighter
         })
+      }
 
-        return [shikiLazyPlugin]
-    },
-    addInputRules() {
-        const supportedLanguages = this.options.supportedLanguages as SupportedLanguageConfig[]
+      const language = options.language
 
-        return [
-            new InputRule({
-                find: /^```(.*?)\s$/,
-                handler: ({ state, range, match }) => {
-                    const $start = state.doc.resolve(range.from)
-                    const languageName = match[1].trim()
-                    const attributes = {
-                        language:
-                            supportedLanguages.find(({ match }) => {
-                                return match.includes(languageName)
-                            })?.id || this.options.defaultLanguage,
-                    }
+      if (
+        language &&
+        language !== 'text' &&
+        !highlighter.getLoadedLanguages().includes(language) &&
+        supportedLanguages.find(({ id }) => id === language) &&
+        bundledLanguagesInfo.find(({ id }) => id === language)
+      ) {
+        return highlighter.loadLanguage(language as BundledLanguage)
+      }
 
-                    if (!$start.node(-1).canReplaceWith($start.index(-1), $start.indexAfter(-1), this.type)) {
-                        return null
-                    }
+      if (!parser) {
+        parser = createParser(highlighter)
+      }
 
-                    state.tr
-                        .delete(range.from, range.to)
-                        .setBlockType(range.from, range.from, this.type, attributes)
-                        .setSelection(TextSelection.create(state.tr.doc, range.from))
+      return parser(options)
+    }
 
-                    return
-                },
-            }),
-        ]
-    },
-    addKeyboardShortcuts() {
-        return {
-            Delete: ({ editor }) => {
-                const { selection } = editor.state
-                const { $from } = selection
+    const shikiLazyPlugin = createHighlightPlugin({
+      parser: lazyParser,
+      languageExtractor: node => node.attrs.language,
+      nodeTypes: [this.name],
+    })
 
-                // When inside empty codeblock, on `DELETE` key press, delete the codeblock
-                if (editor.isActive(this.name) && !$from.parent.textContent && isTextSelection(selection)) {
-                    // Get the start position of the codeblock for node selection
-                    const from = $from.pos - $from.parentOffset - 2
+    return [shikiLazyPlugin]
+  },
+  addInputRules() {
+    const supportedLanguages = this.options.supportedLanguages as SupportedLanguageConfig[]
 
-                    editor.chain().setNodeSelection(from).deleteSelection().run()
+    return [
+      new InputRule({
+        find: /^```(.*?)\s$/,
+        handler: ({ state, range, match }) => {
+          const $start = state.doc.resolve(range.from)
+          const languageName = match[1].trim()
+          const attributes = {
+            language:
+              supportedLanguages.find(({ match }) => {
+                return match.includes(languageName)
+              })?.id || this.options.defaultLanguage,
+          }
 
-                    return true
-                }
+          if (!$start.node(-1).canReplaceWith($start.index(-1), $start.indexAfter(-1), this.type)) {
+            return null
+          }
 
-                return false
-            },
-            Tab: ({ editor }) => {
-                if (!this.options.indentLineWithTab) {
-                    return false
-                }
-                if (editor.isActive(this.name)) {
-                    editor.commands.insertContent('  ')
-                    return true
-                }
+          state.tr
+            .delete(range.from, range.to)
+            .setBlockType(range.from, range.from, this.type, attributes)
+            .setSelection(TextSelection.create(state.tr.doc, range.from))
 
-                return false
-            },
-            Enter: ({ editor }) => {
-                const { $from } = editor.state.selection
+          return
+        },
+      }),
+    ]
+  },
+  addKeyboardShortcuts() {
+    return {
+      Delete: ({ editor }) => {
+        const { selection } = editor.state
+        const { $from } = selection
 
-                if (!editor.isActive(this.name)) {
-                    return false
-                }
+        // When inside empty codeblock, on `DELETE` key press, delete the codeblock
+        if (editor.isActive(this.name) && !$from.parent.textContent && isTextSelection(selection)) {
+          // Get the start position of the codeblock for node selection
+          const from = $from.pos - $from.parentOffset - 2
 
-                const isAtEnd = $from.parentOffset === $from.parent.nodeSize - 2
-                const endsWithDoubleNewline = $from.parent.textContent.endsWith('\n\n')
+          editor.chain().setNodeSelection(from).deleteSelection().run()
 
-                if (!isAtEnd || !endsWithDoubleNewline) {
-                    editor.commands.insertContent('\n')
-                    return true
-                }
-
-                return editor
-                    .chain()
-                    .command(({ tr }) => {
-                        tr.delete($from.pos - 2, $from.pos)
-
-                        return true
-                    })
-                    .exitCode()
-                    .run()
-            },
-            'Shift-Enter': ({ editor }) => {
-                const { $from } = editor.state.selection
-
-                if (!editor.isActive(this.name)) {
-                    return false
-                }
-
-                editor
-                    .chain()
-                    .insertContentAt($from.pos - $from.parentOffset + $from.parent.nodeSize, {
-                        type: 'paragraph',
-                    })
-                    .run()
-
-                return true
-            },
+          return true
         }
-    },
+
+        return false
+      },
+      Tab: ({ editor }) => {
+        if (!this.options.indentLineWithTab) {
+          return false
+        }
+        if (editor.isActive(this.name)) {
+          editor.commands.insertContent('  ')
+          return true
+        }
+
+        return false
+      },
+      Enter: ({ editor }) => {
+        const { $from } = editor.state.selection
+
+        if (!editor.isActive(this.name)) {
+          return false
+        }
+
+        const isAtEnd = $from.parentOffset === $from.parent.nodeSize - 2
+        const endsWithDoubleNewline = $from.parent.textContent.endsWith('\n\n')
+
+        if (!isAtEnd || !endsWithDoubleNewline) {
+          editor.commands.insertContent('\n')
+          return true
+        }
+
+        return editor
+          .chain()
+          .command(({ tr }) => {
+            tr.delete($from.pos - 2, $from.pos)
+
+            return true
+          })
+          .exitCode()
+          .run()
+      },
+      'Shift-Enter': ({ editor }) => {
+        const { $from } = editor.state.selection
+
+        if (!editor.isActive(this.name)) {
+          return false
+        }
+
+        editor
+          .chain()
+          .insertContentAt($from.pos - $from.parentOffset + $from.parent.nodeSize, {
+            type: 'paragraph',
+          })
+          .run()
+
+        return true
+      },
+    }
+  },
 })
 
 export const CodeBlock = createBlockSpecFromStronglyTypedTiptapNode(CodeBlockContent, defaultCodeBlockPropSchema)
 
 export function customizeCodeBlock(options: Partial<CodeBlockOptions>) {
-    return createBlockSpecFromStronglyTypedTiptapNode(CodeBlockContent.configure(options), {
-        language: {
-            default: options.defaultLanguage || defaultCodeBlockPropSchema.language.default,
-            values: options.supportedLanguages?.map(lang => lang.id) || defaultCodeBlockPropSchema.language.values,
-        },
-    })
+  return createBlockSpecFromStronglyTypedTiptapNode(CodeBlockContent.configure(options), {
+    language: {
+      default: options.defaultLanguage || defaultCodeBlockPropSchema.language.default,
+      values: options.supportedLanguages?.map(lang => lang.id) || defaultCodeBlockPropSchema.language.values,
+    },
+  })
 }

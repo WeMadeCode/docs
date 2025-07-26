@@ -1,17 +1,12 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { type ClassValue, clsx } from 'clsx'
 import { extendTailwindMerge } from 'tailwind-merge'
 
 // Ensures that `bn-` prefixed Tailwind classes are recognized as Tailwind
 // classes, so they can be merged correctly.
 const twMerge = extendTailwindMerge({
-    prefix: 'bn-',
+  prefix: 'bn-',
 })
 
 export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs))
 }

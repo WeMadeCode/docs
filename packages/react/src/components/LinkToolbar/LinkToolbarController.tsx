@@ -1,16 +1,11 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { flip, offset } from '@floating-ui/react'
 import {
-    BlockSchema,
-    DefaultBlockSchema,
-    DefaultInlineContentSchema,
-    DefaultStyleSchema,
-    InlineContentSchema,
-    StyleSchema,
+  BlockSchema,
+  DefaultBlockSchema,
+  DefaultInlineContentSchema,
+  DefaultStyleSchema,
+  InlineContentSchema,
+  StyleSchema,
 } from '@miaoma-doc/core'
 import { FC } from 'react'
 
@@ -21,45 +16,45 @@ import { LinkToolbar } from './LinkToolbar'
 import { LinkToolbarProps } from './LinkToolbarProps'
 
 export const LinkToolbarController = <
-    BSchema extends BlockSchema = DefaultBlockSchema,
-    I extends InlineContentSchema = DefaultInlineContentSchema,
-    S extends StyleSchema = DefaultStyleSchema,
+  BSchema extends BlockSchema = DefaultBlockSchema,
+  I extends InlineContentSchema = DefaultInlineContentSchema,
+  S extends StyleSchema = DefaultStyleSchema,
 >(props: {
-    linkToolbar?: FC<LinkToolbarProps>
+  linkToolbar?: FC<LinkToolbarProps>
 }) => {
-    const editor = useMiaomaDocEditor<BSchema, I, S>()
+  const editor = useMiaomaDocEditor<BSchema, I, S>()
 
-    const callbacks = {
-        deleteLink: editor.linkToolbar.deleteLink,
-        editLink: editor.linkToolbar.editLink,
-        startHideTimer: editor.linkToolbar.startHideTimer,
-        stopHideTimer: editor.linkToolbar.stopHideTimer,
-    }
+  const callbacks = {
+    deleteLink: editor.linkToolbar.deleteLink,
+    editLink: editor.linkToolbar.editLink,
+    startHideTimer: editor.linkToolbar.startHideTimer,
+    stopHideTimer: editor.linkToolbar.stopHideTimer,
+  }
 
-    const state = useUIPluginState(editor.linkToolbar.onUpdate.bind(editor.linkToolbar))
-    const { isMounted, ref, style, getFloatingProps } = useUIElementPositioning(state?.show || false, state?.referencePos || null, 4000, {
-        placement: 'top-start',
-        middleware: [offset(10), flip()],
-        onOpenChange: open => {
-            if (!open) {
-                editor.linkToolbar.closeMenu()
-                editor.focus()
-            }
-        },
-    })
+  const state = useUIPluginState(editor.linkToolbar.onUpdate.bind(editor.linkToolbar))
+  const { isMounted, ref, style, getFloatingProps } = useUIElementPositioning(state?.show || false, state?.referencePos || null, 4000, {
+    placement: 'top-start',
+    middleware: [offset(10), flip()],
+    onOpenChange: open => {
+      if (!open) {
+        editor.linkToolbar.closeMenu()
+        editor.focus()
+      }
+    },
+  })
 
-    if (!isMounted || !state) {
-        return null
-    }
+  if (!isMounted || !state) {
+    return null
+  }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { show, referencePos, ...data } = state
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { show, referencePos, ...data } = state
 
-    const Component = props.linkToolbar || LinkToolbar
+  const Component = props.linkToolbar || LinkToolbar
 
-    return (
-        <div ref={ref} style={style} {...getFloatingProps()}>
-            <Component {...data} {...callbacks} />
-        </div>
-    )
+  return (
+    <div ref={ref} style={style} {...getFloatingProps()}>
+      <Component {...data} {...callbacks} />
+    </div>
+  )
 }

@@ -1,15 +1,10 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import {
-    BlockSchema,
-    DefaultBlockSchema,
-    DefaultInlineContentSchema,
-    DefaultStyleSchema,
-    InlineContentSchema,
-    StyleSchema,
+  BlockSchema,
+  DefaultBlockSchema,
+  DefaultInlineContentSchema,
+  DefaultStyleSchema,
+  InlineContentSchema,
+  StyleSchema,
 } from '@miaoma-doc/core'
 import { ReactNode, useMemo } from 'react'
 
@@ -28,42 +23,42 @@ import { SideMenuProps } from './SideMenuProps'
  * - Custom buttons: The `SideMenuButton` component.
  */
 export const SideMenu = <
-    BSchema extends BlockSchema = DefaultBlockSchema,
-    I extends InlineContentSchema = DefaultInlineContentSchema,
-    S extends StyleSchema = DefaultStyleSchema,
+  BSchema extends BlockSchema = DefaultBlockSchema,
+  I extends InlineContentSchema = DefaultInlineContentSchema,
+  S extends StyleSchema = DefaultStyleSchema,
 >(
-    props: SideMenuProps<BSchema, I, S> & { children?: ReactNode }
+  props: SideMenuProps<BSchema, I, S> & { children?: ReactNode }
 ) => {
-    const Components = useComponentsContext()!
+  const Components = useComponentsContext()!
 
-    const dataAttributes = useMemo(() => {
-        const attrs: Record<string, string> = {
-            'data-block-type': props.block.type,
-        }
+  const dataAttributes = useMemo(() => {
+    const attrs: Record<string, string> = {
+      'data-block-type': props.block.type,
+    }
 
-        if (props.block.type === 'heading') {
-            attrs['data-level'] = props.block.props.level.toString()
-        }
+    if (props.block.type === 'heading') {
+      attrs['data-level'] = props.block.props.level.toString()
+    }
 
-        if (props.editor.schema.blockSchema[props.block.type].isFileBlock) {
-            if (props.block.props.url) {
-                attrs['data-url'] = 'true'
-            } else {
-                attrs['data-url'] = 'false'
-            }
-        }
+    if (props.editor.schema.blockSchema[props.block.type].isFileBlock) {
+      if (props.block.props.url) {
+        attrs['data-url'] = 'true'
+      } else {
+        attrs['data-url'] = 'false'
+      }
+    }
 
-        return attrs
-    }, [props.block, props.editor.schema.blockSchema])
+    return attrs
+  }, [props.block, props.editor.schema.blockSchema])
 
-    return (
-        <Components.SideMenu.Root className={'bn-side-menu'} {...dataAttributes}>
-            {props.children || (
-                <>
-                    <AddBlockButton {...props} />
-                    <DragHandleButton {...props} />
-                </>
-            )}
-        </Components.SideMenu.Root>
-    )
+  return (
+    <Components.SideMenu.Root className={'bn-side-menu'} {...dataAttributes}>
+      {props.children || (
+        <>
+          <AddBlockButton {...props} />
+          <DragHandleButton {...props} />
+        </>
+      )}
+    </Components.SideMenu.Root>
+  )
 }

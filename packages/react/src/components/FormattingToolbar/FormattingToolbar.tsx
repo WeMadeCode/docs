@@ -1,8 +1,3 @@
-/*
- *   Copyright (c) 2024 妙码学院 @Heyi
- *   All rights reserved.
- *   妙码学院官方出品，作者 @Heyi，供学员学习使用，可用作练习，可用作美化简历，不可开源。
- */
 import { ReactNode } from 'react'
 
 import { useComponentsContext } from '../../editor/ComponentsContext'
@@ -21,24 +16,24 @@ import { BlockTypeSelect, BlockTypeSelectItem } from './DefaultSelects/BlockType
 import { FormattingToolbarProps } from './FormattingToolbarProps'
 
 export const getFormattingToolbarItems = (blockTypeSelectItems?: BlockTypeSelectItem[]): JSX.Element[] => [
-    <BlockTypeSelect key={'blockTypeSelect'} items={blockTypeSelectItems} />,
-    <FileCaptionButton key={'fileCaptionButton'} />,
-    <FileReplaceButton key={'replaceFileButton'} />,
-    <FileRenameButton key={'fileRenameButton'} />,
-    <FileDeleteButton key={'fileDeleteButton'} />,
-    <FileDownloadButton key={'fileDownloadButton'} />,
-    <FilePreviewButton key={'filePreviewButton'} />,
-    <BasicTextStyleButton basicTextStyle={'bold'} key={'boldStyleButton'} />,
-    <BasicTextStyleButton basicTextStyle={'italic'} key={'italicStyleButton'} />,
-    <BasicTextStyleButton basicTextStyle={'underline'} key={'underlineStyleButton'} />,
-    <BasicTextStyleButton basicTextStyle={'strike'} key={'strikeStyleButton'} />,
-    <TextAlignButton textAlignment={'left'} key={'textAlignLeftButton'} />,
-    <TextAlignButton textAlignment={'center'} key={'textAlignCenterButton'} />,
-    <TextAlignButton textAlignment={'right'} key={'textAlignRightButton'} />,
-    <ColorStyleButton key={'colorStyleButton'} />,
-    <NestBlockButton key={'nestBlockButton'} />,
-    <UnnestBlockButton key={'unnestBlockButton'} />,
-    <CreateLinkButton key={'createLinkButton'} />,
+  <BlockTypeSelect key={'blockTypeSelect'} items={blockTypeSelectItems} />,
+  <FileCaptionButton key={'fileCaptionButton'} />,
+  <FileReplaceButton key={'replaceFileButton'} />,
+  <FileRenameButton key={'fileRenameButton'} />,
+  <FileDeleteButton key={'fileDeleteButton'} />,
+  <FileDownloadButton key={'fileDownloadButton'} />,
+  <FilePreviewButton key={'filePreviewButton'} />,
+  <BasicTextStyleButton basicTextStyle={'bold'} key={'boldStyleButton'} />,
+  <BasicTextStyleButton basicTextStyle={'italic'} key={'italicStyleButton'} />,
+  <BasicTextStyleButton basicTextStyle={'underline'} key={'underlineStyleButton'} />,
+  <BasicTextStyleButton basicTextStyle={'strike'} key={'strikeStyleButton'} />,
+  <TextAlignButton textAlignment={'left'} key={'textAlignLeftButton'} />,
+  <TextAlignButton textAlignment={'center'} key={'textAlignCenterButton'} />,
+  <TextAlignButton textAlignment={'right'} key={'textAlignRightButton'} />,
+  <ColorStyleButton key={'colorStyleButton'} />,
+  <NestBlockButton key={'nestBlockButton'} />,
+  <UnnestBlockButton key={'unnestBlockButton'} />,
+  <CreateLinkButton key={'createLinkButton'} />,
 ]
 
 // TODO: props.blockTypeSelectItems should only be available if no children
@@ -56,11 +51,11 @@ export const getFormattingToolbarItems = (blockTypeSelectItems?: BlockTypeSelect
  * `components/mantine-shared/Toolbar` directory.
  */
 export const FormattingToolbar = (props: FormattingToolbarProps & { children?: ReactNode }) => {
-    const Components = useComponentsContext()!
+  const Components = useComponentsContext()!
 
-    return (
-        <Components.FormattingToolbar.Root className={'bn-toolbar bn-formatting-toolbar'}>
-            {props.children || getFormattingToolbarItems(props.blockTypeSelectItems)}
-        </Components.FormattingToolbar.Root>
-    )
+  return (
+    <Components.FormattingToolbar.Root className={'bn-toolbar bn-formatting-toolbar'}>
+      {props.children || getFormattingToolbarItems(props.blockTypeSelectItems)}
+    </Components.FormattingToolbar.Root>
+  )
 }

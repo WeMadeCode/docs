@@ -1,11 +1,10 @@
 {
   "name": "@miaoma-doc/server",
   "version": "1.19.0",
-  "author": "Heyi",
+  "author": "",
   "private": true,
-  "license": "MIAOMAEDU",
+  "license": "MIT",
   "keywords": [
-    "miaoma",
     "editor",
     "typescript",
     "prosemirror",

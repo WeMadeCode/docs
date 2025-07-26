@@ -1,73 +1,73 @@
 {
-    "name": "@miaoma-doc/shadcn",
-    "private": false,
-    "sideEffects": [
-        "*.css"
-    ],
-    "license": "MIAOMAEDU",
-    "version": "1.19.0",
-    "keywords": [
-        "miaoma",
-        "editor",
-        "typescript",
-        "prosemirror",
-        "wysiwyg",
-        "rich-text-editor",
-        "feishu",
-        "notion",
-        "yjs",
-        "block-based",
-        "tiptap"
-    ],
-    "description": "基于 Prosemirror 和 Tiptap 实现的类 Notion、飞书文档风格可扩展文本编辑器。",
-    "type": "module",
-    "source": "src/index.ts",
-    "main": "build/cjs/index.js",
-    "module": "build/esm/index.js",
-    "exports": {
-        ".": {
-            "import": "./build/esm/index.js"
-        },
-        "./style.css": {
-            "import": "./build/esm/index.css"
-        }
+  "name": "@miaoma-doc/shadcn",
+  "private": false,
+  "sideEffects": [
+    "*.css"
+  ],
+  "license": "MIT",
+  "version": "1.19.0",
+  "keywords": [
+    "miaoma",
+    "editor",
+    "typescript",
+    "prosemirror",
+    "wysiwyg",
+    "rich-text-editor",
+    "feishu",
+    "notion",
+    "yjs",
+    "block-based",
+    "tiptap"
+  ],
+  "description": "基于 Prosemirror 和 Tiptap 实现的类 Notion、飞书文档风格可扩展文本编辑器。",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js"
     },
-    "scripts": {
-        "build:watch": "tsup --watch",
-        "build": "tsup",
-        "clean": "rimraf build",
-        "typecheck": "tsc --noEmit"
-    },
-    "dependencies": {
-        "@miaoma-doc/core": "workspace:*",
-        "@miaoma-doc/react": "workspace:*",
-        "@radix-ui/react-dropdown-menu": "^2.0.6",
-        "@radix-ui/react-label": "^2.0.2",
-        "@radix-ui/react-popover": "^1.0.7",
-        "@radix-ui/react-select": "^2.0.0",
-        "@radix-ui/react-slot": "^1.0.2",
-        "@radix-ui/react-tabs": "^1.0.4",
-        "@radix-ui/react-toggle": "^1.0.3",
-        "@radix-ui/react-tooltip": "^1.0.7",
-        "autoprefixer": "^10.4.19",
-        "class-variance-authority": "^0.7.0",
-        "clsx": "^2.1.1",
-        "lucide-react": "^0.362.0",
-        "postcss": "^8.4.38",
-        "react-hook-form": "^7.52.0",
-        "tailwind-merge": "^2.3.0",
-        "tailwindcss": "^3.4.3",
-        "tailwindcss-animate": "^1.0.7"
-    },
-    "devDependencies": {
-        "@radix-ui/colors": "^3.0.0",
-        "@types/node": "^20.12.7",
-        "@types/react": "^18.0.25",
-        "@types/react-dom": "^18.0.9",
-        "rimraf": "^5.0.5"
-    },
-    "peerDependencies": {
-        "react": "^18.0 || ^19.0 || >= 19.0.0-rc",
-        "react-dom": "^18.0 || ^19.0 || >= 19.0.0-rc"
+    "./style.css": {
+      "import": "./build/esm/index.css"
     }
+  },
+  "scripts": {
+    "build:watch": "tsup --watch",
+    "build": "tsup",
+    "clean": "rimraf build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@miaoma-doc/core": "workspace:*",
+    "@miaoma-doc/react": "workspace:*",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-tabs": "^1.0.4",
+    "@radix-ui/react-toggle": "^1.0.3",
+    "@radix-ui/react-tooltip": "^1.0.7",
+    "autoprefixer": "^10.4.19",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.362.0",
+    "postcss": "^8.4.38",
+    "react-hook-form": "^7.52.0",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@radix-ui/colors": "^3.0.0",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "rimraf": "^5.0.5"
+  },
+  "peerDependencies": {
+    "react": "^18.0 || ^19.0 || >= 19.0.0-rc",
+    "react-dom": "^18.0 || ^19.0 || >= 19.0.0-rc"
+  }
 }

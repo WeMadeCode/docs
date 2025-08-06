@@ -1,13 +1,12 @@
-version: '3'
-
 services:
-  miaoma-docs-postgresql:
+  page-docs-postgresql:
     image: bitnami/postgresql:latest
-    container_name: miaoma-docs-postgresql
+    container_name: page-docs-postgresql
     ports:
       - '5432:5432'
     environment:
       - POSTGRESQL_USERNAME=postgres
+      # - POSTGRESQL_PASSWORD=1234567
       - ALLOW_EMPTY_PASSWORD=yes
       - POSTGRESQL_DATABASE=postgres
       - POSTGRESQL_TIMEZONE=Asia/Shanghai # 数据库时区设置为上海时间
@@ -17,5 +16,5 @@ services:
 
 networks:
   default:
-    name: miaoma-docs-network
+    name: page-docs-network
     driver: bridge

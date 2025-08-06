@@ -8,11 +8,12 @@ export default () => {
   return {
     database: {
       type: 'postgres',
-      host: isProd ? '172.28.49.109' : 'localhost',
+      host: 'localhost',
+      // host: isProd ? '172.28.49.109' : 'localhost',
       port: 5432,
       username: 'postgres',
       database: 'postgres',
-      password: 'xiaoer',
+      password: '57893671',
       entities: [join(__dirname, '../', '**/**.entity{.ts,.js}')],
       synchronize: true,
     },

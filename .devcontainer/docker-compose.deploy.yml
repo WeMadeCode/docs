@@ -3,9 +3,9 @@ include:
 
 services:
   # 应用部署相关
-  miaoma-docs-server:
+  page-docs-server:
     image: bitnami/node:latest
-    container_name: miaoma-docs-server
+    container_name: page-docs-server
     ports:
       - 8082:8082
     volumes:
@@ -16,10 +16,10 @@ services:
     working_dir: /app/docs/apps/backend/server
     command: 'node dist/main.js'
     depends_on:
-      - miaoma-docs-postgresql
-  miaoma-docs-caddy:
+      - page-docs-postgresql
+  page-docs-caddy:
     image: caddy:latest
-    container_name: miaoma-docs-caddy
+    container_name: page-docs-caddy
     ports:
       - 80:80
       - 443:443

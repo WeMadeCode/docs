@@ -8,8 +8,8 @@ export default () => {
   return {
     database: {
       type: 'postgres',
-      host: 'localhost',
-      // host: isProd ? '172.28.49.109' : 'localhost',
+      host: 'page-docs-postgresql',
+      // host: isProd ? '172.28.49.109' : 'page-docs-postgresql',
       port: 5432,
       username: 'postgres',
       database: 'postgres',

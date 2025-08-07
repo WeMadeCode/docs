@@ -29,4 +29,4 @@ services:
       - ./caddy:/etc/caddy
       # - ../:/app
       - ../apps/frontend/web/dist:/app/frontend/web/dist
-    # command: ["caddy", "run", "--resume", "--config", "/etc/caddy/Caddyfile"]
+    command: ['caddy', 'run', '--resume', '--config', '/etc/caddy/Caddyfile']

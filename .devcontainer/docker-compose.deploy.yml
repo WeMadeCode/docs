@@ -10,7 +10,6 @@ services:
       - 8082:8082
     volumes:
       - ../:/app/docs
-    # command: "node /app/server.js"
     environment:
       - NODE_ENV=production
     working_dir: /app/docs/apps/backend/server

@@ -1,23 +1,27 @@
 # 本地调试示例
 :5173 {
+        # 启用 Zstandard 和 Gzip 压缩，减小传输数据大小
         encode zstd gzip
+        # 设置缓存控制头，指示客户端不缓存内容
         header +Cache-Control "max-age=0, private, must-revalidate"
-        # 保留 /api 前缀
-        # handle_path /api/* {
-        #         rewrite * {path}
-        #         reverse_proxy 192.168.3.19:3000
-        # }
+        # 处理所有以 /api/ 开头的请求
         handle_path /api/* {
-                # reverse_proxy 192.168.3.19:3000
+                # 重写 URL，保留 /api 前缀
                 rewrite * /api{path}
-                # reverse_proxy 192.168.31.251:8082
+                # 将请求反向代理到 Docker 服务 page-docs-server 的 8082 端口
                 reverse_proxy page-docs-server:8082
         }
+        # 移除 URL 末尾的斜杠
         uri strip_suffix /
+        # 设置静态文件根目录
         root * /app/frontend/web/dist
+        # 处理其他所有请求
         handle {
+                # 启用模板功能
                 templates
+                # 尝试查找请求的文件或其 HTML 版本，最后回退到根目录
                 try_files {path}.html {path} /
+                # 启用文件服务
                 file_server
         }
 }

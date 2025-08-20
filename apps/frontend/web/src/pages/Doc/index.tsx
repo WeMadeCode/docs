@@ -35,8 +35,9 @@ import { DocEditor } from './DocEditor'
 
 const doc = new Y.Doc()
 // const provider = new WebsocketProvider('ws://localhost:8082', `doc-yjs`, doc)
-const wsHost = import.meta.env.VITE_WS_HOST ?? '192.168.31.251'
-const provider = new WebsocketProvider(`ws://${wsHost}:8082`, `doc-yjs`, doc, { connect: false })
+const wsHost = import.meta.env.VITE_WS_HOST ?? window.location.hostname
+const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
+const provider = new WebsocketProvider(`${wsProtocol}://${wsHost}:8082`, `doc-yjs`, doc, { connect: false })
 
 export const Doc = () => {
   const params = useParams()

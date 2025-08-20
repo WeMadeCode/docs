@@ -2,23 +2,30 @@ include:
   - docker-compose.yml
 
 services:
-  # 应用部署相关
+  # 应用服务
   page-docs-server:
     image: bitnami/node:latest
     container_name: page-docs-server
     ports:
-      - 8082:8082
+      - '8082:8082' # 应用端口映射
     volumes:
-      - ../:/app/docs
+      - ../:/app/docs # 挂载项目代码（根据实际目录调整）
     environment:
-      - NODE_ENV=production
-    working_dir: /app/docs/apps/backend/server
-    command: 'node dist/main.js'
+      - NODE_ENV=production # 生产环境模式
+      # 数据库连接配置（必须与 PostgreSQL 环境变量匹配）
+      - POSTGRES_HOST=page-docs-postgresql # 数据库服务名（关键）
+      - POSTGRES_PORT=5432 # 数据库端口
+      - POSTGRES_USER=postgres # 数据库用户名
+      - POSTGRES_PASSWORD=57893671 # 数据库密码
+      - POSTGRES_DB=postgres # 数据库名称
+    working_dir: /app/docs/apps/backend/server # 应用工作目录
+    command: 'node dist/main.js' # 启动命令
     depends_on:
-      - page-docs-postgresql
+      - page-docs-postgresql # 确保数据库先启动
     networks:
-      - default
-    
+      - page-docs-network
+    restart: unless-stopped # 异常退出时自动重启
+
   page-docs-caddy:
     image: caddy:latest
     container_name: page-docs-caddy
@@ -33,4 +40,8 @@ services:
       - ../apps/frontend/web/dist:/app/frontend/web/dist
     command: ['caddy', 'run', '--resume', '--config', '/etc/caddy/Caddyfile']
     networks:
-      - default
+      - page-docs-network
+
+networks:
+  page-docs-network:
+    driver: bridge

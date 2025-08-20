@@ -9,9 +9,12 @@ services:
       - POSTGRESQL_PASSWORD=57893671
       - POSTGRESQL_DATABASE=postgres
       - POSTGRESQL_TIMEZONE=Asia/Shanghai
-      - POSTGRESQL_LOG_TIMEZONE=Asia/Shanghai 
+      - POSTGRESQL_LOG_TIMEZONE=Asia/Shanghai
     volumes:
       - ./postgresql_data:/bitnami/postgresql
+    networks:
+      - page-docs-network
+    user: root
 
 networks:
   default:

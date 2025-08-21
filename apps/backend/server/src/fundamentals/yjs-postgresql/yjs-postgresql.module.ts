@@ -40,7 +40,7 @@ export class YjsPostgresqlModule {
                 // user: process.env.PG_USER,
                 // password: process.env.PG_PASSWORD,
                 // host: 'localhost',
-                host: 'page-docs-postgresql',
+                host: isProd ? 'page-docs-postgresql' : 'localhost',
                 port: 5432,
                 user: 'postgres',
                 database: 'postgres',

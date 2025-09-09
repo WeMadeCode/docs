@@ -1,5 +1,5 @@
 @import './tailwindStyles.css';
-@import url('@miaoma-doc/react/style.css');
+@import url('@page-doc/react/style.css');
 
 @tailwind components;
 @tailwind utilities;

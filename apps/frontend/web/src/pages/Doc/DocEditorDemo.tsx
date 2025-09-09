@@ -7,9 +7,9 @@ import {
   MiaomaDocEditor,
   MiaomaDocSchema,
 } from '@miaoma-doc/core'
-import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
-// import {} from '@miaoma-doc/react'
+// import {} from '@page-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
+import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@page-doc/react'
 
 import { Mention } from '@/blocks/mention'
 

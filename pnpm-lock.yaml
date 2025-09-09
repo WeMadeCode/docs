@@ -253,7 +253,7 @@ importers:
       '@miaoma-doc/core':
         specifier: workspace:*
         version: link:../../../packages/core
-      '@miaoma-doc/react':
+      '@page-doc/react':
         specifier: workspace:*
         version: link:../../../packages/react
       '@miaoma-doc/shadcn':
@@ -532,7 +532,7 @@ importers:
       '@miaoma-doc/core':
         specifier: workspace:*
         version: link:../core
-      '@miaoma-doc/react':
+      '@page-doc/react':
         specifier: workspace:*
         version: link:../react
       '@radix-ui/react-dropdown-menu':

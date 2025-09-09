@@ -1,7 +1,7 @@
 import './style.css'
 
 import { BlockSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@miaoma-doc/core'
-import { Components, ComponentsContext, MiaomaDocViewRaw } from '@miaoma-doc/react'
+import { Components, ComponentsContext, MiaomaDocViewRaw } from '@page-doc/react'
 import { ComponentProps, useMemo } from 'react'
 
 import { Form } from './form/Form'

@@ -10,8 +10,8 @@ import {
   MiaomaDocSchema,
   PartialBlock,
 } from '@miaoma-doc/core'
-import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
+import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@page-doc/react'
 import { useEffect, useMemo } from 'react'
 // import { yXmlFragmentToProseMirrorFragment, yXmlFragmentToProseMirrorRootNode } from 'y-prosemirror'
 import { WebsocketProvider } from 'y-websocket'

@@ -24,7 +24,6 @@ services:
       - page-docs-postgresql # 确保数据库先启动
     networks:
       - page-docs-network
-    restart: unless-stopped # 异常退出时自动重启
 
   page-docs-caddy:
     image: caddy:latest
@@ -36,9 +35,8 @@ services:
       - 5173:5173
     volumes:
       - ./caddy:/etc/caddy
-      # - ../:/app
       - ../apps/frontend/web/dist:/app/frontend/web/dist
-    command: ['caddy', 'run', '--resume', '--config', '/etc/caddy/Caddyfile']
+    command: caddy run --resume --config /etc/caddy/Caddyfile
     networks:
       - page-docs-network
 

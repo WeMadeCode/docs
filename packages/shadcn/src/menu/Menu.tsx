@@ -1,5 +1,5 @@
 import { assertEmpty } from '@miaoma-doc/core'
-import { ComponentProps } from '@miaoma-doc/react'
+import { ComponentProps } from '@page-doc/react'
 import { ChevronRight } from 'lucide-react'
 import { forwardRef, useMemo } from 'react'
 

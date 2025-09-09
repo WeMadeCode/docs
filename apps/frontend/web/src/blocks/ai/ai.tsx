@@ -1,4 +1,4 @@
-import { createReactBlockSpec } from '@miaoma-doc/react'
+import { createReactBlockSpec } from '@page-doc/react'
 export const AI = createReactBlockSpec(
   {
     type: 'ai',

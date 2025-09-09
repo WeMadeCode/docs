@@ -1,4 +1,4 @@
-import { createReactInlineContentSpec } from '@miaoma-doc/react'
+import { createReactInlineContentSpec } from '@page-doc/react'
 
 import { MentionContent } from './MentionContent'
 

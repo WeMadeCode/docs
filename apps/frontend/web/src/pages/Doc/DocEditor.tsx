@@ -10,8 +10,8 @@ import {
   MiaomaDocSchema,
   PartialBlock,
 } from '@miaoma-doc/core'
-import { DefaultReactSuggestionItem, getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateMiaomaDoc } from '@miaoma-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
+import { DefaultReactSuggestionItem, getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateMiaomaDoc } from '@page-doc/react'
 import { useQuery } from '@tanstack/react-query'
 import { Sparkles } from 'lucide-react'
 import PubSub from 'pubsub-js'

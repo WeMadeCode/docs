@@ -1,5 +1,5 @@
 import { assertEmpty } from '@miaoma-doc/core'
-import { ComponentProps, elementOverflow, mergeRefs } from '@miaoma-doc/react'
+import { ComponentProps, elementOverflow, mergeRefs } from '@page-doc/react'
 import { forwardRef, useEffect, useRef } from 'react'
 
 export const GridSuggestionMenuItem = forwardRef<HTMLDivElement, ComponentProps['GridSuggestionMenu']['Item']>((props, ref) => {

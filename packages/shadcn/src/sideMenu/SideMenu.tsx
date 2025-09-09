@@ -1,5 +1,5 @@
 import { assertEmpty } from '@miaoma-doc/core'
-import { ComponentProps } from '@miaoma-doc/react'
+import { ComponentProps } from '@page-doc/react'
 import { forwardRef } from 'react'
 
 export const SideMenu = forwardRef<HTMLDivElement, ComponentProps['SideMenu']['Root']>((props, ref) => {

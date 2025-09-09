@@ -14,7 +14,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "@miaoma-doc/core": "workspace:*",
-    "@miaoma-doc/react": "workspace:*",
+    "@page-doc/react": "workspace:*",
     "@miaoma-doc/shadcn-shared-ui": "workspace:*",
     "@miaoma-doc/shadcn": "workspace:*",
     "react-router-dom": "6.28.0",

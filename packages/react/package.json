@@ -1,5 +1,5 @@
 {
-  "name": "@miaoma-doc/react",
+  "name": "@page-doc/react",
   "private": false,
   "sideEffects": [
     "*.css"

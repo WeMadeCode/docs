@@ -250,16 +250,16 @@ importers:
 
   apps/frontend/web:
     dependencies:
-      '@miaoma-doc/core':
+      '@page-doc/core':
         specifier: workspace:*
         version: link:../../../packages/core
       '@page-doc/react':
         specifier: workspace:*
         version: link:../../../packages/react
-      '@miaoma-doc/shadcn':
+      '@page-doc/shadcn':
         specifier: workspace:*
         version: link:../../../packages/shadcn
-      '@miaoma-doc/shadcn-shared-ui':
+      '@page-doc/shadcn-shared-ui':
         specifier: workspace:*
         version: link:../../../packages/shadcn-shared-ui
       '@tanstack/react-query':
@@ -486,7 +486,7 @@ importers:
       '@floating-ui/react':
         specifier: ^0.26.4
         version: 0.26.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@miaoma-doc/core':
+      '@page-doc/core':
         specifier: workspace:*
         version: link:../core
       '@tiptap/core':
@@ -529,7 +529,7 @@ importers:
 
   packages/shadcn:
     dependencies:
-      '@miaoma-doc/core':
+      '@page-doc/core':
         specifier: workspace:*
         version: link:../core
       '@page-doc/react':

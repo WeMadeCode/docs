@@ -5,7 +5,7 @@ import {
   InlineContentSchema,
   PartialTableContent,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 
 import { useComponentsContext } from '../../../../editor/ComponentsContext'
 import { useMiaomaDocEditor } from '../../../../hooks/useMiaomaDocEditor'

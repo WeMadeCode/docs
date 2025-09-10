@@ -1,4 +1,4 @@
-import { FileBlockConfig, imageBlockConfig, imageParse } from '@miaoma-doc/core'
+import { FileBlockConfig, imageBlockConfig, imageParse } from '@page-doc/core'
 import { useState } from 'react'
 import { RiImage2Fill } from 'react-icons/ri'
 

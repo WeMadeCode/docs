@@ -1,4 +1,4 @@
-import { MiaomaDocEditor } from '@miaoma-doc/core'
+import { MiaomaDocEditor } from '@page-doc/core'
 import { useEffect, useState } from 'react'
 
 // Hook which handles keyboard navigation of a grid suggestion menu. Arrow keys

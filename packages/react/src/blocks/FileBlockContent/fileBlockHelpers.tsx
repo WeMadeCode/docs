@@ -1,4 +1,4 @@
-import { FileBlockConfig } from '@miaoma-doc/core'
+import { FileBlockConfig } from '@page-doc/core'
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { RiFile2Line } from 'react-icons/ri'
 

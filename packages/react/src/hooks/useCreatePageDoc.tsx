@@ -7,7 +7,7 @@ import {
   MiaomaDocEditor,
   MiaomaDocEditorOptions,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { DependencyList, useMemo } from 'react'
 
 /**

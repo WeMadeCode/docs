@@ -1,4 +1,4 @@
-import { BlockSchema, getDefaultSlashMenuItems, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, getDefaultSlashMenuItems, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
 import {
   RiCodeBlock,
   RiEmotionFill,

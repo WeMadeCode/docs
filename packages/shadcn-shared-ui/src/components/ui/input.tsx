@@ -1,4 +1,4 @@
-import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
+import { cn } from '@page-doc/shadcn-shared-ui/lib/utils'
 import * as React from 'react'
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>

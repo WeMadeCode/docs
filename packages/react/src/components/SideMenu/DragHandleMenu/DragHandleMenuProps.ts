@@ -6,7 +6,7 @@ import {
   DefaultStyleSchema,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 
 export type DragHandleMenuProps<
   BSchema extends BlockSchema = DefaultBlockSchema,

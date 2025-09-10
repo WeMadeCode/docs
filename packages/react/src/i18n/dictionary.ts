@@ -1,4 +1,4 @@
-import { Dictionary } from '@miaoma-doc/core'
+import { Dictionary } from '@page-doc/core'
 
 import { useMiaomaDocContext } from '../editor/MiaomaDocContext'
 

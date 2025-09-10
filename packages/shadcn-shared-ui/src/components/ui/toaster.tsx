@@ -7,8 +7,8 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from '@miaoma-doc/shadcn-shared-ui/components/ui/toast'
-import { useToast } from '@miaoma-doc/shadcn-shared-ui/hooks/use-toast'
+} from '@page-doc/shadcn-shared-ui/components/ui/toast'
+import { useToast } from '@page-doc/shadcn-shared-ui/hooks/use-toast'
 
 export function Toaster() {
   const { toasts } = useToast()

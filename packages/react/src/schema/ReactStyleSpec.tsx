@@ -1,4 +1,4 @@
-import { addStyleAttributes, createInternalStyleSpec, getStyleParseRules, StyleConfig, stylePropsToAttributes } from '@miaoma-doc/core'
+import { addStyleAttributes, createInternalStyleSpec, getStyleParseRules, StyleConfig, stylePropsToAttributes } from '@page-doc/core'
 import { Mark } from '@tiptap/react'
 import { FC } from 'react'
 

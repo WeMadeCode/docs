@@ -6,7 +6,7 @@ import {
   MiaomaDocEditor,
   StyleSchema,
   TableHandlesState,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { DragEvent, FC } from 'react'
 
 import { DragHandleMenuProps } from '../SideMenu/DragHandleMenu/DragHandleMenuProps'

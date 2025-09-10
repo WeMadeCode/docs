@@ -1,4 +1,4 @@
-import { SidebarProvider } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
+import { SidebarProvider } from '@page-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useLayoutEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 

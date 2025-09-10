@@ -13,10 +13,10 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@miaoma-doc/core": "workspace:*",
+    "@page-doc/core": "workspace:*",
     "@page-doc/react": "workspace:*",
-    "@miaoma-doc/shadcn-shared-ui": "workspace:*",
-    "@miaoma-doc/shadcn": "workspace:*",
+    "@page-doc/shadcn-shared-ui": "workspace:*",
+    "@page-doc/shadcn": "workspace:*",
     "react-router-dom": "6.28.0",
     "@tanstack/react-query": "5.59.20",
     "axios": "1.7.7",

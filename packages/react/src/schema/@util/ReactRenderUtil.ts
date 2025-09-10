@@ -1,4 +1,4 @@
-import { MiaomaDocEditor } from '@miaoma-doc/core'
+import { MiaomaDocEditor } from '@page-doc/core'
 import { flushSync } from 'react-dom'
 import { createRoot, Root } from 'react-dom/client'
 

@@ -1,4 +1,4 @@
-import '@miaoma-doc/shadcn/style.css'
+import '@page-doc/shadcn/style.css'
 
 import {
   Block,
@@ -9,9 +9,9 @@ import {
   MiaomaDocEditor,
   MiaomaDocSchema,
   PartialBlock,
-} from '@miaoma-doc/core'
-import { MiaomaDocView } from '@miaoma-doc/shadcn'
+} from '@page-doc/core'
 import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
+import { MiaomaDocView } from '@page-doc/shadcn'
 import { useEffect, useMemo } from 'react'
 // import { yXmlFragmentToProseMirrorFragment, yXmlFragmentToProseMirrorRootNode } from 'y-prosemirror'
 import { WebsocketProvider } from 'y-websocket'

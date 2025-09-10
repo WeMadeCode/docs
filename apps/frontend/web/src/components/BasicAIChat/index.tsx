@@ -1,5 +1,5 @@
-import { MiaomaDocEditor } from '@miaoma-doc/core'
-// import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
+import { MiaomaDocEditor } from '@page-doc/core'
+// import { Button } from '@page-doc/shadcn-shared-ui/components/ui/button'
 import PubSub from 'pubsub-js'
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'

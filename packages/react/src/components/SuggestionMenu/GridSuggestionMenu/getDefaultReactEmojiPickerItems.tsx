@@ -1,4 +1,4 @@
-import { BlockSchema, getDefaultEmojiPickerItems, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, getDefaultEmojiPickerItems, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
 
 import { DefaultReactGridSuggestionItem } from './types'
 

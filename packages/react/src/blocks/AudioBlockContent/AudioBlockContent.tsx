@@ -1,4 +1,4 @@
-import { audioBlockConfig, audioParse, FileBlockConfig } from '@miaoma-doc/core'
+import { audioBlockConfig, audioParse, FileBlockConfig } from '@page-doc/core'
 import { RiVolumeUpFill } from 'react-icons/ri'
 
 import { createReactBlockSpec, ReactCustomBlockRenderProps } from '../../schema/ReactBlockSpec'

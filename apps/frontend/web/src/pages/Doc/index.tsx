@@ -1,8 +1,8 @@
-import '@miaoma-doc/shadcn/style.css'
+import '@page-doc/shadcn/style.css'
 
-// import { PartialBlock } from '@miaoma-doc/core'
-import { Separator } from '@miaoma-doc/shadcn-shared-ui/components/ui/separator'
-import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
+// import { PartialBlock } from '@page-doc/core'
+import { Separator } from '@page-doc/shadcn-shared-ui/components/ui/separator'
+import { SidebarInset, SidebarTrigger } from '@page-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'

@@ -4,7 +4,7 @@ import {
   checkBlockIsFileBlockWithPreview,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { useCallback, useMemo } from 'react'
 import { RiImageAddFill } from 'react-icons/ri'
 

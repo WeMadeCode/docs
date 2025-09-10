@@ -5,7 +5,7 @@ import {
   DefaultProps,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { useCallback, useMemo } from 'react'
 import { IconType } from 'react-icons'
 import { RiAlignCenter, RiAlignJustify, RiAlignLeft, RiAlignRight } from 'react-icons/ri'

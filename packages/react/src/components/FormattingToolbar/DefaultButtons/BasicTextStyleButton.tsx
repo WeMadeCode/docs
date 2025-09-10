@@ -1,4 +1,4 @@
-import { BlockSchema, formatKeyboardShortcut, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, formatKeyboardShortcut, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
 import { useMemo, useState } from 'react'
 import { IconType } from 'react-icons'
 import { RiBold, RiCodeFill, RiItalic, RiStrikethrough, RiUnderline } from 'react-icons/ri'

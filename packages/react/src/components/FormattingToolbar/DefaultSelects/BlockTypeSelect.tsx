@@ -1,4 +1,4 @@
-import { Block, BlockSchema, Dictionary, InlineContentSchema, StyleSchema } from '@miaoma-doc/core'
+import { Block, BlockSchema, Dictionary, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { useMemo, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { RiH1, RiH2, RiH3, RiListCheck3, RiListOrdered, RiListUnordered, RiText } from 'react-icons/ri'

@@ -1,5 +1,5 @@
 import { FloatingPortal } from '@floating-ui/react'
-import { BlockSchema, DefaultInlineContentSchema, DefaultStyleSchema, InlineContentSchema, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, DefaultInlineContentSchema, DefaultStyleSchema, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { FC, useCallback, useMemo, useState } from 'react'
 
 import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'

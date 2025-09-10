@@ -1,4 +1,4 @@
-import { BlockSchema, InlineContentSchema, LinkToolbarState, MiaomaDocEditor, StyleSchema, UiElementPosition } from '@miaoma-doc/core'
+import { BlockSchema, InlineContentSchema, LinkToolbarState, MiaomaDocEditor, StyleSchema, UiElementPosition } from '@page-doc/core'
 
 export type LinkToolbarProps = Omit<LinkToolbarState, keyof UiElementPosition> &
   Pick<

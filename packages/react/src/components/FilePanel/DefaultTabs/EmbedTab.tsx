@@ -6,7 +6,7 @@ import {
   filenameFromURL,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'

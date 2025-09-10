@@ -5,7 +5,7 @@ import {
   DefaultStyleSchema,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { FC } from 'react'
 
 import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'

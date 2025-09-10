@@ -1,4 +1,4 @@
-import { BlockSchema, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'

@@ -1,4 +1,4 @@
-import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
+import { cn } from '@page-doc/shadcn-shared-ui/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'

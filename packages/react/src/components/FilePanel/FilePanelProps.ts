@@ -5,7 +5,7 @@ import {
   InlineContentSchema,
   StyleSchema,
   UiElementPosition,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 
 export type FilePanelProps<I extends InlineContentSchema = DefaultInlineContentSchema, S extends StyleSchema = DefaultStyleSchema> = Omit<
   FilePanelState<I, S>,

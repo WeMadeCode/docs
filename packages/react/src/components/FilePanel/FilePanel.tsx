@@ -5,7 +5,7 @@ import {
   DefaultStyleSchema,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { useState } from 'react'
 
 import { ComponentProps, useComponentsContext } from '../../editor/ComponentsContext'

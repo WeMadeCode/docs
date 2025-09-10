@@ -1,6 +1,6 @@
 import './style.css'
 
-import { BlockSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@page-doc/core'
 import { Components, ComponentsContext, MiaomaDocViewRaw } from '@page-doc/react'
 import { ComponentProps, useMemo } from 'react'
 

@@ -1,7 +1,7 @@
 import '@xyflow/react/dist/style.css'
 
-import { Block } from '@miaoma-doc/core'
-import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
+import { Block } from '@page-doc/core'
+import { SidebarInset, SidebarTrigger } from '@page-doc/shadcn-shared-ui/components/ui/sidebar'
 import { applyEdgeChanges, applyNodeChanges, Background, Controls, Edge, EdgeChange, Node, NodeChange, ReactFlow } from '@xyflow/react'
 import * as d3 from 'd3-force'
 import { useCallback, useEffect, useMemo, useState } from 'react'

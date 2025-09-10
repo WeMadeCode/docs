@@ -1,13 +1,13 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@miaoma-doc/shadcn-shared-ui/components/ui/avatar'
-import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
-import { Collapsible } from '@miaoma-doc/shadcn-shared-ui/components/ui/collapsible'
+import { Avatar, AvatarFallback, AvatarImage } from '@page-doc/shadcn-shared-ui/components/ui/avatar'
+import { Button } from '@page-doc/shadcn-shared-ui/components/ui/button'
+import { Collapsible } from '@page-doc/shadcn-shared-ui/components/ui/collapsible'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@miaoma-doc/shadcn-shared-ui/components/ui/dropdown-menu'
+} from '@page-doc/shadcn-shared-ui/components/ui/dropdown-menu'
 import {
   Sidebar,
   SidebarContent,
@@ -21,9 +21,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
-import { useToast } from '@miaoma-doc/shadcn-shared-ui/hooks/use-toast'
-import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
+} from '@page-doc/shadcn-shared-ui/components/ui/sidebar'
+import { useToast } from '@page-doc/shadcn-shared-ui/hooks/use-toast'
+import { cn } from '@page-doc/shadcn-shared-ui/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import {
   ArrowUpRight,

@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
+import { cn } from '@page-doc/shadcn-shared-ui/lib/utils'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import * as React from 'react'
 

@@ -1,6 +1,6 @@
-import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
-import { Input } from '@miaoma-doc/shadcn-shared-ui/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/popover'
+import { Button } from '@page-doc/shadcn-shared-ui/components/ui/button'
+import { Input } from '@page-doc/shadcn-shared-ui/components/ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@page-doc/shadcn-shared-ui/components/ui/popover'
 import { Share2 } from 'lucide-react'
 
 export function SharePopover() {

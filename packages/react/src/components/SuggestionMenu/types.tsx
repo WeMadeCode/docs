@@ -1,4 +1,4 @@
-import { DefaultSuggestionItem } from '@miaoma-doc/core'
+import { DefaultSuggestionItem } from '@page-doc/core'
 
 /**
  * Although any arbitrary data can be passed as suggestion items, the built-in

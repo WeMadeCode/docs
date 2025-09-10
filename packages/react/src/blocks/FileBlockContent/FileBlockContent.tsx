@@ -1,4 +1,4 @@
-import { fileBlockConfig, fileParse } from '@miaoma-doc/core'
+import { fileBlockConfig, fileParse } from '@page-doc/core'
 
 import { createReactBlockSpec, ReactCustomBlockRenderProps } from '../../schema/ReactBlockSpec'
 import { DefaultFilePreview, FileBlockWrapper, LinkWithCaption } from './fileBlockHelpers'

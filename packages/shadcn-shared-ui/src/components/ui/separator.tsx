@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
+import { cn } from '@page-doc/shadcn-shared-ui/lib/utils'
 import * as SeparatorPrimitive from '@radix-ui/react-separator'
 import * as React from 'react'
 

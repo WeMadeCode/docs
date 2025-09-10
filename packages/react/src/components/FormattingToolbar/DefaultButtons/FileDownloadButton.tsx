@@ -1,10 +1,4 @@
-import {
-  BlockSchema,
-  checkBlockIsFileBlock,
-  checkBlockIsFileBlockWithPlaceholder,
-  InlineContentSchema,
-  StyleSchema,
-} from '@miaoma-doc/core'
+import { BlockSchema, checkBlockIsFileBlock, checkBlockIsFileBlockWithPlaceholder, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { useCallback, useMemo } from 'react'
 import { RiDownload2Fill } from 'react-icons/ri'
 

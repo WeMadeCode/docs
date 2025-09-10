@@ -14,7 +14,7 @@ import {
   PropSchema,
   propsToAttributes,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { NodeViewContent, NodeViewProps, NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react'
 // import { useReactNodeView } from "@tiptap/react/dist/packages/react/src/useReactNodeView";
 import { FC } from 'react'

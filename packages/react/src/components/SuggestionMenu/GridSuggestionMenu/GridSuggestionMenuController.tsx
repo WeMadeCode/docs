@@ -1,5 +1,5 @@
 import { flip, offset, size } from '@floating-ui/react'
-import { BlockSchema, InlineContentSchema, StyleSchema, SuggestionMenuState } from '@miaoma-doc/core'
+import { BlockSchema, InlineContentSchema, StyleSchema, SuggestionMenuState } from '@page-doc/core'
 import { FC, useCallback, useMemo } from 'react'
 
 import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'

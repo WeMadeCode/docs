@@ -8,7 +8,7 @@ import {
   SideMenuState,
   StyleSchema,
   UiElementPosition,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { FC } from 'react'
 
 import { DragHandleMenuProps } from './DragHandleMenu/DragHandleMenuProps'

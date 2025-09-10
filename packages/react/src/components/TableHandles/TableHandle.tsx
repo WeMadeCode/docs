@@ -1,4 +1,4 @@
-import { DefaultInlineContentSchema, DefaultStyleSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@miaoma-doc/core'
+import { DefaultInlineContentSchema, DefaultStyleSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@page-doc/core'
 import { ReactNode, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { MdDragIndicator } from 'react-icons/md'

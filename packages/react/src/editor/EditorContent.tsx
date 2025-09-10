@@ -1,4 +1,4 @@
-import { MiaomaDocEditor } from '@miaoma-doc/core'
+import { MiaomaDocEditor } from '@page-doc/core'
 import { ReactRenderer } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'

@@ -1,4 +1,4 @@
-import { cn } from '@miaoma-doc/shadcn-shared-ui/lib/utils'
+import { cn } from '@page-doc/shadcn-shared-ui/lib/utils'
 import { Handle, NodeProps, Position } from '@xyflow/react'
 import { memo, useMemo } from 'react'
 

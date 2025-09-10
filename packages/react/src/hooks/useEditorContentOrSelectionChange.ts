@@ -1,4 +1,4 @@
-import type { MiaomaDocEditor } from '@miaoma-doc/core'
+import type { MiaomaDocEditor } from '@page-doc/core'
 
 import { useEditorChange } from './useEditorChange'
 import { useEditorSelectionChange } from './useEditorSelectionChange'

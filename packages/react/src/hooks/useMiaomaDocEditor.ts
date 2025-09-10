@@ -7,7 +7,7 @@ import {
   MiaomaDocEditor,
   MiaomaDocSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 
 import { useMiaomaDocContext } from '../editor/MiaomaDocContext'
 

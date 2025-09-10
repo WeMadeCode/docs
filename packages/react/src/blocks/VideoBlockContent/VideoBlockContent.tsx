@@ -1,4 +1,4 @@
-import { FileBlockConfig, videoBlockConfig, videoParse } from '@miaoma-doc/core'
+import { FileBlockConfig, videoBlockConfig, videoParse } from '@page-doc/core'
 import { useState } from 'react'
 import { RiVideoFill } from 'react-icons/ri'
 

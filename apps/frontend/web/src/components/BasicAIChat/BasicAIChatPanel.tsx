@@ -1,5 +1,5 @@
-import { PartialBlock } from '@miaoma-doc/core'
-import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
+import { PartialBlock } from '@page-doc/core'
+import { Button } from '@page-doc/shadcn-shared-ui/components/ui/button'
 import { ArrowUp, Loader, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'

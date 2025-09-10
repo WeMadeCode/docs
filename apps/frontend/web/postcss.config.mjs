@@ -1,2 +1,2 @@
 
-export { default } from "@miaoma-doc/shadcn-shared-ui/postcss.config";
+export { default } from "@page-doc/shadcn-shared-ui/postcss.config";

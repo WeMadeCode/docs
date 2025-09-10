@@ -1,5 +1,5 @@
 {
-  "name": "@miaoma-doc/shadcn",
+  "name": "@page-doc/shadcn",
   "private": false,
   "sideEffects": [
     "*.css"
@@ -7,7 +7,7 @@
   "license": "MIT",
   "version": "1.19.0",
   "keywords": [
-    "miaoma",
+    "page",
     "editor",
     "typescript",
     "prosemirror",
@@ -39,7 +39,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@miaoma-doc/core": "workspace:*",
+    "@page-doc/core": "workspace:*",
     "@page-doc/react": "workspace:*",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-label": "^2.0.2",

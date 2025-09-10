@@ -1,4 +1,4 @@
-import { BlockSchema, checkBlockIsFileBlock, InlineContentSchema, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, checkBlockIsFileBlock, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { useEffect, useState } from 'react'
 import { RiImageEditFill } from 'react-icons/ri'
 

@@ -7,7 +7,7 @@ import {
   mergeCSSClasses,
   PartialTableContent,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { MouseEvent as ReactMouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { RiAddFill } from 'react-icons/ri'
 

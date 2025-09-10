@@ -1,5 +1,5 @@
 import { flip, offset } from '@floating-ui/react'
-import { BlockSchema, DefaultProps, InlineContentSchema, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, DefaultProps, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { FC, useMemo, useRef, useState } from 'react'
 
 import { useEditorContentOrSelectionChange } from '../../hooks/useEditorContentOrSelectionChange'

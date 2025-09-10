@@ -18,7 +18,7 @@ import {
   propsToAttributes,
   StyleSchema,
   wrapInBlockStructure,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { NodeView, NodeViewContent, NodeViewProps, NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react'
 import { FC, ReactNode } from 'react'
 

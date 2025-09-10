@@ -1,5 +1,5 @@
-import { Button } from '@miaoma-doc/shadcn-shared-ui/components/ui/button'
-import { SidebarInset, SidebarTrigger } from '@miaoma-doc/shadcn-shared-ui/components/ui/sidebar'
+import { Button } from '@page-doc/shadcn-shared-ui/components/ui/button'
+import { SidebarInset, SidebarTrigger } from '@page-doc/shadcn-shared-ui/components/ui/sidebar'
 import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { MoreVertical, Plus } from 'lucide-react'

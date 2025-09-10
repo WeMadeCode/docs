@@ -1,4 +1,4 @@
-import { assertEmpty } from '@miaoma-doc/core'
+import { assertEmpty } from '@page-doc/core'
 import { ComponentProps, elementOverflow, mergeRefs } from '@page-doc/react'
 import { forwardRef, useEffect, useRef } from 'react'
 

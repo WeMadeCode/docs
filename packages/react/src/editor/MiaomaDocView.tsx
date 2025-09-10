@@ -1,6 +1,6 @@
 import './styles.css'
 
-import { BlockSchema, InlineContentSchema, mergeCSSClasses, MiaomaDocEditor, StyleSchema } from '@miaoma-doc/core'
+import { BlockSchema, InlineContentSchema, mergeCSSClasses, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
 import React, { ComponentProps, HTMLAttributes, ReactNode, Ref, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useEditorChange } from '../hooks/useEditorChange'

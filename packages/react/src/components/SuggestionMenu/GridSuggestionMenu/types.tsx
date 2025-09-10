@@ -1,4 +1,4 @@
-import { DefaultGridSuggestionItem } from '@miaoma-doc/core'
+import { DefaultGridSuggestionItem } from '@page-doc/core'
 
 import { SuggestionMenuProps } from '../types'
 

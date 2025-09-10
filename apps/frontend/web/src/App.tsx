@@ -1,7 +1,7 @@
 import './App.css'
-import '@miaoma-doc/shadcn/style.css'
+import '@page-doc/shadcn/style.css'
 
-import { Toaster } from '@miaoma-doc/shadcn-shared-ui/components/ui/toaster'
+import { Toaster } from '@page-doc/shadcn-shared-ui/components/ui/toaster'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { setDefaultOptions } from 'date-fns'
 import { zhCN } from 'date-fns/locale'

@@ -1,10 +1,4 @@
-import {
-  BlockSchema,
-  checkBlockIsFileBlock,
-  checkBlockIsFileBlockWithPlaceholder,
-  InlineContentSchema,
-  StyleSchema,
-} from '@miaoma-doc/core'
+import { BlockSchema, checkBlockIsFileBlock, checkBlockIsFileBlockWithPlaceholder, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { ChangeEvent, KeyboardEvent, useCallback, useMemo, useState } from 'react'
 import { RiFontFamily } from 'react-icons/ri'
 

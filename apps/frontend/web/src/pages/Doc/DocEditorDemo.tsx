@@ -6,10 +6,10 @@ import {
   locales,
   MiaomaDocEditor,
   MiaomaDocSchema,
-} from '@miaoma-doc/core'
-// import {} from '@page-doc/react'
-import { MiaomaDocView } from '@miaoma-doc/shadcn'
+} from '@page-doc/core'
 import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
+// import {} from '@page-doc/react'
+import { MiaomaDocView } from '@page-doc/shadcn'
 
 import { Mention } from '@/blocks/mention'
 

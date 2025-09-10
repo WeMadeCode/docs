@@ -6,7 +6,7 @@ import {
   MiaomaDocEditor,
   StyleSchema,
   TableHandlesState,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 
 export type ExtendButtonProps<I extends InlineContentSchema = DefaultInlineContentSchema, S extends StyleSchema = DefaultStyleSchema> = {
   editor: MiaomaDocEditor<

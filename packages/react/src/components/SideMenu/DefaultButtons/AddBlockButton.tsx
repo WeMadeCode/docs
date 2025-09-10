@@ -5,7 +5,7 @@ import {
   DefaultStyleSchema,
   InlineContentSchema,
   StyleSchema,
-} from '@miaoma-doc/core'
+} from '@page-doc/core'
 import { useCallback } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 

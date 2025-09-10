@@ -1,4 +1,4 @@
-import { assertEmpty } from '@miaoma-doc/core'
+import { assertEmpty } from '@page-doc/core'
 import { ComponentProps } from '@page-doc/react'
 import { useForm } from 'react-hook-form'
 

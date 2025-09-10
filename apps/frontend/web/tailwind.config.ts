@@ -1,5 +1,5 @@
 // tailwind config is required for editor support
-import sharedConfig from '@miaoma-doc/shadcn-shared-ui/tailwind.config'
+import sharedConfig from '@page-doc/shadcn-shared-ui/tailwind.config'
 import type { Config } from 'tailwindcss'
 
 const config: Pick<Config, 'presets'> = {

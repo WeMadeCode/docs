@@ -1,5 +1,5 @@
 {
-  "name": "@miaoma-doc/core",
+  "name": "@page-doc/core",
   "private": false,
   "sideEffects": [
     "*.css"
@@ -7,7 +7,7 @@
   "license": "MIT",
   "version": "1.19.0",
   "keywords": [
-    "miaoma",
+    "page",
     "editor",
     "typescript",
     "prosemirror",

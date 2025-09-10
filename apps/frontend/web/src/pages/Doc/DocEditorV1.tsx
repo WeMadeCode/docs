@@ -11,7 +11,7 @@ import {
   PartialBlock,
 } from '@miaoma-doc/core'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
-import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@page-doc/react'
+import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
 import { useEffect, useMemo } from 'react'
 // import { yXmlFragmentToProseMirrorFragment, yXmlFragmentToProseMirrorRootNode } from 'y-prosemirror'
 import { WebsocketProvider } from 'y-websocket'
@@ -143,7 +143,7 @@ export function DocEditor(props: DocEditorProps) {
     return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
   }, [])
 
-  const editor = useCreateMiaomaDoc(
+  const editor = useCreatePageDoc(
     {
       schema,
       dictionary: locales.zh,

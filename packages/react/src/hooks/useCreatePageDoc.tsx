@@ -11,11 +11,11 @@ import {
 import { DependencyList, useMemo } from 'react'
 
 /**
- * Main hook for importing a MiaomaDoc editor into a React project
+ * Main hook for importing a PageDoc editor into a React project
  *
  * TODO: document in docs
  */
-export const useCreateMiaomaDoc = <
+export const useCreatePageDoc = <
   BSchema extends BlockSchema = DefaultBlockSchema,
   ISchema extends InlineContentSchema = DefaultInlineContentSchema,
   SSchema extends StyleSchema = DefaultStyleSchema,
@@ -32,8 +32,3 @@ export const useCreateMiaomaDoc = <
     return editor
   }, deps)
 }
-
-/**
- * @deprecated use useCreateMiaomaDoc instead
- */
-export const useMiaomaDoc = useCreateMiaomaDoc

@@ -9,7 +9,7 @@ import {
 } from '@miaoma-doc/core'
 // import {} from '@page-doc/react'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
-import { DefaultReactSuggestionItem, SuggestionMenuController, useCreateMiaomaDoc } from '@page-doc/react'
+import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
 
 import { Mention } from '@/blocks/mention'
 
@@ -66,7 +66,7 @@ const getMentionMenuItems = (editor: MiaomaDocEditor) => {
 export function DocEditorDemo() {
   // tiptap editor
   // const editor = useEditor()   @tiptap/react
-  const editor = useCreateMiaomaDoc({
+  const editor = useCreatePageDoc({
     schema, // 整个编辑器的 schema
     dictionary: locales.zh, // 语言包
     initialContent: undefined, // 初始内容

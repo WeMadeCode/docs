@@ -11,7 +11,7 @@ import {
   PartialBlock,
 } from '@miaoma-doc/core'
 import { MiaomaDocView } from '@miaoma-doc/shadcn'
-import { DefaultReactSuggestionItem, getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateMiaomaDoc } from '@page-doc/react'
+import { DefaultReactSuggestionItem, getDefaultReactSlashMenuItems, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
 import { useQuery } from '@tanstack/react-query'
 import { Sparkles } from 'lucide-react'
 import PubSub from 'pubsub-js'
@@ -126,7 +126,7 @@ export function DocEditor(props: DocEditorProps) {
     return color
   }, [])
 
-  const editor = useCreateMiaomaDoc(
+  const editor = useCreatePageDoc(
     {
       schema,
       dictionary: locales.zh,

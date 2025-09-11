@@ -7,7 +7,7 @@ import { SuggestionMenuController } from '../components/SuggestionMenu/Suggestio
 import { TableHandlesController } from '../components/TableHandles/TableHandlesController'
 import { useMiaomaDocEditor } from '../hooks/useMiaomaDocEditor'
 
-export type MiaomaDocDefaultUIProps = {
+export type PageDocDefaultUIProps = {
   formattingToolbar?: boolean
   linkToolbar?: boolean
   slashMenu?: boolean
@@ -17,11 +17,11 @@ export type MiaomaDocDefaultUIProps = {
   emojiPicker?: boolean
 }
 
-export function MiaomaDocDefaultUI(props: MiaomaDocDefaultUIProps) {
+export function MiaomaDocDefaultUI(props: PageDocDefaultUIProps) {
   const editor = useMiaomaDocEditor()
 
   if (!editor) {
-    throw new Error('MiaomaDocDefaultUI must be used within a MiaomaDocContext.Provider')
+    throw new Error('MiaomaDocDefaultUI must be used within a PageDocContext.Provider')
   }
 
   return (

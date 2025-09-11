@@ -1,7 +1,7 @@
 import { DefaultBlockSchema, DefaultInlineContentSchema, defaultStyleSpecs } from '../../../blocks/defaultBlocks'
 import { uploadToTmpFilesDotOrg_DEV_ONLY } from '../../../blocks/FileBlockContent/uploadToTmpFilesDotOrg_DEV_ONLY'
 import { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
-import { MiaomaDocSchema } from '../../../editor/MiaomaDocSchema'
+import { PageDocSchema } from '../../../editor/PageDocSchema'
 import { createStyleSpec } from '../../../schema/styles/createSpec'
 import { EditorTestCases } from '../index'
 
@@ -38,7 +38,7 @@ const fontSize = createStyleSpec(
   }
 )
 
-const schema = MiaomaDocSchema.create({
+const schema = PageDocSchema.create({
   styleSpecs: {
     ...defaultStyleSpecs,
     small,

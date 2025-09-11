@@ -5,15 +5,15 @@ import {
   filterSuggestionItems,
   locales,
   MiaomaDocEditor,
-  MiaomaDocSchema,
+  PageDocSchema,
 } from '@page-doc/core'
 import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
 // import {} from '@page-doc/react'
-import { MiaomaDocView } from '@page-doc/shadcn'
+import { PageDocView } from '@page-doc/shadcn'
 
 import { Mention } from '@/blocks/mention'
 
-const schema = MiaomaDocSchema.create({
+const schema = PageDocSchema.create({
   inlineContentSpecs: {
     // built-in inline content specs
     ...defaultInlineContentSpecs,
@@ -72,7 +72,7 @@ export function DocEditorDemo() {
     initialContent: undefined, // 初始内容
   })
   return (
-    <MiaomaDocView editor={editor}>
+    <PageDocView editor={editor}>
       <SuggestionMenuController
         triggerCharacter="@"
         getItems={async query => {
@@ -80,6 +80,6 @@ export function DocEditorDemo() {
           return filterSuggestionItems(getMentionMenuItems(editor), query)
         }}
       />
-    </MiaomaDocView>
+    </PageDocView>
   )
 }

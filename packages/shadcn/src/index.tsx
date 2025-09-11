@@ -1,7 +1,7 @@
 import './style.css'
 
 import { BlockSchema, InlineContentSchema, mergeCSSClasses, StyleSchema } from '@page-doc/core'
-import { Components, ComponentsContext, MiaomaDocViewRaw } from '@page-doc/react'
+import { Components, ComponentsContext, PageDocViewRaw } from '@page-doc/react'
 import { ComponentProps, useMemo } from 'react'
 
 import { Form } from './form/Form'
@@ -88,8 +88,8 @@ export const components: Components = {
   },
 }
 
-export const MiaomaDocView = <BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema>(
-  props: ComponentProps<typeof MiaomaDocViewRaw<BSchema, ISchema, SSchema>> & {
+export const PageDocView = <BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema>(
+  props: ComponentProps<typeof PageDocViewRaw<BSchema, ISchema, SSchema>> & {
     /**
      * (optional)Provide your own shadcn component overrides
      */
@@ -108,7 +108,7 @@ export const MiaomaDocView = <BSchema extends BlockSchema, ISchema extends Inlin
   return (
     <ShadCNComponentsContext.Provider value={componentsValue}>
       <ComponentsContext.Provider value={components}>
-        <MiaomaDocViewRaw className={mergeCSSClasses('bn-shadcn', className || '')} {...rest} />
+        <PageDocViewRaw className={mergeCSSClasses('bn-shadcn', className || '')} {...rest} />
       </ComponentsContext.Provider>
     </ShadCNComponentsContext.Provider>
   )

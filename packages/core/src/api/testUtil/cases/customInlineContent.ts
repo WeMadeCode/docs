@@ -1,7 +1,7 @@
 import { DefaultBlockSchema, defaultInlineContentSpecs, DefaultStyleSchema } from '../../../blocks/defaultBlocks'
 import { uploadToTmpFilesDotOrg_DEV_ONLY } from '../../../blocks/FileBlockContent/uploadToTmpFilesDotOrg_DEV_ONLY'
 import { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
-import { MiaomaDocSchema } from '../../../editor/MiaomaDocSchema'
+import { PageDocSchema } from '../../../editor/PageDocSchema'
 import { createInlineContentSpec } from '../../../schema/inlineContent/createSpec'
 import { EditorTestCases } from '../index'
 
@@ -49,7 +49,7 @@ const tag = createInlineContentSpec(
   }
 )
 
-const schema = MiaomaDocSchema.create({
+const schema = PageDocSchema.create({
   inlineContentSpecs: {
     ...defaultInlineContentSpecs,
     mention,

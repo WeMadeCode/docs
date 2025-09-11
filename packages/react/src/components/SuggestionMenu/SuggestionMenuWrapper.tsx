@@ -1,7 +1,7 @@
 import { BlockSchema, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { FC, useCallback, useEffect } from 'react'
 
-import { useMiaomaDocContext } from '../../editor/MiaomaDocContext'
+import { usePageDocContext } from '../../editor/PageDocContext'
 import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
 import { useCloseSuggestionMenuNoItems } from './hooks/useCloseSuggestionMenuNoItems'
 import { useLoadSuggestionMenuItems } from './hooks/useLoadSuggestionMenuItems'
@@ -16,7 +16,7 @@ export function SuggestionMenuWrapper<Item>(props: {
   onItemClick?: (item: Item) => void
   suggestionMenuComponent: FC<SuggestionMenuProps<Item>>
 }) {
-  const ctx = useMiaomaDocContext()
+  const ctx = usePageDocContext()
   const setContentEditableProps = ctx!.setContentEditableProps!
   const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 

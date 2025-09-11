@@ -1,7 +1,7 @@
 // TODO: review directories
-export * from './editor/MiaomaDocContext'
-export * from './editor/MiaomaDocDefaultUI'
-export * from './editor/MiaomaDocView'
+export * from './editor/PageDocContext'
+export * from './editor/PageDocDefaultUI'
+export * from './editor/PageDocView'
 export * from './editor/ComponentsContext'
 export * from './i18n/dictionary'
 

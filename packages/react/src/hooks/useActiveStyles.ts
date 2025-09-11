@@ -1,18 +1,18 @@
 import { MiaomaDocEditor, StyleSchema } from '@page-doc/core'
 import { useState } from 'react'
 
-import { useMiaomaDocContext } from '../editor/MiaomaDocContext'
+import { usePageDocContext } from '../editor/PageDocContext'
 import { useEditorChange } from './useEditorChange'
 import { useEditorSelectionChange } from './useEditorSelectionChange'
 
 export function useActiveStyles<T extends StyleSchema>(editor?: MiaomaDocEditor<any, any, T>) {
-  const editorContext = useMiaomaDocContext<any, any, T>()
+  const editorContext = usePageDocContext<any, any, T>()
   if (!editor) {
     editor = editorContext?.editor
   }
 
   if (!editor) {
-    throw new Error("'editor' is required, either from MiaomaDocContext or as a function argument")
+    throw new Error("'editor' is required, either from PageDocContext or as a function argument")
   }
 
   const e = editor

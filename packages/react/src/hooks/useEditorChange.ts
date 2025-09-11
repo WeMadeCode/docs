@@ -1,17 +1,17 @@
 import type { MiaomaDocEditor } from '@page-doc/core'
 import { useEffect } from 'react'
 
-import { useMiaomaDocContext } from '../editor/MiaomaDocContext'
+import { usePageDocContext } from '../editor/PageDocContext'
 
 export function useEditorChange(callback: () => void, editor?: MiaomaDocEditor<any, any, any>) {
-  const editorContext = useMiaomaDocContext()
+  const editorContext = usePageDocContext()
   if (!editor) {
     editor = editorContext?.editor
   }
 
   useEffect(() => {
     if (!editor) {
-      throw new Error("'editor' is required, either from MiaomaDocContext or as a function argument")
+      throw new Error("'editor' is required, either from PageDocContext or as a function argument")
     }
 
     return editor.onChange(callback)

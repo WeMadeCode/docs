@@ -7,11 +7,11 @@ import {
   insertOrUpdateBlock,
   locales,
   MiaomaDocEditor,
-  MiaomaDocSchema,
+  PageDocSchema,
   PartialBlock,
 } from '@page-doc/core'
 import { DefaultReactSuggestionItem, getDefaultReactSlashMenuItems, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
-import { MiaomaDocView } from '@page-doc/shadcn'
+import { PageDocView } from '@page-doc/shadcn'
 import { useQuery } from '@tanstack/react-query'
 import { Sparkles } from 'lucide-react'
 import PubSub from 'pubsub-js'
@@ -35,7 +35,7 @@ interface DocEditorProps {
   provider: WebsocketProvider
 }
 
-const schema = MiaomaDocSchema.create({
+const schema = PageDocSchema.create({
   inlineContentSpecs: {
     ...defaultInlineContentSpecs,
     mention: Mention,
@@ -81,8 +81,8 @@ const getMentionMenuItems = async (editor: MiaomaDocEditor, pageId?: string): Pr
 
 // Slash menu item to insert an Alert block
 const insertAI = (editor: typeof schema.MiaomaDocEditor) => ({
-  title: 'MiaoMa AI',
-  subtext: '妙码 AI，让进取的人更具职业价值',
+  title: 'Page AI',
+  subtext: 'Page AI，让进取的人更具职业价值',
   onItemClick: () => {
     const aiAnchorBlock = insertOrUpdateBlock(editor, {
       type: 'paragraph',
@@ -155,7 +155,7 @@ export function DocEditor(props: DocEditorProps) {
   }, [])
 
   return (
-    <MiaomaDocView editor={editor} theme="light" slashMenu={false}>
+    <PageDocView editor={editor} theme="light" slashMenu={false}>
       <SuggestionMenuController
         triggerCharacter="@"
         getItems={async query => {
@@ -174,6 +174,6 @@ export function DocEditor(props: DocEditorProps) {
       />
       {/* @ts-expect-error editor schema type fix */}
       <BasicAIChat editor={editor} />
-    </MiaomaDocView>
+    </PageDocView>
   )
 }

@@ -50,8 +50,8 @@ import { mergeCSSClasses } from '../util/browser'
 import { NoInfer, UnreachableCaseError } from '../util/typescript'
 import { TextCursorPosition } from './cursorPositionTypes'
 import { getMiaomaDocExtensions } from './MiaomaDocExtensions'
-import { MiaomaDocSchema } from './MiaomaDocSchema'
 import { MiaomaDocTipTapEditor, MiaomaDocTipTapEditorOptions } from './MiaomaDocTipTapEditor'
+import { PageDocSchema } from './PageDocSchema'
 import { Selection } from './selectionTypes'
 import { transformPasted } from './transformPasted'
 
@@ -92,7 +92,7 @@ export type MiaomaDocEditorOptions<BSchema extends BlockSchema, ISchema extends 
    */
   defaultStyles: boolean
 
-  schema: MiaomaDocSchema<BSchema, ISchema, SSchema>
+  schema: PageDocSchema<BSchema, ISchema, SSchema>
 
   /**
    * The `uploadFile` method is what the editor uses when files need to be uploaded (for example when selecting an image to upload).
@@ -209,7 +209,7 @@ export class MiaomaDocEditor<
   /**
    * The schema of the editor. The schema defines which Blocks, InlineContent, and Styles are available in the editor.
    */
-  public readonly schema: MiaomaDocSchema<BSchema, ISchema, SSchema>
+  public readonly schema: PageDocSchema<BSchema, ISchema, SSchema>
 
   public readonly blockImplementations: BlockSpecs
   public readonly inlineContentImplementations: InlineContentSpecs
@@ -254,13 +254,13 @@ export class MiaomaDocEditor<
     const anyOpts = options as any
     if (anyOpts.onEditorContentChange) {
       throw new Error(
-        'onEditorContentChange initialization option is deprecated, use <MiaomaDocView onChange={...} />, the useEditorChange(...) hook, or editor.onChange(...)'
+        'onEditorContentChange initialization option is deprecated, use <PageDocView onChange={...} />, the useEditorChange(...) hook, or editor.onChange(...)'
       )
     }
 
     if (anyOpts.onTextCursorPositionChange) {
       throw new Error(
-        'onTextCursorPositionChange initialization option is deprecated, use <MiaomaDocView onSelectionChange={...} />, the useEditorSelectionChange(...) hook, or editor.onSelectionChange(...)'
+        'onTextCursorPositionChange initialization option is deprecated, use <PageDocView onSelectionChange={...} />, the useEditorSelectionChange(...) hook, or editor.onSelectionChange(...)'
       )
     }
 
@@ -270,7 +270,7 @@ export class MiaomaDocEditor<
 
     if (anyOpts.editable) {
       throw new Error(
-        'editable initialization option is deprecated, use <MiaomaDocView editable={true/false} />, or alternatively editor.isEditable = true/false'
+        'editable initialization option is deprecated, use <PageDocView editable={true/false} />, or alternatively editor.isEditable = true/false'
       )
     }
 
@@ -279,7 +279,7 @@ export class MiaomaDocEditor<
     // apply defaults
     const newOptions = {
       defaultStyles: true,
-      schema: options.schema || MiaomaDocSchema.create(),
+      schema: options.schema || PageDocSchema.create(),
       _headless: false,
       ...options,
       placeholders: {
@@ -419,7 +419,7 @@ export class MiaomaDocEditor<
   /**
    * Mount the editor to a parent DOM element. Call mount(undefined) to clean up
    *
-   * @warning Not needed to call manually when using React, use MiaomaDocView to take care of mounting
+   * @warning Not needed to call manually when using React, use PageDocView to take care of mounting
    */
   public mount = (parentElement?: HTMLElement | null) => {
     this._tiptapEditor.mount(parentElement)

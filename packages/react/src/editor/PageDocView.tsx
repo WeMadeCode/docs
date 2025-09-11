@@ -8,14 +8,14 @@ import { useEditorSelectionChange } from '../hooks/useEditorSelectionChange'
 import { usePrefersColorScheme } from '../hooks/usePrefersColorScheme'
 import { EditorContent } from './EditorContent'
 import { ElementRenderer } from './ElementRenderer'
-import { MiaomaDocContext, useMiaomaDocContext } from './MiaomaDocContext'
-import { MiaomaDocDefaultUI, MiaomaDocDefaultUIProps } from './MiaomaDocDefaultUI'
+import { PageDocContext, usePageDocContext } from './PageDocContext'
+import { MiaomaDocDefaultUI, PageDocDefaultUIProps } from './PageDocDefaultUI'
 
 const emptyFn = () => {
   // noop
 }
 
-export type MiaomaDocViewProps<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> = {
+export type PageDocViewProps<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> = {
   editor: MiaomaDocEditor<BSchema, ISchema, SSchema>
 
   theme?: 'light' | 'dark'
@@ -38,10 +38,10 @@ export type MiaomaDocViewProps<BSchema extends BlockSchema, ISchema extends Inli
 
   ref?: Ref<HTMLDivElement> | undefined // only here to get types working with the generics. Regular form doesn't work
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'onSelectionChange' | 'children'> &
-  MiaomaDocDefaultUIProps
+  PageDocDefaultUIProps
 
-function MiaomaDocViewComponent<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema>(
-  props: MiaomaDocViewProps<BSchema, ISchema, SSchema>,
+function PageDocViewComponent<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema>(
+  props: PageDocViewProps<BSchema, ISchema, SSchema>,
   ref: React.Ref<HTMLDivElement>
 ) {
   const {
@@ -66,7 +66,7 @@ function MiaomaDocViewComponent<BSchema extends BlockSchema, ISchema extends Inl
   // aria related props to the contenteditable div
   const [contentEditableProps, setContentEditableProps] = useState<Record<string, any>>()
 
-  const existingContext = useMiaomaDocContext()
+  const existingContext = usePageDocContext()
   const systemColorScheme = usePrefersColorScheme()
   const defaultColorScheme = existingContext?.colorSchemePreference || systemColorScheme
 
@@ -112,7 +112,7 @@ function MiaomaDocViewComponent<BSchema extends BlockSchema, ISchema extends Inl
   )
 
   return (
-    <MiaomaDocContext.Provider value={context as any}>
+    <PageDocContext.Provider value={context as any}>
       <ElementRenderer ref={setElementRenderer} />
       {!editor.headless && (
         <EditorContent editor={editor}>
@@ -127,17 +127,17 @@ function MiaomaDocViewComponent<BSchema extends BlockSchema, ISchema extends Inl
           </div>
         </EditorContent>
       )}
-    </MiaomaDocContext.Provider>
+    </PageDocContext.Provider>
   )
 }
 
 // https://fettblog.eu/typescript-react-generic-forward-refs/
-export const MiaomaDocViewRaw = React.forwardRef(MiaomaDocViewComponent) as <
+export const PageDocViewRaw = React.forwardRef(PageDocViewComponent) as <
   BSchema extends BlockSchema,
   ISchema extends InlineContentSchema,
   SSchema extends StyleSchema,
 >(
-  props: ComponentProps<typeof MiaomaDocViewComponent<BSchema, ISchema, SSchema>> & {
+  props: ComponentProps<typeof PageDocViewComponent<BSchema, ISchema, SSchema>> & {
     ref?: React.ForwardedRef<HTMLDivElement>
   }
-) => ReturnType<typeof MiaomaDocViewComponent<BSchema, ISchema, SSchema>>
+) => ReturnType<typeof PageDocViewComponent<BSchema, ISchema, SSchema>>

@@ -7,11 +7,11 @@ import {
   filterSuggestionItems,
   locales,
   MiaomaDocEditor,
-  MiaomaDocSchema,
+  PageDocSchema,
   PartialBlock,
 } from '@page-doc/core'
 import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
-import { MiaomaDocView } from '@page-doc/shadcn'
+import { PageDocView } from '@page-doc/shadcn'
 import { useEffect, useMemo } from 'react'
 // import { yXmlFragmentToProseMirrorFragment, yXmlFragmentToProseMirrorRootNode } from 'y-prosemirror'
 import { WebsocketProvider } from 'y-websocket'
@@ -68,7 +68,7 @@ const pages = [
   },
 ]
 
-const schema = MiaomaDocSchema.create({
+const schema = PageDocSchema.create({
   inlineContentSpecs: {
     ...defaultInlineContentSpecs,
     mention: Mention,
@@ -183,7 +183,7 @@ export function DocEditor(props: DocEditorProps) {
   }, [page?.id, editor])
 
   return (
-    <MiaomaDocView editor={editor} theme="light">
+    <PageDocView editor={editor} theme="light">
       <SuggestionMenuController
         triggerCharacter="@"
         getItems={async query => {
@@ -191,6 +191,6 @@ export function DocEditor(props: DocEditorProps) {
           return filterSuggestionItems(getMentionMenuItems(editor, page?.id), query)
         }}
       />
-    </MiaomaDocView>
+    </PageDocView>
   )
 }

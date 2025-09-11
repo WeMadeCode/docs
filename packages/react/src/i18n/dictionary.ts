@@ -1,8 +1,8 @@
 import { Dictionary } from '@page-doc/core'
 
-import { useMiaomaDocContext } from '../editor/MiaomaDocContext'
+import { usePageDocContext } from '../editor/PageDocContext'
 
 export function useDictionary(): Dictionary {
-  const ctx = useMiaomaDocContext()
+  const ctx = usePageDocContext()
   return ctx!.editor!.dictionary
 }

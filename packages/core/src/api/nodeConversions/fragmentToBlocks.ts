@@ -1,6 +1,6 @@
 import { Fragment } from '@tiptap/pm/model'
 
-import { MiaomaDocSchema } from '../../editor/MiaomaDocSchema'
+import { PageDocSchema } from '../../editor/PageDocSchema'
 import { BlockNoDefaults, BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { nodeToBlock } from './nodeToBlock'
 
@@ -9,7 +9,7 @@ import { nodeToBlock } from './nodeToBlock'
  */
 export function fragmentToBlocks<B extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   fragment: Fragment,
-  schema: MiaomaDocSchema<B, I, S>
+  schema: PageDocSchema<B, I, S>
 ) {
   // first convert selection to miaomadoc-style blocks, and then
   // pass these to the exporter

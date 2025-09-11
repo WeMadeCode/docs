@@ -18,7 +18,7 @@ export { EMPTY_CELL_HEIGHT, EMPTY_CELL_WIDTH } from './blocks/TableBlockContent/
 export * from './blocks/VideoBlockContent/VideoBlockContent'
 export * from './editor/MiaomaDocEditor'
 export * from './editor/MiaomaDocExtensions'
-export * from './editor/MiaomaDocSchema'
+export * from './editor/PageDocSchema'
 export * from './editor/selectionTypes'
 export * from './extensions-shared/UiElementPosition'
 export * from './extensions/FilePanel/FilePanelPlugin'

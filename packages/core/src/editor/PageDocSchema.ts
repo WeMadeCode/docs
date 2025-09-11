@@ -23,7 +23,7 @@ function removeUndefined<T extends Record<string, any> | undefined>(obj: T): T {
   return Object.fromEntries(Object.entries(obj).filter(([, value]) => value !== undefined)) as T
 }
 
-export class MiaomaDocSchema<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> {
+export class PageDocSchema<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> {
   public readonly blockSpecs: BlockSpecs
   public readonly inlineContentSpecs: InlineContentSpecs
   public readonly styleSpecs: StyleSpecs
@@ -57,8 +57,8 @@ export class MiaomaDocSchema<BSchema extends BlockSchema, ISchema extends Inline
      */
     styleSpecs?: SSpecs
   }) {
-    return new MiaomaDocSchema<BlockSchemaFromSpecs<BSpecs>, InlineContentSchemaFromSpecs<ISpecs>, StyleSchemaFromSpecs<SSpecs>>(options)
-    // as MiaomaDocSchema<
+    return new PageDocSchema<BlockSchemaFromSpecs<BSpecs>, InlineContentSchemaFromSpecs<ISpecs>, StyleSchemaFromSpecs<SSpecs>>(options)
+    // as PageDocSchema<
     // BlockSchemaFromSpecs<BSpecs>,
     // InlineContentSchemaFromSpecs<ISpecs>,
     // StyleSchemaFromSpecs<SSpecs>

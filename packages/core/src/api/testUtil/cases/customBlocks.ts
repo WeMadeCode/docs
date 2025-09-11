@@ -3,7 +3,7 @@ import { defaultProps } from '../../../blocks/defaultProps'
 import { uploadToTmpFilesDotOrg_DEV_ONLY } from '../../../blocks/FileBlockContent/uploadToTmpFilesDotOrg_DEV_ONLY'
 import { imagePropSchema, imageRender } from '../../../blocks/ImageBlockContent/ImageBlockContent'
 import { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
-import { MiaomaDocSchema } from '../../../editor/MiaomaDocSchema'
+import { PageDocSchema } from '../../../editor/PageDocSchema'
 import { createBlockSpec } from '../../../schema/index'
 import { EditorTestCases } from '../index'
 
@@ -68,7 +68,7 @@ const SimpleCustomParagraph = createBlockSpec(
   }
 )
 
-const schema = MiaomaDocSchema.create({
+const schema = PageDocSchema.create({
   blockSpecs: {
     ...defaultBlockSpecs,
     simpleImage: SimpleImage,

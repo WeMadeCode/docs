@@ -5,12 +5,12 @@ import {
   DefaultStyleSchema,
   InlineContentSchema,
   MiaomaDocEditor,
-  MiaomaDocSchema,
+  PageDocSchema,
   StyleSchema,
 } from '@page-doc/core'
 import { createContext, useContext, useState } from 'react'
 
-type MiaomaDocContextValue<
+type PageDocContextValue<
   BSchema extends BlockSchema = DefaultBlockSchema,
   ISchema extends InlineContentSchema = DefaultInlineContentSchema,
   SSchema extends StyleSchema = DefaultStyleSchema,
@@ -20,19 +20,19 @@ type MiaomaDocContextValue<
   colorSchemePreference?: 'light' | 'dark'
 }
 
-export const MiaomaDocContext = createContext<MiaomaDocContextValue | undefined>(undefined)
+export const PageDocContext = createContext<PageDocContextValue | undefined>(undefined)
 
 /**
- * Get the MiaomaDocContext instance from the nearest MiaomaDocContext provider
+ * Get the PageDocContext instance from the nearest PageDocContext provider
  * @param _schema: optional, pass in the schema to return type-safe Context if you're using a custom schema
  */
-export function useMiaomaDocContext<
+export function usePageDocContext<
   BSchema extends BlockSchema = DefaultBlockSchema,
   ISchema extends InlineContentSchema = DefaultInlineContentSchema,
   SSchema extends StyleSchema = DefaultStyleSchema,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
->(_schema?: MiaomaDocSchema<BSchema, ISchema, SSchema>): MiaomaDocContextValue<BSchema, ISchema, SSchema> | undefined {
-  const context = useContext(MiaomaDocContext) as any
+>(_schema?: PageDocSchema<BSchema, ISchema, SSchema>): PageDocContextValue<BSchema, ISchema, SSchema> | undefined {
+  const context = useContext(PageDocContext) as any
 
   return context
 }

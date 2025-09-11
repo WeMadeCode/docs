@@ -17,7 +17,7 @@
     "docker:deploy:stop": "docker compose -p page-docs -f .devcontainer/docker-compose.deploy.yml down",
     "clean": "run-s clean:build clean:caches",
     "clean:build": "pnpm --filter @page-doc/* clean",
-    "clean:caches": " rimraf .turbo/cache **/*/.turbo",
+    "clean:caches": "rimraf .turbo */.turbo */*/.turbo */*/*/.turbo",
     "clean:deps": "rimraf node_modules **/*/node_modules",
     "clean:all": "run-s clean:build clean:caches clean:deps",
     "lint": "eslint",

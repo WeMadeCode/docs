@@ -23,7 +23,7 @@ export function DocList() {
   const handleCreate = async () => {
     const res = await srv.createPage({
       emoji: randomEmoji(),
-      title: '未命名文档@妙码学院-合一',
+      title: '未命名文档',
     })
     navigate(`/doc/${res.data.pageId}`)
     refetch()

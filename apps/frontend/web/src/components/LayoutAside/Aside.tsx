@@ -107,7 +107,7 @@ export function Aside() {
         <div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-2">
           <a href="/" className="flex items-center gap-2 ">
             <img className="w-8" src="/image.svg" />
-            <p className="font-semibold text-lg">Page协同云文档</p>
+            <p className="font-semibold text-lg">云文档</p>
           </a>
         </div>
         <SidebarMenu>

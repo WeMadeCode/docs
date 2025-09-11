@@ -2,7 +2,7 @@ import { findParentNode } from '@tiptap/core'
 import { EditorState, Plugin, PluginKey } from 'prosemirror-state'
 import { Decoration, DecorationSet, EditorView } from 'prosemirror-view'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { UiElementPosition } from '../../extensions-shared/UiElementPosition'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { EventEmitter } from '../../util/EventEmitter'
@@ -21,7 +21,7 @@ class SuggestionMenuView<BSchema extends BlockSchema, I extends InlineContentSch
   pluginState: SuggestionPluginState
 
   constructor(
-    private readonly editor: MiaomaDocEditor<BSchema, I, S>,
+    private readonly editor: PageDocEditor<BSchema, I, S>,
     emitUpdate: (menuName: string, state: SuggestionMenuState) => void
   ) {
     this.pluginState = undefined
@@ -149,7 +149,7 @@ export class SuggestionMenuProseMirrorPlugin<
 
   private triggerCharacters: string[] = []
 
-  constructor(editor: MiaomaDocEditor<BSchema, I, S>) {
+  constructor(editor: PageDocEditor<BSchema, I, S>) {
     super()
     const triggerCharacters = this.triggerCharacters
     this.plugin = new Plugin({
@@ -313,7 +313,7 @@ export class SuggestionMenuProseMirrorPlugin<
 }
 
 export function createSuggestionMenu<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   triggerCharacter: string
 ) {
   editor.suggestionMenus.addTriggerCharacter(triggerCharacter)

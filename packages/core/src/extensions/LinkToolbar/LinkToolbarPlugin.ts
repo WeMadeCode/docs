@@ -3,7 +3,7 @@ import { EditorView } from '@tiptap/pm/view'
 import { Mark } from 'prosemirror-model'
 import { Plugin, PluginKey, PluginView } from 'prosemirror-state'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { UiElementPosition } from '../../extensions-shared/UiElementPosition'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { EventEmitter } from '../../util/EventEmitter'
@@ -33,7 +33,7 @@ class LinkToolbarView implements PluginView {
   linkMarkRange: Range | undefined
 
   constructor(
-    private readonly editor: MiaomaDocEditor<any, any, any>,
+    private readonly editor: PageDocEditor<any, any, any>,
     private readonly pmView: EditorView,
     emitUpdate: (state: LinkToolbarState) => void
   ) {
@@ -240,7 +240,7 @@ export class LinkToolbarProsemirrorPlugin<
   private view: LinkToolbarView | undefined
   public readonly plugin: Plugin
 
-  constructor(editor: MiaomaDocEditor<BSchema, I, S>) {
+  constructor(editor: PageDocEditor<BSchema, I, S>) {
     super()
     this.plugin = new Plugin({
       key: linkToolbarPluginKey,

@@ -81,7 +81,7 @@ export * from './components/TableHandles/TableHandleMenu/TableHandleMenu'
 export * from './components/TableHandles/TableHandleMenu/TableHandleMenuProps'
 
 export * from './hooks/useActiveStyles'
-export * from './hooks/useMiaomaDocEditor'
+export * from './hooks/usePageDocEditor'
 export * from './hooks/useCreatePageDoc'
 export * from './hooks/useEditorChange'
 export * from './hooks/useEditorContentOrSelectionChange'

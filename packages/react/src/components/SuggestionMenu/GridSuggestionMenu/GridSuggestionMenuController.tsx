@@ -2,7 +2,7 @@ import { flip, offset, size } from '@floating-ui/react'
 import { BlockSchema, InlineContentSchema, StyleSchema, SuggestionMenuState } from '@page-doc/core'
 import { FC, useCallback, useMemo } from 'react'
 
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useUIElementPositioning } from '../../../hooks/useUIElementPositioning'
 import { useUIPluginState } from '../../../hooks/useUIPluginState'
 import { getDefaultReactEmojiPickerItems } from './getDefaultReactEmojiPickerItems'
@@ -36,7 +36,7 @@ export function GridSuggestionMenuController<
         onItemClick: (item: ItemType<GetItemsType>) => void
       })
 ) {
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const { triggerCharacter, gridSuggestionMenuComponent, columns, minQueryLength, onItemClick, getItems } = props
 

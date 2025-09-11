@@ -3,7 +3,7 @@ import { DOMParser, Schema } from 'prosemirror-model'
 import { Block } from '../../../blocks/defaultBlocks'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { nodeToBlock } from '../../nodeConversions/nodeToBlock'
-import { nestedListsToMiaomaDocStructure } from './util/nestedLists'
+import { nestedListsToPageDocStructure } from './util/nestedLists'
 export async function HTMLToBlocks<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   html: string,
   blockSchema: BSchema,
@@ -11,7 +11,7 @@ export async function HTMLToBlocks<BSchema extends BlockSchema, I extends Inline
   styleSchema: S,
   pmSchema: Schema
 ): Promise<Block<BSchema, I, S>[]> {
-  const htmlNode = nestedListsToMiaomaDocStructure(html)
+  const htmlNode = nestedListsToPageDocStructure(html)
   const parser = DOMParser.fromSchema(pmSchema)
 
   // Other approach might be to use

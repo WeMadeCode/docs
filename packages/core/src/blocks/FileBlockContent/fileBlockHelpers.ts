@@ -1,9 +1,9 @@
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { BlockFromConfig, BlockSchemaWithBlock, FileBlockConfig } from '../../schema/index'
 
 export const createFileBlockWrapper = (
   block: BlockFromConfig<FileBlockConfig, any, any>,
-  editor: MiaomaDocEditor<BlockSchemaWithBlock<FileBlockConfig['type'], FileBlockConfig>, any, any>,
+  editor: PageDocEditor<BlockSchemaWithBlock<FileBlockConfig['type'], FileBlockConfig>, any, any>,
   // TODO: Maybe make optional for default preview
   element: { dom: HTMLElement; destroy?: () => void },
   buttonText?: string,
@@ -105,7 +105,7 @@ export const createFileAndCaptionWrapper = (block: BlockFromConfig<FileBlockConf
 // Button element that acts as a placeholder for files with no src.
 export const createAddFileButton = (
   block: BlockFromConfig<FileBlockConfig, any, any>,
-  editor: MiaomaDocEditor<any, any, any>,
+  editor: PageDocEditor<any, any, any>,
   buttonText?: string,
   buttonIcon?: HTMLElement
 ) => {
@@ -203,7 +203,7 @@ export const createFigureWithCaption = (element: HTMLElement, caption: string) =
 // previews.
 export const createResizeHandlesWrapper = (
   block: BlockFromConfig<FileBlockConfig, any, any>,
-  editor: MiaomaDocEditor<any, any, any>,
+  editor: PageDocEditor<any, any, any>,
   element: HTMLElement,
   getWidth: () => number,
   setWidth: (width: number) => void

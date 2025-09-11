@@ -1,4 +1,4 @@
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { BlockFromConfig, createBlockSpec, FileBlockConfig, PropSchema } from '../../schema/index'
 import { defaultProps } from '../defaultProps'
 import {
@@ -33,7 +33,7 @@ export const fileBlockConfig = {
   isFileBlock: true,
 } satisfies FileBlockConfig
 
-export const fileRender = (block: BlockFromConfig<typeof fileBlockConfig, any, any>, editor: MiaomaDocEditor<any, any, any>) => {
+export const fileRender = (block: BlockFromConfig<typeof fileBlockConfig, any, any>, editor: PageDocEditor<any, any, any>) => {
   const file = createDefaultFilePreview(block).dom
   const element = createFileAndCaptionWrapper(block, file)
 

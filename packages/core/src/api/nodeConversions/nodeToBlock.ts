@@ -18,7 +18,7 @@ import { UnreachableCaseError } from '../../util/typescript'
 import { getBlockInfoWithManualOffset } from '../getBlockInfoFromPos'
 
 /**
- * Converts an internal (prosemirror) table node contentto a MiaomaDoc Tablecontent
+ * Converts an internal (prosemirror) table node contentto a PageDoc Tablecontent
  */
 export function contentNodeToTableContent<I extends InlineContentSchema, S extends StyleSchema>(
   contentNode: Node,
@@ -56,7 +56,7 @@ export function contentNodeToTableContent<I extends InlineContentSchema, S exten
 }
 
 /**
- * Converts an internal (prosemirror) content node to a MiaomaDoc InlineContent array.
+ * Converts an internal (prosemirror) content node to a PageDoc InlineContent array.
  */
 export function contentNodeToInlineContent<I extends InlineContentSchema, S extends StyleSchema>(
   contentNode: Node,
@@ -67,7 +67,7 @@ export function contentNodeToInlineContent<I extends InlineContentSchema, S exte
   let currentContent: InlineContent<any, S> | undefined = undefined
 
   // Most of the logic below is for handling links because in ProseMirror links are marks
-  // while in MiaomaDoc links are a type of inline content
+  // while in PageDoc links are a type of inline content
   contentNode.content.forEach(node => {
     // hardBreak nodes do not have an InlineContent equivalent, instead we
     // add a newline to the previous node.
@@ -279,7 +279,7 @@ export function nodeToCustomInlineContent<I extends InlineContentSchema, S exten
 }
 
 /**
- * Convert a TipTap node to a MiaomaDoc block.
+ * Convert a TipTap node to a PageDoc block.
  */
 export function nodeToBlock<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   node: Node,

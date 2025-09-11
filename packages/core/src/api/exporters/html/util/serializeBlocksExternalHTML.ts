@@ -1,13 +1,13 @@
 import { DOMSerializer, Fragment } from 'prosemirror-model'
 
 import { PartialBlock } from '../../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../../schema/index'
 import { UnreachableCaseError } from '../../../../util/typescript'
 import { inlineContentToNodes, tableContentToNodes } from '../../../nodeConversions/blockToNode'
 
 function addAttributesAndRemoveClasses(element: HTMLElement) {
-  // Removes all MiaomaDoc specific class names.
+  // Removes all PageDoc specific class names.
   const className = [...element.classList].filter(className => !className.startsWith('bn-')) || []
 
   if (className.length > 0) {
@@ -18,7 +18,7 @@ function addAttributesAndRemoveClasses(element: HTMLElement) {
 }
 
 export function serializeInlineContentExternalHTML<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<any, I, S>,
+  editor: PageDocEditor<any, I, S>,
   blockContent: PartialBlock<BSchema, I, S>['content'],
   serializer: DOMSerializer,
   options?: { document?: Document }
@@ -57,7 +57,7 @@ export function serializeInlineContentExternalHTML<BSchema extends BlockSchema, 
  */
 function serializeBlock<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   fragment: DocumentFragment,
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   block: PartialBlock<BSchema, I, S>,
   serializer: DOMSerializer,
   orderedListItemBlockTypes: Set<string>,
@@ -171,7 +171,7 @@ function serializeBlock<BSchema extends BlockSchema, I extends InlineContentSche
 
 const serializeBlocksToFragment = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   fragment: DocumentFragment,
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blocks: PartialBlock<BSchema, I, S>[],
   serializer: DOMSerializer,
   orderedListItemBlockTypes: Set<string>,
@@ -184,7 +184,7 @@ const serializeBlocksToFragment = <BSchema extends BlockSchema, I extends Inline
 }
 
 export const serializeBlocksExternalHTML = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blocks: PartialBlock<BSchema, I, S>[],
   serializer: DOMSerializer,
   orderedListItemBlockTypes: Set<string>,

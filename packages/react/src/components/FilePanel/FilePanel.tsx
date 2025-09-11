@@ -9,7 +9,7 @@ import {
 import { useState } from 'react'
 
 import { ComponentProps, useComponentsContext } from '../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useDictionary } from '../../i18n/dictionary'
 import { EmbedTab } from './DefaultTabs/EmbedTab'
 import { UploadTab } from './DefaultTabs/UploadTab'
@@ -33,7 +33,7 @@ export const FilePanel = <
   const Components = useComponentsContext()!
   const dict = useDictionary()
 
-  const editor = useMiaomaDocEditor<B, I, S>()
+  const editor = usePageDocEditor<B, I, S>()
 
   const [loading, setLoading] = useState<boolean>(false)
 

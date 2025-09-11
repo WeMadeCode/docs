@@ -1,12 +1,12 @@
 import { DefaultBlockSchema, DefaultInlineContentSchema, DefaultStyleSchema } from '../../../blocks/defaultBlocks'
 import { uploadToTmpFilesDotOrg_DEV_ONLY } from '../../../blocks/FileBlockContent/uploadToTmpFilesDotOrg_DEV_ONLY'
-import { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../../editor/PageDocEditor'
 import { EditorTestCases } from '../index'
 
 export const defaultSchemaTestCases: EditorTestCases<DefaultBlockSchema, DefaultInlineContentSchema, DefaultStyleSchema> = {
   name: 'default schema',
   createEditor: () => {
-    return MiaomaDocEditor.create({
+    return PageDocEditor.create({
       uploadFile: uploadToTmpFilesDotOrg_DEV_ONLY,
     })
   },

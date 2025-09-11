@@ -94,7 +94,7 @@ export function firework() {
   }, 250)
 }
 
-export const miaoConfetti = {
+export const pageConfetti = {
   snow,
   schoolPride,
   firework,

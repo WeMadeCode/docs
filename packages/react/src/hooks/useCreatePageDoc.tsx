@@ -4,8 +4,8 @@ import {
   DefaultInlineContentSchema,
   DefaultStyleSchema,
   InlineContentSchema,
-  MiaomaDocEditor,
-  MiaomaDocEditorOptions,
+  PageDocEditor,
+  PageDocEditorOptions,
   StyleSchema,
 } from '@page-doc/core'
 import { DependencyList, useMemo } from 'react'
@@ -20,11 +20,11 @@ export const useCreatePageDoc = <
   ISchema extends InlineContentSchema = DefaultInlineContentSchema,
   SSchema extends StyleSchema = DefaultStyleSchema,
 >(
-  options: Partial<MiaomaDocEditorOptions<BSchema, ISchema, SSchema>> = {},
+  options: Partial<PageDocEditorOptions<BSchema, ISchema, SSchema>> = {},
   deps: DependencyList = []
 ) => {
   return useMemo(() => {
-    const editor = MiaomaDocEditor.create<BSchema, ISchema, SSchema>(options)
+    const editor = PageDocEditor.create<BSchema, ISchema, SSchema>(options)
     if (window) {
       // for testing / dev purposes
       ;(window as any).ProseMirror = editor._tiptapEditor

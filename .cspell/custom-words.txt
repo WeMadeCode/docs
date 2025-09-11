@@ -23,9 +23,8 @@ labelledby
 lucide
 marko
 metatype
-miao
-miaoma
-miaomadoc
+page
+pagedoc
 nodeconversions
 nonbreaking
 numberedlist

@@ -14,7 +14,7 @@ import {
   StyleSchemaFromSpecs,
   StyleSpecs,
 } from '../schema/index'
-import type { MiaomaDocEditor } from './MiaomaDocEditor'
+import type { PageDocEditor } from './PageDocEditor'
 
 function removeUndefined<T extends Record<string, any> | undefined>(obj: T): T {
   if (!obj) {
@@ -32,8 +32,8 @@ export class PageDocSchema<BSchema extends BlockSchema, ISchema extends InlineCo
   public readonly inlineContentSchema: ISchema
   public readonly styleSchema: SSchema
 
-  // Helper so that you can use typeof schema.MiaomaDocEditor
-  public readonly MiaomaDocEditor: MiaomaDocEditor<BSchema, ISchema, SSchema> = 'only for types' as any
+  // Helper so that you can use typeof schema.PageDocEditor
+  public readonly PageDocEditor: PageDocEditor<BSchema, ISchema, SSchema> = 'only for types' as any
 
   public readonly Block: BlockNoDefaults<BSchema, ISchema, SSchema> = 'only for types' as any
 

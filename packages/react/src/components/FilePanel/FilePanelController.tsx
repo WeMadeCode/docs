@@ -9,7 +9,7 @@ import {
 } from '@page-doc/core'
 import { FC } from 'react'
 
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useUIElementPositioning } from '../../hooks/useUIElementPositioning'
 import { useUIPluginState } from '../../hooks/useUIPluginState'
 import { FilePanel } from './FilePanel'
@@ -22,10 +22,10 @@ export const FilePanelController = <
 >(props: {
   filePanel?: FC<FilePanelProps<I, S>>
 }) => {
-  const editor = useMiaomaDocEditor<B, I, S>()
+  const editor = usePageDocEditor<B, I, S>()
 
   if (!editor.filePanel) {
-    throw new Error('FileToolbarController can only be used when MiaomaDoc editor schema contains file block')
+    throw new Error('FileToolbarController can only be used when PageDoc editor schema contains file block')
   }
 
   const state = useUIPluginState(editor.filePanel.onUpdate.bind(editor.filePanel))

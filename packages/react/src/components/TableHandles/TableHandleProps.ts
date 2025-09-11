@@ -3,7 +3,7 @@ import {
   DefaultInlineContentSchema,
   DefaultStyleSchema,
   InlineContentSchema,
-  MiaomaDocEditor,
+  PageDocEditor,
   StyleSchema,
   TableHandlesState,
 } from '@page-doc/core'
@@ -14,7 +14,7 @@ import { DragHandleMenuProps } from '../SideMenu/DragHandleMenu/DragHandleMenuPr
 type NonUndefined<T> = T extends undefined ? never : T
 
 export type TableHandleProps<I extends InlineContentSchema = DefaultInlineContentSchema, S extends StyleSchema = DefaultStyleSchema> = {
-  editor: MiaomaDocEditor<
+  editor: PageDocEditor<
     {
       table: DefaultBlockSchema['table']
     },
@@ -39,7 +39,7 @@ export type TableHandleProps<I extends InlineContentSchema = DefaultInlineConten
 } & Pick<TableHandlesState<I, S>, 'block'> &
   Pick<
     NonUndefined<
-      MiaomaDocEditor<
+      PageDocEditor<
         {
           table: DefaultBlockSchema['table']
         },

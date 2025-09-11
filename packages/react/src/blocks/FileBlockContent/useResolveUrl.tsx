@@ -1,10 +1,10 @@
 import { BlockSchema, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { useEffect, useState } from 'react'
 
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 
 export function useResolveUrl(fetchUrl: string) {
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>('loading')
   const [downloadUrl, setDownloadUrl] = useState<string | undefined>()

@@ -11,7 +11,7 @@ import {
   inheritedProps,
   InlineContentSchema,
   mergeCSSClasses,
-  MiaomaDocEditor,
+  PageDocEditor,
   PartialBlockFromConfig,
   Props,
   PropSchema,
@@ -28,7 +28,7 @@ import { renderToDOMSpec } from './@util/ReactRenderUtil'
 
 export type ReactCustomBlockRenderProps<T extends CustomBlockConfig, I extends InlineContentSchema, S extends StyleSchema> = {
   block: BlockFromConfig<T, I, S>
-  editor: MiaomaDocEditor<BlockSchemaWithBlock<T['type'], T>, I, S>
+  editor: PageDocEditor<BlockSchemaWithBlock<T['type'], T>, I, S>
   contentRef: (node: HTMLElement | null) => void
 }
 
@@ -121,8 +121,8 @@ export function createReactBlockSpec<const T extends CustomBlockConfig, const I 
       return props => {
         const nodeView = ReactNodeViewRenderer(
           (props: NodeViewProps) => {
-            // Gets the MiaomaDoc editor instance
-            const editor = this.options.editor! as MiaomaDocEditor<any>
+            // Gets the PageDoc editor instance
+            const editor = this.options.editor! as PageDocEditor<any>
             // Gets the block
             const block = getBlockFromPos(props.getPos, editor, this.editor, blockConfig.type) as any
             // Gets the custom HTML attributes for `blockContent` nodes

@@ -4,7 +4,7 @@ import {
   DefaultInlineContentSchema,
   DefaultStyleSchema,
   InlineContentSchema,
-  MiaomaDocEditor,
+  PageDocEditor,
   PageDocSchema,
   StyleSchema,
 } from '@page-doc/core'
@@ -16,7 +16,7 @@ type PageDocContextValue<
   SSchema extends StyleSchema = DefaultStyleSchema,
 > = {
   setContentEditableProps?: ReturnType<typeof useState<Record<string, any>>>[1] // copy type of setXXX from useState
-  editor?: MiaomaDocEditor<BSchema, ISchema, SSchema>
+  editor?: PageDocEditor<BSchema, ISchema, SSchema>
   colorSchemePreference?: 'light' | 'dark'
 }
 

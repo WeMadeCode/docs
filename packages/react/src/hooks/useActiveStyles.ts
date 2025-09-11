@@ -1,11 +1,11 @@
-import { MiaomaDocEditor, StyleSchema } from '@page-doc/core'
+import { PageDocEditor, StyleSchema } from '@page-doc/core'
 import { useState } from 'react'
 
 import { usePageDocContext } from '../editor/PageDocContext'
 import { useEditorChange } from './useEditorChange'
 import { useEditorSelectionChange } from './useEditorSelectionChange'
 
-export function useActiveStyles<T extends StyleSchema>(editor?: MiaomaDocEditor<any, any, T>) {
+export function useActiveStyles<T extends StyleSchema>(editor?: PageDocEditor<any, any, T>) {
   const editorContext = usePageDocContext<any, any, T>()
   if (!editor) {
     editor = editorContext?.editor

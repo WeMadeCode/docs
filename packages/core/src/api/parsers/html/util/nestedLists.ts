@@ -95,13 +95,13 @@ function createGroups(element: HTMLElement) {
 }
 
 // prevent XSS, similar to https://github.com/ProseMirror/prosemirror-view/blob/1251b2b412656a2a06263e4187574beb43651273/src/clipboard.ts#L204
-// https://github.com/TypeCellOS/MiaomaDoc/issues/601
+// https://github.com/TypeCellOS/PageDoc/issues/601
 let _detachedDoc: Document | null = null
 function detachedDoc() {
   return _detachedDoc || (_detachedDoc = document.implementation.createHTMLDocument('title'))
 }
 
-export function nestedListsToMiaomaDocStructure(elementOrHTML: HTMLElement | string) {
+export function nestedListsToPageDocStructure(elementOrHTML: HTMLElement | string) {
   if (typeof elementOrHTML === 'string') {
     const element = detachedDoc().createElement('div')
     element.innerHTML = elementOrHTML

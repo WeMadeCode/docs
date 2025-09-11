@@ -1,17 +1,17 @@
 import { Extension } from '@tiptap/core'
 import { Plugin } from 'prosemirror-state'
 
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
-import { nestedListsToMiaomaDocStructure } from '../../parsers/html/util/nestedLists'
+import { nestedListsToPageDocStructure } from '../../parsers/html/util/nestedLists'
 import { acceptedMIMETypes } from './acceptedMIMETypes'
 import { handleFileInsertion } from './handleFileInsertion'
 import { handleVSCodePaste } from './handleVSCodePaste'
 
 export const createPasteFromClipboardExtension = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) =>
-  Extension.create<{ editor: MiaomaDocEditor<BSchema, I, S> }, undefined>({
+  Extension.create<{ editor: PageDocEditor<BSchema, I, S> }, undefined>({
     name: 'pasteFromClipboard',
     addProseMirrorPlugins() {
       return [
@@ -48,13 +48,13 @@ export const createPasteFromClipboardExtension = <BSchema extends BlockSchema, I
 
                 let data = event.clipboardData!.getData(format)
 
-                if (format === 'miaomadoc/html') {
+                if (format === 'pagedoc/html') {
                   editor._tiptapEditor.view.pasteHTML(data)
                   return true
                 }
 
                 if (format === 'text/html') {
-                  const htmlNode = nestedListsToMiaomaDocStructure(data.trim())
+                  const htmlNode = nestedListsToPageDocStructure(data.trim())
                   data = htmlNode.innerHTML
                   editor._tiptapEditor.view.pasteHTML(data)
                   return true

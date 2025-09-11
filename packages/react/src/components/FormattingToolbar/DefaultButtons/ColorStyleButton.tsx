@@ -1,9 +1,9 @@
-import { BlockSchema, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
+import { BlockSchema, InlineContentSchema, PageDocEditor, StyleSchema } from '@page-doc/core'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'
 import { useEditorContentOrSelectionChange } from '../../../hooks/useEditorContentOrSelectionChange'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useSelectedBlocks } from '../../../hooks/useSelectedBlocks'
 import { useDictionary } from '../../../i18n/dictionary'
 import { ColorIcon } from '../../ColorPicker/ColorIcon'
@@ -11,8 +11,8 @@ import { ColorPicker } from '../../ColorPicker/ColorPicker'
 
 function checkColorInSchema<Color extends 'text' | 'background'>(
   color: Color,
-  editor: MiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>
-): editor is MiaomaDocEditor<
+  editor: PageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>
+): editor is PageDocEditor<
   BlockSchema,
   InlineContentSchema,
   Color extends 'text'
@@ -39,7 +39,7 @@ function checkColorInSchema<Color extends 'text' | 'background'>(
 export const ColorStyleButton = () => {
   const Components = useComponentsContext()!
   const dict = useDictionary()
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const textColorInSchema = checkColorInSchema('text', editor)
   const backgroundColorInSchema = checkColorInSchema('background', editor)

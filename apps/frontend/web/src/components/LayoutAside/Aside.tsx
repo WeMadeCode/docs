@@ -40,7 +40,7 @@ import {
 import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 
 import * as srv from '@/services'
-import { miaoConfetti } from '@/utils/miao-confetti'
+import { pageConfetti } from '@/utils/page-confetti'
 import { randomEmoji } from '@/utils/randomEmoji'
 
 export function Aside() {
@@ -91,7 +91,7 @@ export function Aside() {
   }
 
   const handleConfetti = () => {
-    miaoConfetti.firework()
+    pageConfetti.firework()
   }
   const handleLogout = () => {
     toast({

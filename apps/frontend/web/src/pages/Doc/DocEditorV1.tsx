@@ -6,7 +6,7 @@ import {
   defaultInlineContentSpecs,
   filterSuggestionItems,
   locales,
-  MiaomaDocEditor,
+  PageDocEditor,
   PageDocSchema,
   PartialBlock,
 } from '@page-doc/core'
@@ -79,7 +79,7 @@ const schema = PageDocSchema.create({
 })
 
 // Function which gets all users for the mentions menu.
-const getMentionMenuItems = (editor: MiaomaDocEditor, pageId?: string): DefaultReactSuggestionItem[] => {
+const getMentionMenuItems = (editor: PageDocEditor, pageId?: string): DefaultReactSuggestionItem[] => {
   const items: DefaultReactSuggestionItem[] = []
 
   for (const page of pages) {
@@ -126,12 +126,12 @@ export function DocEditor(props: DocEditorProps) {
   }, [pageId])
 
   const userName = useMemo(() => {
-    const storedName = sessionStorage.getItem('miaomadoc-user-name')
+    const storedName = sessionStorage.getItem('pagedoc-user-name')
     if (storedName) {
       return storedName
     } else {
       const randomName = `heyi-${Math.floor(Math.random() * 1000)}`
-      sessionStorage.setItem('miaomadoc-user-name', randomName)
+      sessionStorage.setItem('pagedoc-user-name', randomName)
       return randomName
     }
   }, [])

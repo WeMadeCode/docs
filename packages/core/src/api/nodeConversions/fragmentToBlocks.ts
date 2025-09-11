@@ -5,13 +5,13 @@ import { BlockNoDefaults, BlockSchema, InlineContentSchema, StyleSchema } from '
 import { nodeToBlock } from './nodeToBlock'
 
 /**
- * Converts all Blocks within a fragment to MiaomaDoc blocks.
+ * Converts all Blocks within a fragment to PageDoc blocks.
  */
 export function fragmentToBlocks<B extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   fragment: Fragment,
   schema: PageDocSchema<B, I, S>
 ) {
-  // first convert selection to miaomadoc-style blocks, and then
+  // first convert selection to pagedoc-style blocks, and then
   // pass these to the exporter
   const blocks: BlockNoDefaults<B, I, S>[] = []
   fragment.descendants(node => {

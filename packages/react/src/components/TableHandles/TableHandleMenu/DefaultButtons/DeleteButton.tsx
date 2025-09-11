@@ -8,7 +8,7 @@ import {
 } from '@page-doc/core'
 
 import { useComponentsContext } from '../../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../../hooks/usePageDocEditor'
 import { useDictionary } from '../../../../i18n/dictionary'
 import { TableHandleMenuProps } from '../TableHandleMenuProps'
 
@@ -17,7 +17,7 @@ export const DeleteRowButton = <I extends InlineContentSchema = DefaultInlineCon
 ) => {
   const Components = useComponentsContext()!
   const dict = useDictionary()
-  const editor = useMiaomaDocEditor<{ table: DefaultBlockSchema['table'] }, I, S>()
+  const editor = usePageDocEditor<{ table: DefaultBlockSchema['table'] }, I, S>()
 
   return (
     <Components.Generic.Menu.Item
@@ -49,7 +49,7 @@ export const DeleteColumnButton = <I extends InlineContentSchema = DefaultInline
   const Components = useComponentsContext()!
   const dict = useDictionary()
 
-  const editor = useMiaomaDocEditor<{ table: DefaultBlockSchema['table'] }, I, S>()
+  const editor = usePageDocEditor<{ table: DefaultBlockSchema['table'] }, I, S>()
 
   return (
     <Components.Generic.Menu.Item

@@ -1,11 +1,11 @@
 import { Plugin, PluginKey } from 'prosemirror-state'
 import { Decoration, DecorationSet } from 'prosemirror-view'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 
-const PLUGIN_KEY = new PluginKey(`miaomadoc-placeholder`)
+const PLUGIN_KEY = new PluginKey(`pagedoc-placeholder`)
 
-export const PlaceholderPlugin = (editor: MiaomaDocEditor<any, any, any>, placeholders: Record<string | 'default', string>) => {
+export const PlaceholderPlugin = (editor: PageDocEditor<any, any, any>, placeholders: Record<string | 'default', string>) => {
   return new Plugin({
     key: PLUGIN_KEY,
     view: () => {

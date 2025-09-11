@@ -1,11 +1,11 @@
-import { BlockSchema, formatKeyboardShortcut, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
+import { BlockSchema, formatKeyboardShortcut, InlineContentSchema, PageDocEditor, StyleSchema } from '@page-doc/core'
 import { useMemo, useState } from 'react'
 import { IconType } from 'react-icons'
 import { RiBold, RiCodeFill, RiItalic, RiStrikethrough, RiUnderline } from 'react-icons/ri'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'
 import { useEditorContentOrSelectionChange } from '../../../hooks/useEditorContentOrSelectionChange'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useSelectedBlocks } from '../../../hooks/useSelectedBlocks'
 import { useDictionary } from '../../../i18n/dictionary'
 
@@ -21,8 +21,8 @@ const icons = {
 
 function checkBasicTextStyleInSchema<Style extends BasicTextStyle>(
   style: Style,
-  editor: MiaomaDocEditor<BlockSchema, InlineContentSchema, any>
-): editor is MiaomaDocEditor<
+  editor: PageDocEditor<BlockSchema, InlineContentSchema, any>
+): editor is PageDocEditor<
   BlockSchema,
   InlineContentSchema,
   {
@@ -43,7 +43,7 @@ export const BasicTextStyleButton = <Style extends BasicTextStyle>(props: { basi
   const dict = useDictionary()
   const Components = useComponentsContext()!
 
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const basicTextStyleInSchema = checkBasicTextStyleInSchema(props.basicTextStyle, editor)
 

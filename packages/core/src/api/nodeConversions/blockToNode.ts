@@ -193,7 +193,7 @@ function blockOrInlineContentToContentNode(
 }
 
 /**
- * Converts a MiaomaDoc block to a TipTap node.
+ * Converts a PageDoc block to a TipTap node.
  */
 export function blockToNode(block: PartialBlock<any, any, any>, schema: Schema, styleSchema: StyleSchema) {
   let id = block.id

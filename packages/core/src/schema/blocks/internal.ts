@@ -2,7 +2,7 @@ import { Attribute, Attributes, Editor, Extension, Node, NodeConfig } from '@tip
 
 import { defaultBlockToHTML } from '../../blocks/defaultBlockHelpers'
 import { inheritedProps } from '../../blocks/defaultProps'
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { mergeCSSClasses } from '../../util/browser'
 import { camelToDataKebab } from '../../util/string'
 import { InlineContentSchema } from '../inlineContent/types'
@@ -85,7 +85,7 @@ export function getBlockFromPos<
   BSchema extends BlockSchemaWithBlock<BType, Config>,
   I extends InlineContentSchema,
   S extends StyleSchema,
->(getPos: (() => number) | boolean, editor: MiaomaDocEditor<BSchema, I, S>, tipTapEditor: Editor, type: BType) {
+>(getPos: (() => number) | boolean, editor: PageDocEditor<BSchema, I, S>, tipTapEditor: Editor, type: BType) {
   // Gets position of the node
   if (typeof getPos === 'boolean') {
     throw new Error('Cannot find node position as getPos is a boolean, not a function.')

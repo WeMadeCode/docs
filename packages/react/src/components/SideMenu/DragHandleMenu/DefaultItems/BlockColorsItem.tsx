@@ -11,7 +11,7 @@ import {
 import { ReactNode } from 'react'
 
 import { useComponentsContext } from '../../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../../hooks/usePageDocEditor'
 import { ColorPicker } from '../../../ColorPicker/ColorPicker'
 import { DragHandleMenuProps } from '../DragHandleMenuProps'
 
@@ -26,7 +26,7 @@ export const BlockColorsItem = <
 ) => {
   const Components = useComponentsContext()!
 
-  const editor = useMiaomaDocEditor<BSchema, I, S>()
+  const editor = usePageDocEditor<BSchema, I, S>()
 
   if (
     !checkBlockTypeHasDefaultProp('textColor', props.block.type, editor) &&

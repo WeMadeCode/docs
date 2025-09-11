@@ -8,7 +8,7 @@ import { blockToNode } from '../api/nodeConversions/blockToNode'
 import { PartialBlock } from '../blocks/defaultBlocks'
 import { StyleSchema } from '../schema/index'
 
-export type MiaomaDocTipTapEditorOptions = Partial<Omit<EditorOptions, 'content'>> & {
+export type PageDocTipTapEditorOptions = Partial<Omit<EditorOptions, 'content'>> & {
   content: PartialBlock<any, any, any>[]
 }
 
@@ -16,10 +16,10 @@ export type MiaomaDocTipTapEditorOptions = Partial<Omit<EditorOptions, 'content'
  * Custom Editor class that extends TiptapEditor and separates
  * the creation of the view from the constructor.
  */
-export class MiaomaDocTipTapEditor extends TiptapEditor {
+export class PageDocTipTapEditor extends TiptapEditor {
   private _state: EditorState
 
-  public static create = (options: MiaomaDocTipTapEditorOptions, styleSchema: StyleSchema) => {
+  public static create = (options: PageDocTipTapEditorOptions, styleSchema: StyleSchema) => {
     // because we separate the constructor from the creation of the view,
     // we need to patch setTimeout to prevent this code from having any effect:
     // https://github.com/ueberdosis/tiptap/blob/45bac803283446795ad1b03f43d3746fa54a68ff/packages/core/src/Editor.ts#L117
@@ -30,7 +30,7 @@ export class MiaomaDocTipTapEditor extends TiptapEditor {
       }) as any
     }
     try {
-      return new MiaomaDocTipTapEditor(options, styleSchema)
+      return new PageDocTipTapEditor(options, styleSchema)
     } finally {
       if (oldSetTimeout) {
         globalThis.window.setTimeout = oldSetTimeout
@@ -38,7 +38,7 @@ export class MiaomaDocTipTapEditor extends TiptapEditor {
     }
   }
 
-  protected constructor(options: MiaomaDocTipTapEditorOptions, styleSchema: StyleSchema) {
+  protected constructor(options: PageDocTipTapEditorOptions, styleSchema: StyleSchema) {
     // possible fix for next.js server side rendering
     // const d = globalThis.document;
     // const w = globalThis.window;
@@ -176,7 +176,7 @@ export class MiaomaDocTipTapEditor extends TiptapEditor {
   }
 }
 
-;(MiaomaDocTipTapEditor.prototype as any).createView = function () {
+;(PageDocTipTapEditor.prototype as any).createView = function () {
   // no-op
   // Disable default call to `createView` in the Editor constructor.
   // We should call `createView` manually only when a DOM element is available

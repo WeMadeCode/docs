@@ -5,7 +5,7 @@ import { RiH1, RiH2, RiH3, RiListCheck3, RiListOrdered, RiListUnordered, RiText 
 
 import { ComponentProps, useComponentsContext } from '../../../editor/ComponentsContext'
 import { useEditorContentOrSelectionChange } from '../../../hooks/useEditorContentOrSelectionChange'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useSelectedBlocks } from '../../../hooks/useSelectedBlocks'
 import { useDictionary } from '../../../i18n/dictionary'
 
@@ -69,7 +69,7 @@ export const BlockTypeSelect = (props: { items?: BlockTypeSelectItem[] }) => {
   const Components = useComponentsContext()!
   const dict = useDictionary()
 
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const selectedBlocks = useSelectedBlocks(editor)
 

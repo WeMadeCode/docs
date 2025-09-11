@@ -3,7 +3,7 @@ import { BlockSchema, DefaultProps, InlineContentSchema, StyleSchema } from '@pa
 import { FC, useMemo, useRef, useState } from 'react'
 
 import { useEditorContentOrSelectionChange } from '../../hooks/useEditorContentOrSelectionChange'
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useUIElementPositioning } from '../../hooks/useUIElementPositioning'
 import { useUIPluginState } from '../../hooks/useUIPluginState'
 import { mergeRefs } from '../../util/mergeRefs'
@@ -26,7 +26,7 @@ const textAlignmentToPlacement = (textAlignment: DefaultProps['textAlignment']) 
 export const FormattingToolbarController = (props: { formattingToolbar?: FC<FormattingToolbarProps> }) => {
   const divRef = useRef<HTMLDivElement>(null)
 
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const [placement, setPlacement] = useState<'top-start' | 'top' | 'top-end'>(() => {
     const block = editor.getTextCursorPosition().block

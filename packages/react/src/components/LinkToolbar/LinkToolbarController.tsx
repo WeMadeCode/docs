@@ -9,7 +9,7 @@ import {
 } from '@page-doc/core'
 import { FC } from 'react'
 
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useUIElementPositioning } from '../../hooks/useUIElementPositioning'
 import { useUIPluginState } from '../../hooks/useUIPluginState'
 import { LinkToolbar } from './LinkToolbar'
@@ -22,7 +22,7 @@ export const LinkToolbarController = <
 >(props: {
   linkToolbar?: FC<LinkToolbarProps>
 }) => {
-  const editor = useMiaomaDocEditor<BSchema, I, S>()
+  const editor = usePageDocEditor<BSchema, I, S>()
 
   const callbacks = {
     deleteLink: editor.linkToolbar.deleteLink,

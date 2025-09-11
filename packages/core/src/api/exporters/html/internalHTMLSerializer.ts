@@ -1,10 +1,10 @@
 import { DOMSerializer, Schema } from 'prosemirror-model'
 
 import { PartialBlock } from '../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { serializeBlocksInternalHTML } from './util/serializeBlocksInternalHTML'
-// Used to serialize MiaomaDoc blocks and ProseMirror nodes to HTML without
+// Used to serialize PageDoc blocks and ProseMirror nodes to HTML without
 // losing data. Blocks are exported using the `toInternalHTML` method in their
 // `blockSpec`.
 //
@@ -15,7 +15,7 @@ import { serializeBlocksInternalHTML } from './util/serializeBlocksInternalHTML'
 // loss.
 export const createInternalHTMLSerializer = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   schema: Schema,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) => {
   const serializer = DOMSerializer.fromSchema(schema)
 

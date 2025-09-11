@@ -56,7 +56,7 @@ export const Doc = () => {
   //     return pages?.find(page => page.pageId === params.id)
   // }, [params?.id, pages])
 
-  // const provider = useRef(new WebsocketProvider('ws://localhost:1314', `miaoma-doc-${page?.id}`, doc)).current
+  // const provider = useRef(new WebsocketProvider('ws://localhost:1314', `page-doc-${page?.id}`, doc)).current
   const [remoteUsers, setRemoteUsers] = useState<Map<number, { name: string; color: string }>>()
 
   const handleTitleInput = useMemo(() => {

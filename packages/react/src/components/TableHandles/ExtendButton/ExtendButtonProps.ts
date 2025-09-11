@@ -3,13 +3,13 @@ import {
   DefaultInlineContentSchema,
   DefaultStyleSchema,
   InlineContentSchema,
-  MiaomaDocEditor,
+  PageDocEditor,
   StyleSchema,
   TableHandlesState,
 } from '@page-doc/core'
 
 export type ExtendButtonProps<I extends InlineContentSchema = DefaultInlineContentSchema, S extends StyleSchema = DefaultStyleSchema> = {
-  editor: MiaomaDocEditor<
+  editor: PageDocEditor<
     {
       table: DefaultBlockSchema['table']
     },

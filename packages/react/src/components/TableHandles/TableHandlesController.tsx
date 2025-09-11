@@ -2,7 +2,7 @@ import { FloatingPortal } from '@floating-ui/react'
 import { BlockSchema, DefaultInlineContentSchema, DefaultStyleSchema, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { FC, useCallback, useMemo, useState } from 'react'
 
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useUIPluginState } from '../../hooks/useUIPluginState'
 import { ExtendButton } from './ExtendButton/ExtendButton'
 import { ExtendButtonProps } from './ExtendButton/ExtendButtonProps'
@@ -18,12 +18,12 @@ export const TableHandlesController = <
   tableHandle?: FC<TableHandleProps<I, S>>
   extendButton?: FC<ExtendButtonProps<I, S>>
 }) => {
-  const editor = useMiaomaDocEditor<BlockSchema, I, S>()
+  const editor = usePageDocEditor<BlockSchema, I, S>()
 
   const [menuContainerRef, setMenuContainerRef] = useState<HTMLDivElement | null>(null)
 
   if (!editor.tableHandles) {
-    throw new Error('TableHandlesController can only be used when MiaomaDoc editor schema contains table block')
+    throw new Error('TableHandlesController can only be used when PageDoc editor schema contains table block')
   }
 
   const callbacks = {

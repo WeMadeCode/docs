@@ -1,7 +1,7 @@
 import { EditorState, Plugin, PluginKey, PluginView } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { UiElementPosition } from '../../extensions-shared/UiElementPosition'
 import type { BlockFromConfig, FileBlockConfig, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { EventEmitter } from '../../util/EventEmitter'
@@ -16,7 +16,7 @@ export class FilePanelView<I extends InlineContentSchema, S extends StyleSchema>
   public emitUpdate: () => void
 
   constructor(
-    private readonly editor: MiaomaDocEditor<Record<string, FileBlockConfig>, I, S>,
+    private readonly editor: PageDocEditor<Record<string, FileBlockConfig>, I, S>,
     private readonly pluginKey: PluginKey,
     private readonly pmView: EditorView,
     emitUpdate: (state: FilePanelState<I, S>) => void
@@ -116,7 +116,7 @@ export class FilePanelProsemirrorPlugin<I extends InlineContentSchema, S extends
   private view: FilePanelView<I, S> | undefined
   public readonly plugin: Plugin
 
-  constructor(editor: MiaomaDocEditor<Record<string, FileBlockConfig>, I, S>) {
+  constructor(editor: PageDocEditor<Record<string, FileBlockConfig>, I, S>) {
     super()
     this.plugin = new Plugin<{
       block: BlockFromConfig<FileBlockConfig, I, S> | undefined

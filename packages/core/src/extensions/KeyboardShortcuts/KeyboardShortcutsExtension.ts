@@ -5,10 +5,10 @@ import { getPrevBlockPos, mergeBlocksCommand } from '../../api/blockManipulation
 import { splitBlockCommand } from '../../api/blockManipulation/commands/splitBlock/splitBlock'
 import { updateBlockCommand } from '../../api/blockManipulation/commands/updateBlock/updateBlock'
 import { getBlockInfoFromResolvedPos, getBlockInfoFromSelection } from '../../api/getBlockInfoFromPos'
-import { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../editor/PageDocEditor'
 
 export const KeyboardShortcutsExtension = Extension.create<{
-  editor: MiaomaDocEditor<any, any, any>
+  editor: PageDocEditor<any, any, any>
 }>({
   priority: 50,
 

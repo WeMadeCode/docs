@@ -44,7 +44,7 @@ export function addInlineContentAttributes<IType extends string, PSchema extends
   return element
 }
 
-// see https://github.com/TypeCellOS/MiaomaDoc/pull/435
+// see https://github.com/TypeCellOS/PageDoc/pull/435
 export function addInlineContentKeyboardShortcuts<T extends CustomInlineContentConfig>(
   config: T
 ): {

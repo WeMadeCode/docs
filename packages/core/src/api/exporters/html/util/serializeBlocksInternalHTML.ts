@@ -1,13 +1,13 @@
 import { DOMSerializer, Fragment } from 'prosemirror-model'
 
 import { PartialBlock } from '../../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../../schema/index'
 import { UnreachableCaseError } from '../../../../util/typescript'
 import { inlineContentToNodes, tableContentToNodes } from '../../../nodeConversions/blockToNode'
 
 export function serializeInlineContentInternalHTML<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<any, I, S>,
+  editor: PageDocEditor<any, I, S>,
   blockContent: PartialBlock<BSchema, I, S>['content'],
   serializer: DOMSerializer,
   options?: { document?: Document }
@@ -36,7 +36,7 @@ export function serializeInlineContentInternalHTML<BSchema extends BlockSchema, 
 }
 
 function serializeBlock<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   block: PartialBlock<BSchema, I, S>,
   serializer: DOMSerializer,
   listIndex: number,
@@ -70,7 +70,7 @@ function serializeBlock<BSchema extends BlockSchema, I extends InlineContentSche
     // This is a workaround to make sure there's a list index set.
     // Normally, this is set on the internal prosemirror nodes by the NumberedListIndexingPlugin,
     // but:
-    // - (a) this information is not available on the Blocks passed to the serializer. (we only have access to MiaomaDoc Blocks)
+    // - (a) this information is not available on the Blocks passed to the serializer. (we only have access to PageDoc Blocks)
     // - (b) the NumberedListIndexingPlugin might not even have run, because we can manually call blocksToFullHTML
     //       with blocks that are not part of the active document
     ret.dom.setAttribute('data-index', listIndex.toString())
@@ -95,7 +95,7 @@ function serializeBlock<BSchema extends BlockSchema, I extends InlineContentSche
 }
 
 export const serializeBlocksInternalHTML = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blocks: PartialBlock<BSchema, I, S>[],
   serializer: DOMSerializer,
   options?: { document?: Document }

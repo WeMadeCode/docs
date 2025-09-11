@@ -58,7 +58,7 @@ const converted = {
                   type: 'element',
                   name: 'heading',
                   attributes: { level: '1', textAlignment: 'left' },
-                  elements: [{ type: 'text', text: 'Miaoma' }],
+                  elements: [{ type: 'text', text: 'Page' }],
                 },
               ],
             },

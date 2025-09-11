@@ -7,7 +7,7 @@ import { createExternalHTMLExporter } from '../../api/exporters/html/externalHTM
 import { cleanHTMLToMarkdown } from '../../api/exporters/markdown/markdownExporter'
 import { fragmentToBlocks } from '../../api/nodeConversions/fragmentToBlocks'
 import { Block } from '../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { UiElementPosition } from '../../extensions-shared/UiElementPosition'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { MultipleNodeSelection } from './MultipleNodeSelection'
@@ -149,7 +149,7 @@ export function unsetDragImage(rootEl: Document | ShadowRoot) {
 
 export function dragStart<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   e: { dataTransfer: DataTransfer | null; clientY: number },
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) {
   if (!e.dataTransfer) {
     return
@@ -209,7 +209,7 @@ export function dragStart<BSchema extends BlockSchema, I extends InlineContentSc
     const plainText = cleanHTMLToMarkdown(externalHTML)
 
     e.dataTransfer.clearData()
-    e.dataTransfer.setData('miaomadoc/html', clipboardHTML)
+    e.dataTransfer.setData('pagedoc/html', clipboardHTML)
     e.dataTransfer.setData('text/html', externalHTML)
     e.dataTransfer.setData('text/plain', plainText)
     e.dataTransfer.effectAllowed = 'move'

@@ -80,7 +80,7 @@ export function getNearestBlockContainerPos(doc: Node, pos: number) {
 
 /**
  * Gets information regarding the ProseMirror nodes that make up a block in a
- * MiaomaDoc document. This includes the main `blockContainer` node, the
+ * PageDoc document. This includes the main `blockContainer` node, the
  * `blockContent` node with the block's main body, and the optional `blockGroup`
  * node which contains the block's children. As well as the nodes, also returns
  * the ProseMirror positions just before & after each node.
@@ -140,7 +140,7 @@ export function getBlockInfoWithManualOffset(node: Node, blockContainerBeforePos
 
 /**
  * Gets information regarding the ProseMirror nodes that make up a block in a
- * MiaomaDoc document. This includes the main `blockContainer` node, the
+ * PageDoc document. This includes the main `blockContainer` node, the
  * `blockContent` node with the block's main body, and the optional `blockGroup`
  * node which contains the block's children. As well as the nodes, also returns
  * the ProseMirror positions just before & after each node.

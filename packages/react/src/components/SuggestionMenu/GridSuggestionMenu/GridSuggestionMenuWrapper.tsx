@@ -2,7 +2,7 @@ import { BlockSchema, InlineContentSchema, StyleSchema } from '@page-doc/core'
 import { FC, useCallback, useEffect } from 'react'
 
 import { usePageDocContext } from '../../../editor/PageDocContext'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useCloseSuggestionMenuNoItems } from '../hooks/useCloseSuggestionMenuNoItems'
 import { useLoadSuggestionMenuItems } from '../hooks/useLoadSuggestionMenuItems'
 import { useGridSuggestionMenuKeyboardNavigation } from './hooks/useGridSuggestionMenuKeyboardNavigation'
@@ -19,7 +19,7 @@ export function GridSuggestionMenuWrapper<Item>(props: {
 }) {
   const ctx = usePageDocContext()
   const setContentEditableProps = ctx!.setContentEditableProps!
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const { getItems, gridSuggestionMenuComponent, query, clearQuery, closeMenu, onItemClick, columns } = props
 

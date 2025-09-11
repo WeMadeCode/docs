@@ -1,10 +1,10 @@
-import { MiaomaDocEditor } from '@page-doc/core'
+import { PageDocEditor } from '@page-doc/core'
 import { useEffect, useState } from 'react'
 
 // Hook which handles keyboard navigation of a grid suggestion menu. Arrow keys
 // are used to select a menu item, enter is used to execute it.
 export function useGridSuggestionMenuKeyboardNavigation<Item>(
-  editor: MiaomaDocEditor<any, any, any>,
+  editor: PageDocEditor<any, any, any>,
   query: string,
   items: Item[],
   columns: number,

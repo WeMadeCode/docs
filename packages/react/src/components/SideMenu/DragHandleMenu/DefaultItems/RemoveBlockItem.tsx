@@ -9,7 +9,7 @@ import {
 import { ReactNode } from 'react'
 
 import { useComponentsContext } from '../../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../../hooks/usePageDocEditor'
 import { DragHandleMenuProps } from '../DragHandleMenuProps'
 
 export const RemoveBlockItem = <
@@ -23,7 +23,7 @@ export const RemoveBlockItem = <
 ) => {
   const Components = useComponentsContext()!
 
-  const editor = useMiaomaDocEditor<BSchema, I, S>()
+  const editor = usePageDocEditor<BSchema, I, S>()
 
   return (
     <Components.Generic.Menu.Item className={'bn-menu-item'} onClick={() => editor.removeBlocks([props.block])}>

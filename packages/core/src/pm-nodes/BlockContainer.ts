@@ -1,7 +1,7 @@
 import { Node } from '@tiptap/core'
 
-import type { MiaomaDocEditor } from '../editor/MiaomaDocEditor'
-import { MiaomaDocDOMAttributes } from '../schema/index'
+import type { PageDocEditor } from '../editor/PageDocEditor'
+import { PageDocDOMAttributes } from '../schema/index'
 import { mergeCSSClasses } from '../util/browser'
 
 // Object containing all possible block attributes.
@@ -17,8 +17,8 @@ const BlockAttributes: Record<string, string> = {
  * The main "Block node" documents consist of
  */
 export const BlockContainer = Node.create<{
-  domAttributes?: MiaomaDocDOMAttributes
-  editor: MiaomaDocEditor<any, any, any>
+  domAttributes?: PageDocDOMAttributes
+  editor: PageDocEditor<any, any, any>
 }>({
   name: 'blockContainer',
   group: 'blockContainer',

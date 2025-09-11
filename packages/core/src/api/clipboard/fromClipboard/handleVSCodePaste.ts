@@ -1,9 +1,9 @@
-import { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
 
 export async function handleVSCodePaste<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   event: ClipboardEvent,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) {
   const view = editor.prosemirrorView
   const { schema } = view.state

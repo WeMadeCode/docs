@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "miaoma-docs",
+  "productName": "page-docs",
   "version": "1.0.0",
-  "identifier": "com.miaoma.docs",
+  "identifier": "com.page.docs",
   "build": {
     "beforeDevCommand": "echo 1",
     "devUrl": "http://localhost:5173",

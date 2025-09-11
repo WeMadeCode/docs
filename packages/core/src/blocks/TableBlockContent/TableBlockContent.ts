@@ -44,12 +44,12 @@ export const TableBlockContent = createStronglyTypedTiptapNode({
   // plugin adds its own node view, which overrides how the node is rendered vs
   // `renderHTML`. This means that the wrapping `blockContent` HTML element is
   // no longer rendered. The `columnResizing` plugin uses the `TableView` as its
-  // default node view. `MiaomaDocTableView` extends it by wrapping it in a
+  // default node view. `PageDocTableView` extends it by wrapping it in a
   // `blockContent` element, so the DOM structure is consistent with other block
   // types.
   addNodeView() {
     return ({ node, HTMLAttributes }) => {
-      class MiaomaDocTableView extends TableView {
+      class PageDocTableView extends TableView {
         constructor(
           public node: PMNode,
           public cellMinWidth: number,
@@ -88,7 +88,7 @@ export const TableBlockContent = createStronglyTypedTiptapNode({
         }
       }
 
-      return new MiaomaDocTableView(node, EMPTY_CELL_WIDTH, {
+      return new PageDocTableView(node, EMPTY_CELL_WIDTH, {
         ...(this.options.domAttributes?.blockContent || {}),
         ...HTMLAttributes,
       })

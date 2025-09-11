@@ -1,7 +1,7 @@
 import { NodeSelection, Selection, TextSelection } from 'prosemirror-state'
 import { CellSelection } from 'prosemirror-tables'
 
-import type { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockIdentifier } from '../../../../schema/index'
 import { getBlockInfoFromSelection } from '../../../getBlockInfoFromPos'
 import { getNodeById } from '../../../nodeUtil'
@@ -28,7 +28,7 @@ type BlockSelectionData = (
 
 // `getBlockSelectionData` and `updateBlockSelectionFromData` are used to save
 // and restore the selection within a block, when the block is moved.
-function getBlockSelectionData(editor: MiaomaDocEditor<any, any, any>): BlockSelectionData {
+function getBlockSelectionData(editor: PageDocEditor<any, any, any>): BlockSelectionData {
   const { blockContainer } = getBlockInfoFromSelection(editor._tiptapEditor.state)
 
   const selectionData = {
@@ -59,7 +59,7 @@ function getBlockSelectionData(editor: MiaomaDocEditor<any, any, any>): BlockSel
   }
 }
 
-function updateBlockSelectionFromData(editor: MiaomaDocEditor<any, any, any>, data: BlockSelectionData) {
+function updateBlockSelectionFromData(editor: PageDocEditor<any, any, any>, data: BlockSelectionData) {
   const blockPos = getNodeById(data.blockId, editor._tiptapEditor.state.doc).posBeforeNode
 
   let selection: Selection
@@ -83,7 +83,7 @@ function updateBlockSelectionFromData(editor: MiaomaDocEditor<any, any, any>, da
 }
 
 export function moveSelectedBlockAndSelection(
-  editor: MiaomaDocEditor<any, any, any>,
+  editor: PageDocEditor<any, any, any>,
   referenceBlock: BlockIdentifier,
   placement: 'before' | 'after'
 ) {
@@ -96,7 +96,7 @@ export function moveSelectedBlockAndSelection(
   updateBlockSelectionFromData(editor, selectionData)
 }
 
-export function moveBlockUp(editor: MiaomaDocEditor<any, any, any>) {
+export function moveBlockUp(editor: PageDocEditor<any, any, any>) {
   // This function currently only supports moving a single block.
   const editorSelection = editor.getSelection()
   if (editorSelection && editorSelection.blocks.length > 1) {
@@ -128,7 +128,7 @@ export function moveBlockUp(editor: MiaomaDocEditor<any, any, any>) {
   moveSelectedBlockAndSelection(editor, referenceBlockId, placement)
 }
 
-export function moveBlockDown(editor: MiaomaDocEditor<any, any, any>) {
+export function moveBlockDown(editor: PageDocEditor<any, any, any>) {
   // This function currently only supports moving a single block.
   const editorSelection = editor.getSelection()
   if (editorSelection && editorSelection.blocks.length > 1) {

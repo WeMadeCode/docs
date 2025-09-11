@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useSelectedBlocks } from '../../../hooks/useSelectedBlocks'
 import { useDictionary } from '../../../i18n/dictionary'
 
@@ -11,7 +11,7 @@ export const FileDeleteButton = () => {
   const dict = useDictionary()
   const Components = useComponentsContext()!
 
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const selectedBlocks = useSelectedBlocks(editor)
 

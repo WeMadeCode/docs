@@ -1,14 +1,14 @@
 import { Node } from 'prosemirror-model'
 
 import { Block, PartialBlock } from '../../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockIdentifier, BlockSchema, InlineContentSchema, StyleSchema } from '../../../../schema/index'
 import { blockToNode } from '../../../nodeConversions/blockToNode'
 import { nodeToBlock } from '../../../nodeConversions/nodeToBlock'
 import { removeBlocksWithCallback } from '../removeBlocks/removeBlocks'
 
 export function replaceBlocks<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blocksToRemove: BlockIdentifier[],
   blocksToInsert: PartialBlock<BSchema, I, S>[]
 ): {

@@ -1,4 +1,4 @@
-import { BlockSchema, getDefaultSlashMenuItems, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
+import { BlockSchema, getDefaultSlashMenuItems, InlineContentSchema, PageDocEditor, StyleSchema } from '@page-doc/core'
 import {
   RiCodeBlock,
   RiEmotionFill,
@@ -36,7 +36,7 @@ const icons = {
 }
 
 export function getDefaultReactSlashMenuItems<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ): DefaultReactSuggestionItem[] {
   return getDefaultSlashMenuItems(editor).map(item => {
     const Icon = icons[item.key]

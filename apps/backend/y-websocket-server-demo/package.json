@@ -1,5 +1,5 @@
 {
-  "name": "@miaoma-doc/y-websocket-server-demo",
+  "name": "@page-doc/y-websocket-server-demo",
   "version": "1.19.0",
   "main": "index.js",
   "scripts": {

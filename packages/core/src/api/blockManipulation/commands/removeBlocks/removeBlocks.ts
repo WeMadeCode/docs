@@ -2,12 +2,12 @@ import { Node } from 'prosemirror-model'
 import { Transaction } from 'prosemirror-state'
 
 import { Block } from '../../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockIdentifier, BlockSchema, InlineContentSchema, StyleSchema } from '../../../../schema/index'
 import { nodeToBlock } from '../../../nodeConversions/nodeToBlock'
 
 export function removeBlocksWithCallback<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blocksToRemove: BlockIdentifier[],
   // Should return new removedSize.
   callback?: (node: Node, pos: number, tr: Transaction, removedSize: number) => number
@@ -59,7 +59,7 @@ export function removeBlocksWithCallback<BSchema extends BlockSchema, I extends 
 }
 
 export function removeBlocks<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blocksToRemove: BlockIdentifier[]
 ): Block<BSchema, I, S>[] {
   return removeBlocksWithCallback(editor, blocksToRemove)

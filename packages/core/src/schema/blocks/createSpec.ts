@@ -2,7 +2,7 @@ import { Editor } from '@tiptap/core'
 import { TagParseRule } from '@tiptap/pm/model'
 import { NodeView } from '@tiptap/pm/view'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { InlineContentSchema } from '../inlineContent/types'
 import { StyleSchema } from '../styles/types'
 import {
@@ -26,11 +26,11 @@ export type CustomBlockImplementation<T extends CustomBlockConfig, I extends Inl
      */
     block: BlockFromConfig<T, I, S>,
     /**
-     * The MiaomaDoc editor instance
+     * The PageDoc editor instance
      * This is typed generically. If you want an editor with your custom schema, you need to
-     * cast it manually, e.g.: `const e = editor as MiaomaDocEditor<typeof mySchema>;`
+     * cast it manually, e.g.: `const e = editor as PageDocEditor<typeof mySchema>;`
      */
-    editor: MiaomaDocEditor<BlockSchemaWithBlock<T['type'], T>, I, S>
+    editor: PageDocEditor<BlockSchemaWithBlock<T['type'], T>, I, S>
     // (note) if we want to fix the manual cast, we need to prevent circular references and separate block definition and render implementations
     // or allow manually passing <BSchema>, but that's not possible without passing the other generics because Typescript doesn't support partial inferred generics
   ) => {
@@ -40,11 +40,11 @@ export type CustomBlockImplementation<T extends CustomBlockConfig, I extends Inl
   }
   // Exports block to external HTML. If not defined, the output will be the same
   // as `render(...).dom`. Used to create clipboard data when pasting outside
-  // MiaomaDoc.
+  // PageDoc.
   // TODO: Maybe can return undefined to ignore when serializing?
   toExternalHTML?: (
     block: BlockFromConfig<T, I, S>,
-    editor: MiaomaDocEditor<BlockSchemaWithBlock<T['type'], T>, I, S>
+    editor: PageDocEditor<BlockSchemaWithBlock<T['type'], T>, I, S>
   ) => {
     dom: HTMLElement
     contentDOM?: HTMLElement
@@ -160,7 +160,7 @@ export function createBlockSpec<T extends CustomBlockConfig, I extends InlineCon
 
     addNodeView() {
       return ({ getPos }) => {
-        // Gets the MiaomaDoc editor instance
+        // Gets the PageDoc editor instance
         const editor = this.options.editor
         // Gets the block
         const block = getBlockFromPos(getPos, editor, this.editor, blockConfig.type)
@@ -181,7 +181,7 @@ export function createBlockSpec<T extends CustomBlockConfig, I extends InlineCon
   })
 
   if (node.name !== blockConfig.type) {
-    throw new Error('Node name does not match block type. This is a bug in MiaomaDoc.')
+    throw new Error('Node name does not match block type. This is a bug in PageDoc.')
   }
 
   return createInternalBlockSpec(blockConfig, {

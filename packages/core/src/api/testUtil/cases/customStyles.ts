@@ -1,6 +1,6 @@
 import { DefaultBlockSchema, DefaultInlineContentSchema, defaultStyleSpecs } from '../../../blocks/defaultBlocks'
 import { uploadToTmpFilesDotOrg_DEV_ONLY } from '../../../blocks/FileBlockContent/uploadToTmpFilesDotOrg_DEV_ONLY'
-import { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../../editor/PageDocEditor'
 import { PageDocSchema } from '../../../editor/PageDocSchema'
 import { createStyleSpec } from '../../../schema/styles/createSpec'
 import { EditorTestCases } from '../index'
@@ -49,7 +49,7 @@ const schema = PageDocSchema.create({
 export const customStylesTestCases: EditorTestCases<DefaultBlockSchema, DefaultInlineContentSchema, typeof schema.styleSchema> = {
   name: 'custom style schema',
   createEditor: () => {
-    return MiaomaDocEditor.create({
+    return PageDocEditor.create({
       uploadFile: uploadToTmpFilesDotOrg_DEV_ONLY,
       schema,
     })

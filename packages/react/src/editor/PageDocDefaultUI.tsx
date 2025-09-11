@@ -5,7 +5,7 @@ import { SideMenuController } from '../components/SideMenu/SideMenuController'
 import { GridSuggestionMenuController } from '../components/SuggestionMenu/GridSuggestionMenu/GridSuggestionMenuController'
 import { SuggestionMenuController } from '../components/SuggestionMenu/SuggestionMenuController'
 import { TableHandlesController } from '../components/TableHandles/TableHandlesController'
-import { useMiaomaDocEditor } from '../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../hooks/usePageDocEditor'
 
 export type PageDocDefaultUIProps = {
   formattingToolbar?: boolean
@@ -17,11 +17,11 @@ export type PageDocDefaultUIProps = {
   emojiPicker?: boolean
 }
 
-export function MiaomaDocDefaultUI(props: PageDocDefaultUIProps) {
-  const editor = useMiaomaDocEditor()
+export function PageDocDefaultUI(props: PageDocDefaultUIProps) {
+  const editor = usePageDocEditor()
 
   if (!editor) {
-    throw new Error('MiaomaDocDefaultUI must be used within a PageDocContext.Provider')
+    throw new Error('PageDocDefaultUI must be used within a PageDocContext.Provider')
   }
 
   return (

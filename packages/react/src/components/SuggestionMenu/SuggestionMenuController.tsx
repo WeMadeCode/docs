@@ -2,7 +2,7 @@ import { flip, offset, shift, size } from '@floating-ui/react'
 import { BlockSchema, filterSuggestionItems, InlineContentSchema, StyleSchema, SuggestionMenuState } from '@page-doc/core'
 import { FC, useCallback, useMemo } from 'react'
 
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useUIElementPositioning } from '../../hooks/useUIElementPositioning'
 import { useUIPluginState } from '../../hooks/useUIPluginState'
 import { getDefaultReactSlashMenuItems } from './getDefaultReactSlashMenuItems'
@@ -35,7 +35,7 @@ export function SuggestionMenuController<
         onItemClick: (item: ItemType<GetItemsType>) => void
       })
 ) {
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const { triggerCharacter, suggestionMenuComponent, minQueryLength, onItemClick, getItems } = props
 

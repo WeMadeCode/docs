@@ -8,7 +8,7 @@ import {
 } from '@page-doc/core'
 import { FC } from 'react'
 
-import { useMiaomaDocEditor } from '../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../hooks/usePageDocEditor'
 import { useUIElementPositioning } from '../../hooks/useUIElementPositioning'
 import { useUIPluginState } from '../../hooks/useUIPluginState'
 import { SideMenu } from './SideMenu'
@@ -21,7 +21,7 @@ export const SideMenuController = <
 >(props: {
   sideMenu?: FC<SideMenuProps<BSchema, I, S>>
 }) => {
-  const editor = useMiaomaDocEditor<BSchema, I, S>()
+  const editor = usePageDocEditor<BSchema, I, S>()
 
   const callbacks = {
     blockDragStart: editor.sideMenu.blockDragStart,

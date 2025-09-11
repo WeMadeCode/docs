@@ -1,5 +1,5 @@
 import { PartialBlock } from '../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, FileBlockConfig, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { getBlockInfo, getNearestBlockContainerPos } from '../../getBlockInfoFromPos'
 import { acceptedMIMETypes } from './acceptedMIMETypes'
@@ -35,7 +35,7 @@ function checkMIMETypesMatch(mimeType1: string, mimeType2: string) {
 
 export async function handleFileInsertion<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   event: DragEvent | ClipboardEvent,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) {
   if (!editor.uploadFile) {
     return

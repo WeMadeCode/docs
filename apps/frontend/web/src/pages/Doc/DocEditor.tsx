@@ -6,7 +6,7 @@ import {
   filterSuggestionItems,
   insertOrUpdateBlock,
   locales,
-  MiaomaDocEditor,
+  PageDocEditor,
   PageDocSchema,
   PartialBlock,
 } from '@page-doc/core'
@@ -47,7 +47,7 @@ const schema = PageDocSchema.create({
 })
 
 // Function which gets all users for the mentions menu.
-const getMentionMenuItems = async (editor: MiaomaDocEditor, pageId?: string): Promise<DefaultReactSuggestionItem[]> => {
+const getMentionMenuItems = async (editor: PageDocEditor, pageId?: string): Promise<DefaultReactSuggestionItem[]> => {
   const items: DefaultReactSuggestionItem[] = []
   // 获取远程页面
   const res = await srv.fetchPageList()
@@ -80,7 +80,7 @@ const getMentionMenuItems = async (editor: MiaomaDocEditor, pageId?: string): Pr
 }
 
 // Slash menu item to insert an Alert block
-const insertAI = (editor: typeof schema.MiaomaDocEditor) => ({
+const insertAI = (editor: typeof schema.PageDocEditor) => ({
   title: 'Page AI',
   subtext: 'Page AI，让进取的人更具职业价值',
   onItemClick: () => {
@@ -103,18 +103,18 @@ export function DocEditor(props: DocEditorProps) {
   })
 
   // const userName = useMemo(() => {
-  //     const storedName = sessionStorage.getItem('miaomadoc-user-name')
+  //     const storedName = sessionStorage.getItem('pagedoc-user-name')
   //     if (storedName) {
   //         return storedName
   //     } else {
   //         const randomName = `heyi-${Math.floor(Math.random() * 1000)}`
-  //         sessionStorage.setItem('miaomadoc-user-name', randomName)
+  //         sessionStorage.setItem('pagedoc-user-name', randomName)
   //         return randomName
   //     }
   // }, [])
 
   const randomColor = useMemo(() => {
-    const storedColor = sessionStorage.getItem('miaomadoc-user-color')
+    const storedColor = sessionStorage.getItem('pagedoc-user-color')
     if (storedColor) {
       return storedColor
     }
@@ -122,7 +122,7 @@ export function DocEditor(props: DocEditorProps) {
     const g = Math.floor(Math.random() * 256)
     const b = Math.floor(Math.random() * 256)
     const color = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
-    sessionStorage.setItem('miaomadoc-user-color', color)
+    sessionStorage.setItem('pagedoc-user-color', color)
     return color
   }, [])
 

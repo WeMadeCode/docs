@@ -2,7 +2,7 @@ import { isNodeSelection, isTextSelection, posToDOMRect } from '@tiptap/core'
 import { EditorState, Plugin, PluginKey, PluginView } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { UiElementPosition } from '../../extensions-shared/UiElementPosition'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { EventEmitter } from '../../util/EventEmitter'
@@ -40,7 +40,7 @@ export class FormattingToolbarView implements PluginView {
   }
 
   constructor(
-    private readonly editor: MiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>,
+    private readonly editor: PageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>,
     private readonly pmView: EditorView,
     emitUpdate: (state: FormattingToolbarState) => void
   ) {
@@ -211,7 +211,7 @@ export class FormattingToolbarProsemirrorPlugin extends EventEmitter<any> {
   private view: FormattingToolbarView | undefined
   public readonly plugin: Plugin
 
-  constructor(editor: MiaomaDocEditor<any, any, any>) {
+  constructor(editor: PageDocEditor<any, any, any>) {
     super()
     this.plugin = new Plugin({
       key: formattingToolbarPluginKey,

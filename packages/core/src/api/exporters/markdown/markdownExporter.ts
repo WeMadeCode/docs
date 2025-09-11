@@ -1,7 +1,7 @@
 import { Schema } from 'prosemirror-model'
 
 import { PartialBlock } from '../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { esmDependencies, initializeESMDependencies } from '../../../util/esmDependencies'
 import { createExternalHTMLExporter } from '../html/externalHTMLExporter'
@@ -35,7 +35,7 @@ export function cleanHTMLToMarkdown(cleanHTMLString: string) {
 export async function blocksToMarkdown<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   blocks: PartialBlock<BSchema, I, S>[],
   schema: Schema,
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   options: { document?: Document }
 ): Promise<string> {
   await initializeESMDependencies()

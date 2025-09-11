@@ -3,7 +3,7 @@ import { ChangeEvent, KeyboardEvent, useCallback, useMemo, useState } from 'reac
 import { RiInputField } from 'react-icons/ri'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useSelectedBlocks } from '../../../hooks/useSelectedBlocks'
 import { useDictionary } from '../../../i18n/dictionary'
 
@@ -11,7 +11,7 @@ export const FileCaptionButton = () => {
   const dict = useDictionary()
   const Components = useComponentsContext()!
 
-  const editor = useMiaomaDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
+  const editor = usePageDocEditor<BlockSchema, InlineContentSchema, StyleSchema>()
 
   const [currentEditingCaption, setCurrentEditingCaption] = useState<string>()
 

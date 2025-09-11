@@ -2,7 +2,7 @@ import { Fragment, Node as PMNode, Slice } from 'prosemirror-model'
 import { EditorState } from 'prosemirror-state'
 
 import { Block, PartialBlock } from '../../../../blocks/defaultBlocks'
-import { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockIdentifier, BlockSchema } from '../../../../schema/blocks/types'
 import { InlineContentSchema } from '../../../../schema/inlineContent/types'
 import { StyleSchema } from '../../../../schema/styles/types'
@@ -14,7 +14,7 @@ import { getNodeById } from '../../../nodeUtil'
 
 export const updateBlockCommand =
   <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-    editor: MiaomaDocEditor<BSchema, I, S>,
+    editor: PageDocEditor<BSchema, I, S>,
     posBeforeBlock: number,
     block: PartialBlock<BSchema, I, S>
   ) =>
@@ -123,7 +123,7 @@ export const updateBlockCommand =
   }
 
 export function updateBlock<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   blockToUpdate: BlockIdentifier,
   update: PartialBlock<BSchema, I, S>
 ): Block<BSchema, I, S> {

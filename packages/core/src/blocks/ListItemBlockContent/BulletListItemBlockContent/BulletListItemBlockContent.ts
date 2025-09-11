@@ -89,7 +89,7 @@ const BulletListItemBlockContent = createStronglyTypedTiptapNode({
         },
         node: 'bulletListItem',
       },
-      // Case for MiaomaDoc list structure.
+      // Case for PageDoc list structure.
       {
         tag: 'p',
         getAttrs: element => {

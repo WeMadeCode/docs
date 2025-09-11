@@ -1,10 +1,10 @@
-import { MiaomaDocEditor } from '@page-doc/core'
+import { PageDocEditor } from '@page-doc/core'
 import { useEffect, useState } from 'react'
 
 // Hook which handles keyboard navigation of a suggestion menu. Up & down arrow
 // keys are used to select a menu item, enter is used to execute it.
 export function useSuggestionMenuKeyboardNavigation<Item>(
-  editor: MiaomaDocEditor<any, any, any>,
+  editor: PageDocEditor<any, any, any>,
   query: string,
   items: Item[],
   onItemClick?: (item: Item) => void

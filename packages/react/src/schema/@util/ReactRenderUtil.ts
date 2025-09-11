@@ -1,10 +1,10 @@
-import { MiaomaDocEditor } from '@page-doc/core'
+import { PageDocEditor } from '@page-doc/core'
 import { flushSync } from 'react-dom'
 import { createRoot, Root } from 'react-dom/client'
 
 export function renderToDOMSpec(
   fc: (refCB: (ref: HTMLElement | null) => void) => React.ReactNode,
-  editor: MiaomaDocEditor<any, any, any> | undefined
+  editor: PageDocEditor<any, any, any> | undefined
 ) {
   let contentDOM: HTMLElement | undefined
   const div = document.createElement('div')

@@ -6,7 +6,7 @@ export const EMPTY_CELL_WIDTH = 120
 export const EMPTY_CELL_HEIGHT = 31
 
 export const TableExtension = Extension.create({
-  name: 'MiaomaDocTableExtension',
+  name: 'PageDocTableExtension',
 
   addProseMirrorPlugins: () => {
     return [

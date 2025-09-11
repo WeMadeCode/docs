@@ -1,15 +1,15 @@
 import { Extension } from '@tiptap/core'
 import { Plugin } from 'prosemirror-state'
 
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { acceptedMIMETypes } from './acceptedMIMETypes'
 import { handleFileInsertion } from './handleFileInsertion'
 
 export const createDropFileExtension = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) =>
-  Extension.create<{ editor: MiaomaDocEditor<BSchema, I, S> }, undefined>({
+  Extension.create<{ editor: PageDocEditor<BSchema, I, S> }, undefined>({
     name: 'dropFile',
     addProseMirrorPlugins() {
       return [

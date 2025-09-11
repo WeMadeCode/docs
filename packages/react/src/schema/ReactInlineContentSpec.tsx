@@ -37,7 +37,7 @@ export type ReactInlineContentImplementation<
   // TODO?
   // toExternalHTML?: FC<{
   //   block: BlockFromConfig<T, I, S>;
-  //   editor: MiaomaDocEditor<BlockSchemaWithBlock<T["type"], T>, I, S>;
+  //   editor: PageDocEditor<BlockSchemaWithBlock<T["type"], T>, I, S>;
   // }>;
 }
 

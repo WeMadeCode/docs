@@ -1,4 +1,4 @@
-import { MiaomaDocEditor } from '@page-doc/core'
+import { PageDocEditor } from '@page-doc/core'
 // import { Button } from '@page-doc/shadcn-shared-ui/components/ui/button'
 import PubSub from 'pubsub-js'
 import React, { useEffect, useState } from 'react'
@@ -9,7 +9,7 @@ import { useClickOutside } from '@/hooks/use-click-outside'
 import { BasicAIChatPanel } from './BasicAIChatPanel'
 
 interface BasicAIChatProps {
-  editor: MiaomaDocEditor
+  editor: PageDocEditor
 }
 
 export function BasicAIChat(props: BasicAIChatProps) {

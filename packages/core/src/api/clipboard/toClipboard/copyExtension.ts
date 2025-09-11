@@ -5,7 +5,7 @@ import { CellSelection } from 'prosemirror-tables'
 import * as pmView from 'prosemirror-view'
 import { EditorView } from 'prosemirror-view'
 
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { createExternalHTMLExporter } from '../../exporters/html/externalHTMLExporter'
 import { cleanHTMLToMarkdown } from '../../exporters/markdown/markdownExporter'
@@ -15,7 +15,7 @@ import { contentNodeToInlineContent, contentNodeToTableContent } from '../../nod
 function fragmentToExternalHTML<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   view: pmView.EditorView,
   selectedFragment: Fragment,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) {
   let isWithinBlockContent = false
   const isWithinTable = view.state.selection instanceof CellSelection
@@ -51,13 +51,13 @@ function fragmentToExternalHTML<BSchema extends BlockSchema, I extends InlineCon
       selectedFragment = selectedFragment.firstChild.content
     }
 
-    // first convert selection to miaomadoc-style table content, and then
+    // first convert selection to pagedoc-style table content, and then
     // pass this to the exporter
     const ic = contentNodeToTableContent(selectedFragment as any, editor.schema.inlineContentSchema, editor.schema.styleSchema)
 
     externalHTML = externalHTMLExporter.exportInlineContent(ic as any, {})
   } else if (isWithinBlockContent) {
-    // first convert selection to miaomadoc-style inline content, and then
+    // first convert selection to pagedoc-style inline content, and then
     // pass this to the exporter
     const ic = contentNodeToInlineContent(selectedFragment as any, editor.schema.inlineContentSchema, editor.schema.styleSchema)
     externalHTML = externalHTMLExporter.exportInlineContent(ic, {})
@@ -70,7 +70,7 @@ function fragmentToExternalHTML<BSchema extends BlockSchema, I extends InlineCon
 
 export function selectedFragmentToHTML<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   view: EditorView,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ): {
   clipboardHTML: string
   externalHTML: string
@@ -97,7 +97,7 @@ export function selectedFragmentToHTML<BSchema extends BlockSchema, I extends In
 }
 
 const copyToClipboard = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   view: EditorView,
   event: ClipboardEvent
 ) => {
@@ -109,15 +109,15 @@ const copyToClipboard = <BSchema extends BlockSchema, I extends InlineContentSch
 
   // TODO: Writing to other MIME types not working in Safari for
   //  some reason.
-  event.clipboardData!.setData('miaomadoc/html', clipboardHTML)
+  event.clipboardData!.setData('pagedoc/html', clipboardHTML)
   event.clipboardData!.setData('text/html', externalHTML)
   event.clipboardData!.setData('text/plain', markdown)
 }
 
 export const createCopyToClipboardExtension = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) =>
-  Extension.create<{ editor: MiaomaDocEditor<BSchema, I, S> }, undefined>({
+  Extension.create<{ editor: PageDocEditor<BSchema, I, S> }, undefined>({
     name: 'copyToClipboard',
     addProseMirrorPlugins() {
       return [
@@ -162,7 +162,7 @@ export const createCopyToClipboardExtension = <BSchema extends BlockSchema, I ex
 
                 // TODO: Writing to other MIME types not working in Safari for
                 //  some reason.
-                event.dataTransfer!.setData('miaomadoc/html', clipboardHTML)
+                event.dataTransfer!.setData('pagedoc/html', clipboardHTML)
                 event.dataTransfer!.setData('text/html', externalHTML)
                 event.dataTransfer!.setData('text/plain', markdown)
 

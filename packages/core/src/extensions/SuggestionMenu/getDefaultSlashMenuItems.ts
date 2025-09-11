@@ -1,6 +1,6 @@
 import { Block, PartialBlock } from '../../blocks/defaultBlocks'
 import { checkDefaultBlockTypeInSchema } from '../../blocks/defaultBlockTypeGuards'
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, isStyledTextInlineContent, StyleSchema } from '../../schema/index'
 import { formatKeyboardShortcut } from '../../util/browser'
 import { DefaultSuggestionItem } from './DefaultSuggestionItem'
@@ -10,7 +10,7 @@ import { DefaultSuggestionItem } from './DefaultSuggestionItem'
 // paragraph, so this function won't try to set the cursor position past the
 // last block.
 function setSelectionToNextContentEditableBlock<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) {
   let block = editor.getTextCursorPosition().block
   let contentType = editor.schema.blockSchema[block.type].content
@@ -27,7 +27,7 @@ function setSelectionToNextContentEditableBlock<BSchema extends BlockSchema, I e
 // block doesn't contain editable content, the cursor is moved to the next block
 // that does.
 export function insertOrUpdateBlock<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   block: PartialBlock<BSchema, I, S>
 ): Block<BSchema, I, S> {
   const currentBlock = editor.getTextCursorPosition().block
@@ -64,7 +64,7 @@ export function insertOrUpdateBlock<BSchema extends BlockSchema, I extends Inlin
 }
 
 export function getDefaultSlashMenuItems<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) {
   const items: DefaultSuggestionItem[] = []
 

@@ -3,7 +3,7 @@ import { TagParseRule } from '@tiptap/pm/model'
 
 import { inlineContentToNodes } from '../../api/nodeConversions/blockToNode'
 import { nodeToCustomInlineContent } from '../../api/nodeConversions/nodeToBlock'
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { propsToAttributes } from '../blocks/internal'
 import { Props } from '../propTypes'
 import { StyleSchema } from '../styles/types'
@@ -25,11 +25,11 @@ export type CustomInlineContentImplementation<
     inlineContent: InlineContentFromConfig<T, S>,
     updateInlineContent: (update: PartialCustomInlineContentFromConfig<T, S>) => void,
     /**
-     * The MiaomaDoc editor instance
+     * The PageDoc editor instance
      * This is typed generically. If you want an editor with your custom schema, you need to
-     * cast it manually, e.g.: `const e = editor as MiaomaDocEditor<typeof mySchema>;`
+     * cast it manually, e.g.: `const e = editor as PageDocEditor<typeof mySchema>;`
      */
-    editor: MiaomaDocEditor<any, any, S>
+    editor: PageDocEditor<any, any, S>
     // (note) if we want to fix the manual cast, we need to prevent circular references and separate block definition and render implementations
     // or allow manually passing <BSchema>, but that's not possible without passing the other generics because Typescript doesn't support partial inferred generics
   ) => {

@@ -14,7 +14,7 @@ export function SharePopover() {
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80">
         <p className="text-xs mb-3 text-zinc-500">任何人可以访问该链接</p>
-        <Input className="w-full h-8 bg-zinc-100  rounded-md" value="https://www.miaoma.com" disabled />
+        <Input className="w-full h-8 bg-zinc-100  rounded-md" value="https://www.page.com" disabled />
         <div className="mt-6 text-sm">
           <div className="flex flex-row items-center justify-between mb-4">
             <div className="font-medium">任何人</div>

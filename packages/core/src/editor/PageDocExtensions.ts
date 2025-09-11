@@ -24,18 +24,18 @@ import {
   BlockSpecs,
   InlineContentSchema,
   InlineContentSpecs,
-  MiaomaDocDOMAttributes,
+  PageDocDOMAttributes,
   StyleSchema,
   StyleSpecs,
 } from '../schema/index'
-import type { MiaomaDocEditor } from './MiaomaDocEditor'
+import type { PageDocEditor } from './PageDocEditor'
 
 /**
- * Get all the Tiptap extensions MiaomaDoc is configured with by default
+ * Get all the Tiptap extensions PageDoc is configured with by default
  */
-export const getMiaomaDocExtensions = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(opts: {
-  editor: MiaomaDocEditor<BSchema, I, S>
-  domAttributes: Partial<MiaomaDocDOMAttributes>
+export const getPageDocExtensions = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(opts: {
+  editor: PageDocEditor<BSchema, I, S>
+  domAttributes: Partial<PageDocDOMAttributes>
   blockSpecs: BlockSpecs
   inlineContentSpecs: InlineContentSpecs
   styleSpecs: StyleSpecs

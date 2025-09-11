@@ -1,4 +1,4 @@
-import type { MiaomaDocEditor } from '../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../editor/PageDocEditor'
 import { BlockFromConfig, BlockSchema, FileBlockConfig, InlineContentSchema, StyleSchema } from '../schema/index'
 import { Block, DefaultBlockSchema, defaultBlockSchema, DefaultInlineContentSchema, defaultInlineContentSchema } from './defaultBlocks'
 import { defaultProps } from './defaultProps'
@@ -7,7 +7,7 @@ export function checkDefaultBlockTypeInSchema<
   BlockType extends keyof DefaultBlockSchema,
   I extends InlineContentSchema,
   S extends StyleSchema,
->(blockType: BlockType, editor: MiaomaDocEditor<any, I, S>): editor is MiaomaDocEditor<{ Type: DefaultBlockSchema[BlockType] }, I, S> {
+>(blockType: BlockType, editor: PageDocEditor<any, I, S>): editor is PageDocEditor<{ Type: DefaultBlockSchema[BlockType] }, I, S> {
   return blockType in editor.schema.blockSchema && editor.schema.blockSchema[blockType] === defaultBlockSchema[blockType]
 }
 
@@ -17,8 +17,8 @@ export function checkDefaultInlineContentTypeInSchema<
   S extends StyleSchema,
 >(
   inlineContentType: InlineContentType,
-  editor: MiaomaDocEditor<B, any, S>
-): editor is MiaomaDocEditor<B, { Type: DefaultInlineContentSchema[InlineContentType] }, S> {
+  editor: PageDocEditor<B, any, S>
+): editor is PageDocEditor<B, { Type: DefaultInlineContentSchema[InlineContentType] }, S> {
   return (
     inlineContentType in editor.schema.inlineContentSchema &&
     editor.schema.inlineContentSchema[inlineContentType] === defaultInlineContentSchema[inlineContentType]
@@ -28,21 +28,21 @@ export function checkDefaultInlineContentTypeInSchema<
 export function checkBlockIsDefaultType<BlockType extends keyof DefaultBlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   blockType: BlockType,
   block: Block<any, I, S>,
-  editor: MiaomaDocEditor<any, I, S>
+  editor: PageDocEditor<any, I, S>
 ): block is BlockFromConfig<DefaultBlockSchema[BlockType], I, S> {
   return block.type === blockType && block.type in editor.schema.blockSchema && checkDefaultBlockTypeInSchema(block.type, editor)
 }
 
 export function checkBlockIsFileBlock<B extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   block: Block<any, I, S>,
-  editor: MiaomaDocEditor<B, I, S>
+  editor: PageDocEditor<B, I, S>
 ): block is BlockFromConfig<FileBlockConfig, I, S> {
   return (block.type in editor.schema.blockSchema && editor.schema.blockSchema[block.type].isFileBlock) || false
 }
 
 export function checkBlockIsFileBlockWithPreview<B extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   block: Block<any, I, S>,
-  editor: MiaomaDocEditor<B, I, S>
+  editor: PageDocEditor<B, I, S>
 ): block is BlockFromConfig<
   FileBlockConfig & {
     propSchema: Required<FileBlockConfig['propSchema']>
@@ -60,7 +60,7 @@ export function checkBlockIsFileBlockWithPreview<B extends BlockSchema, I extend
 
 export function checkBlockIsFileBlockWithPlaceholder<B extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   block: Block<B, I, S>,
-  editor: MiaomaDocEditor<B, I, S>
+  editor: PageDocEditor<B, I, S>
 ) {
   const config = editor.schema.blockSchema[block.type]
   return config.isFileBlock && !block.props.url
@@ -69,8 +69,8 @@ export function checkBlockIsFileBlockWithPlaceholder<B extends BlockSchema, I ex
 export function checkBlockTypeHasDefaultProp<Prop extends keyof typeof defaultProps, I extends InlineContentSchema, S extends StyleSchema>(
   prop: Prop,
   blockType: string,
-  editor: MiaomaDocEditor<any, I, S>
-): editor is MiaomaDocEditor<
+  editor: PageDocEditor<any, I, S>
+): editor is PageDocEditor<
   {
     [BT in string]: {
       type: BT
@@ -93,7 +93,7 @@ export function checkBlockTypeHasDefaultProp<Prop extends keyof typeof defaultPr
 export function checkBlockHasDefaultProp<Prop extends keyof typeof defaultProps, I extends InlineContentSchema, S extends StyleSchema>(
   prop: Prop,
   block: Block<any, I, S>,
-  editor: MiaomaDocEditor<any, I, S>
+  editor: PageDocEditor<any, I, S>
 ): block is BlockFromConfig<
   {
     type: string

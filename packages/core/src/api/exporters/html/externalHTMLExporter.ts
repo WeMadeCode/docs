@@ -1,11 +1,11 @@
 import { DOMSerializer, Schema } from 'prosemirror-model'
 
 import { PartialBlock } from '../../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../editor/PageDocEditor'
 import { BlockSchema, InlineContent, InlineContentSchema, StyleSchema } from '../../../schema/index'
 import { serializeBlocksExternalHTML, serializeInlineContentExternalHTML } from './util/serializeBlocksExternalHTML'
 
-// Used to export MiaomaDoc blocks and ProseMirror nodes to HTML for use outside
+// Used to export PageDoc blocks and ProseMirror nodes to HTML for use outside
 // the editor. Blocks are exported using the `toExternalHTML` method in their
 // `blockSpec`, or `toInternalHTML` if `toExternalHTML` is not defined.
 //
@@ -23,7 +23,7 @@ import { serializeBlocksExternalHTML, serializeInlineContentExternalHTML } from 
 // Ideally, call `await initializeESMDependencies()` before calling this function
 export const createExternalHTMLExporter = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   schema: Schema,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ) => {
   const serializer = DOMSerializer.fromSchema(schema)
 

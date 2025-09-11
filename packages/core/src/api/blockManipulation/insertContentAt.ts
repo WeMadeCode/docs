@@ -1,14 +1,14 @@
 import { selectionToInsertionEnd } from '@tiptap/core'
 import { Node } from 'prosemirror-model'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 
 // similar to tiptap insertContentAt
 export function insertContentAt<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   position: any,
   nodes: Node[],
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   options: {
     updateSelection: boolean
   } = { updateSelection: true }

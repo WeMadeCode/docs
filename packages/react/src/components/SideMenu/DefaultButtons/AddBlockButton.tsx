@@ -10,7 +10,7 @@ import { useCallback } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useDictionary } from '../../../i18n/dictionary'
 import { SideMenuProps } from '../SideMenuProps'
 
@@ -24,7 +24,7 @@ export const AddBlockButton = <
   const Components = useComponentsContext()!
   const dict = useDictionary()
 
-  const editor = useMiaomaDocEditor<BSchema, I, S>()
+  const editor = usePageDocEditor<BSchema, I, S>()
 
   const onClick = useCallback(() => {
     const blockContent = props.block.content

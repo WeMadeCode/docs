@@ -40,7 +40,7 @@ import {
   BlockSpecs,
   InlineContentSchema,
   InlineContentSpecs,
-  MiaomaDocDOMAttributes,
+  PageDocDOMAttributes,
   PartialInlineContent,
   Styles,
   StyleSchema,
@@ -49,13 +49,13 @@ import {
 import { mergeCSSClasses } from '../util/browser'
 import { NoInfer, UnreachableCaseError } from '../util/typescript'
 import { TextCursorPosition } from './cursorPositionTypes'
-import { getMiaomaDocExtensions } from './MiaomaDocExtensions'
-import { MiaomaDocTipTapEditor, MiaomaDocTipTapEditorOptions } from './MiaomaDocTipTapEditor'
+import { getPageDocExtensions } from './PageDocExtensions'
 import { PageDocSchema } from './PageDocSchema'
+import { PageDocTipTapEditor, PageDocTipTapEditorOptions } from './PageDocTipTapEditor'
 import { Selection } from './selectionTypes'
 import { transformPasted } from './transformPasted'
 
-export type MiaomaDocEditorOptions<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> = {
+export type PageDocEditorOptions<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> = {
   /**
    * Whether changes to blocks (like indentation, creating lists, changing headings) should be animated or not. Defaults to `true`.
    *
@@ -79,14 +79,14 @@ export type MiaomaDocEditorOptions<BSchema extends BlockSchema, ISchema extends 
    *
    * @example { editor: { class: "my-editor-class" } }
    */
-  domAttributes: Partial<MiaomaDocDOMAttributes>
+  domAttributes: Partial<PageDocDOMAttributes>
 
   /**
    * The content that should be in the editor when it's created, represented as an array of partial block objects.
    */
   initialContent: PartialBlock<NoInfer<BSchema>, NoInfer<ISchema>, NoInfer<SSchema>>[]
   /**
-   * Use default MiaomaDoc font and reset the styles of <p> <li> <h1> elements etc., that are used in MiaomaDoc.
+   * Use default PageDoc font and reset the styles of <p> <li> <h1> elements etc., that are used in PageDoc.
    *
    * @default true
    */
@@ -162,13 +162,13 @@ export type MiaomaDocEditorOptions<BSchema extends BlockSchema, ISchema extends 
   setIdAttribute?: boolean
 }
 
-const miaomaDocTipTapOptions = {
+const pageDocTipTapOptions = {
   enableInputRules: true,
   enablePasteRules: true,
   enableCoreExtensions: false,
 }
 
-export class MiaomaDocEditor<
+export class PageDocEditor<
   BSchema extends BlockSchema = DefaultBlockSchema,
   ISchema extends InlineContentSchema = DefaultInlineContentSchema,
   SSchema extends StyleSchema = DefaultStyleSchema,
@@ -184,7 +184,7 @@ export class MiaomaDocEditor<
    */
   public readonly headless: boolean = false
 
-  public readonly _tiptapEditor: MiaomaDocTipTapEditor & {
+  public readonly _tiptapEditor: PageDocTipTapEditor & {
     contentComponent: any
   } = undefined as any // TODO: Type should actually reflect that it can be `undefined` in headless mode
 
@@ -246,11 +246,11 @@ export class MiaomaDocEditor<
     BSchema extends BlockSchema = DefaultBlockSchema,
     ISchema extends InlineContentSchema = DefaultInlineContentSchema,
     SSchema extends StyleSchema = DefaultStyleSchema,
-  >(options: Partial<MiaomaDocEditorOptions<BSchema, ISchema, SSchema>> = {}) {
-    return new MiaomaDocEditor<BSchema, ISchema, SSchema>(options)
+  >(options: Partial<PageDocEditorOptions<BSchema, ISchema, SSchema>> = {}) {
+    return new PageDocEditor<BSchema, ISchema, SSchema>(options)
   }
 
-  protected constructor(protected readonly options: Partial<MiaomaDocEditorOptions<any, any, any>>) {
+  protected constructor(protected readonly options: Partial<PageDocEditorOptions<any, any, any>>) {
     const anyOpts = options as any
     if (anyOpts.onEditorContentChange) {
       throw new Error(
@@ -304,7 +304,7 @@ export class MiaomaDocEditor<
       this.tableHandles = new TableHandlesProsemirrorPlugin(this as any)
     }
 
-    const extensions = getMiaomaDocExtensions({
+    const extensions = getPageDocExtensions({
       editor: this,
       domAttributes: newOptions.domAttributes || {},
       blockSpecs: this.schema.blockSpecs,
@@ -316,8 +316,8 @@ export class MiaomaDocEditor<
       setIdAttribute: newOptions.setIdAttribute,
     })
 
-    const miaomaDocUIExtension = Extension.create({
-      name: 'MiaomaDocUIExtension',
+    const pageDocUIExtension = Extension.create({
+      name: 'PageDocUIExtension',
 
       addProseMirrorPlugins: () => {
         return [
@@ -333,7 +333,7 @@ export class MiaomaDocEditor<
         ]
       },
     })
-    extensions.push(miaomaDocUIExtension)
+    extensions.push(pageDocUIExtension)
 
     if (newOptions.uploadFile) {
       const uploadFile = newOptions.uploadFile
@@ -376,8 +376,8 @@ export class MiaomaDocEditor<
       throw new Error('initialContent must be a non-empty array of blocks, received: ' + initialContent)
     }
 
-    const tiptapOptions: MiaomaDocTipTapEditorOptions = {
-      ...miaomaDocTipTapOptions,
+    const tiptapOptions: PageDocTipTapEditorOptions = {
+      ...pageDocTipTapOptions,
       ...newOptions._tiptapOptions,
       content: initialContent,
       extensions: [...(newOptions._tiptapOptions?.extensions || []), ...extensions],
@@ -401,7 +401,7 @@ export class MiaomaDocEditor<
     }
 
     if (!this.headless) {
-      this._tiptapEditor = MiaomaDocTipTapEditor.create(tiptapOptions, this.schema.styleSchema) as MiaomaDocTipTapEditor & {
+      this._tiptapEditor = PageDocTipTapEditor.create(tiptapOptions, this.schema.styleSchema) as PageDocTipTapEditor & {
         contentComponent: any
       }
       this._pmSchema = this._tiptapEditor.schema
@@ -655,7 +655,7 @@ export class MiaomaDocEditor<
   }
 
   /**
-   * Inserts new blocks into the editor. If a block's `id` is undefined, MiaomaDoc generates one automatically. Throws an
+   * Inserts new blocks into the editor. If a block's `id` is undefined, PageDoc generates one automatically. Throws an
    * error if the reference block could not be found.
    * @param blocksToInsert An array of partial blocks that should be inserted.
    * @param referenceBlock An identifier for an existing block, at which the new blocks should be inserted.
@@ -894,7 +894,7 @@ export class MiaomaDocEditor<
   /**
    * Serializes blocks into an HTML string in the format that would normally be rendered by the editor.
    *
-   * Use this method if you want to server-side render HTML (for example, a blog post that has been edited in MiaomaDoc)
+   * Use this method if you want to server-side render HTML (for example, a blog post that has been edited in PageDoc)
    * and serve it to users without loading the editor on the client (i.e.: displaying the blog post)
    *
    * @param blocks An array of blocks that should be serialized into HTML.
@@ -906,7 +906,7 @@ export class MiaomaDocEditor<
   }
   /**
    * Parses blocks from an HTML string. Tries to create `Block` objects out of any HTML block-level elements, and
-   * `InlineNode` objects from any HTML inline elements, though not all element types are recognized. If MiaomaDoc
+   * `InlineNode` objects from any HTML inline elements, though not all element types are recognized. If PageDoc
    * doesn't recognize an HTML element's tag, it will parse it as a paragraph or plain text.
    * @param html The HTML string to parse blocks from.
    * @returns The blocks parsed from the HTML string.
@@ -917,7 +917,7 @@ export class MiaomaDocEditor<
 
   /**
    * Serializes blocks into a Markdown string. The output is simplified as Markdown does not support all features of
-   * MiaomaDoc - children of blocks which aren't list items are un-nested and certain styles are removed.
+   * PageDoc - children of blocks which aren't list items are un-nested and certain styles are removed.
    * @param blocks An array of blocks that should be serialized into Markdown.
    * @returns The blocks, serialized as a Markdown string.
    */
@@ -927,7 +927,7 @@ export class MiaomaDocEditor<
 
   /**
    * Creates a list of blocks from a Markdown string. Tries to create `Block` and `InlineNode` objects based on
-   * Markdown syntax, though not all symbols are recognized. If MiaomaDoc doesn't recognize a symbol, it will parse it
+   * Markdown syntax, though not all symbols are recognized. If PageDoc doesn't recognize a symbol, it will parse it
    * as text.
    * @param markdown The Markdown string to parse blocks from.
    * @returns The blocks parsed from the Markdown string.
@@ -952,7 +952,7 @@ export class MiaomaDocEditor<
    * @param callback The callback to execute.
    * @returns A function to remove the callback.
    */
-  public onChange(callback: (editor: MiaomaDocEditor<BSchema, ISchema, SSchema>) => void) {
+  public onChange(callback: (editor: PageDocEditor<BSchema, ISchema, SSchema>) => void) {
     if (this.headless) {
       // Note: would be nice if this is possible in headless mode as well
       return
@@ -975,7 +975,7 @@ export class MiaomaDocEditor<
    * @param callback The callback to execute.
    * @returns A function to remove the callback.
    */
-  public onSelectionChange(callback: (editor: MiaomaDocEditor<BSchema, ISchema, SSchema>) => void) {
+  public onSelectionChange(callback: (editor: PageDocEditor<BSchema, ISchema, SSchema>) => void) {
     if (this.headless) {
       return
     }

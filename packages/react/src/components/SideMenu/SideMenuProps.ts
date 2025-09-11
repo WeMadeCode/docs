@@ -4,7 +4,7 @@ import {
   DefaultInlineContentSchema,
   DefaultStyleSchema,
   InlineContentSchema,
-  MiaomaDocEditor,
+  PageDocEditor,
   SideMenuState,
   StyleSchema,
   UiElementPosition,
@@ -18,7 +18,7 @@ export type SideMenuProps<
   I extends InlineContentSchema = DefaultInlineContentSchema,
   S extends StyleSchema = DefaultStyleSchema,
 > = {
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
   dragHandleMenu?: FC<DragHandleMenuProps<BSchema, I, S>>
 } & Omit<SideMenuState<BSchema, I, S>, keyof UiElementPosition> &
-  Pick<MiaomaDocEditor<BSchema, I, S>['sideMenu'], 'blockDragStart' | 'blockDragEnd' | 'freezeMenu' | 'unfreezeMenu'>
+  Pick<PageDocEditor<BSchema, I, S>['sideMenu'], 'blockDragStart' | 'blockDragEnd' | 'freezeMenu' | 'unfreezeMenu'>

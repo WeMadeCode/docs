@@ -5,7 +5,7 @@ import { nodeToBlock } from '../../api/nodeConversions/nodeToBlock'
 import { getNodeById } from '../../api/nodeUtil'
 import { DefaultBlockSchema } from '../../blocks/defaultBlocks'
 import { checkBlockIsDefaultType } from '../../blocks/defaultBlockTypeGuards'
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { BlockFromConfigNoChildren, BlockSchemaWithBlock, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { EventEmitter } from '../../util/EventEmitter'
 import { getDraggableBlockFromElement } from '../SideMenu/dragging'
@@ -124,7 +124,7 @@ export class TableHandlesView<I extends InlineContentSchema, S extends StyleSche
   public prevWasEditable: boolean | null = null
 
   constructor(
-    private readonly editor: MiaomaDocEditor<BlockSchemaWithBlock<'table', DefaultBlockSchema['table']>, I, S>,
+    private readonly editor: PageDocEditor<BlockSchemaWithBlock<'table', DefaultBlockSchema['table']>, I, S>,
     private readonly pmView: EditorView,
     emitUpdate: (state: TableHandlesState<I, S>) => void
   ) {
@@ -445,7 +445,7 @@ export class TableHandlesProsemirrorPlugin<I extends InlineContentSchema, S exte
   private view: TableHandlesView<I, S> | undefined
   public readonly plugin: Plugin
 
-  constructor(private readonly editor: MiaomaDocEditor<BlockSchemaWithBlock<'table', DefaultBlockSchema['table']>, I, S>) {
+  constructor(private readonly editor: PageDocEditor<BlockSchemaWithBlock<'table', DefaultBlockSchema['table']>, I, S>) {
     super()
     this.plugin = new Plugin({
       key: tableHandlesPluginKey,

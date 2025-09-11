@@ -1,9 +1,9 @@
 import { splitBlockCommand } from '../../api/blockManipulation/commands/splitBlock/splitBlock'
 import { updateBlockCommand } from '../../api/blockManipulation/commands/updateBlock/updateBlock'
 import { getBlockInfoFromSelection } from '../../api/getBlockInfoFromPos'
-import { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../editor/PageDocEditor'
 
-export const handleEnter = (editor: MiaomaDocEditor<any, any, any>) => {
+export const handleEnter = (editor: PageDocEditor<any, any, any>) => {
   const ttEditor = editor._tiptapEditor
   const { blockContent, blockContainer } = getBlockInfoFromSelection(ttEditor.state)
 

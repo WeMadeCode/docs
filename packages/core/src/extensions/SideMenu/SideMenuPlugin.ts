@@ -3,7 +3,7 @@ import { EditorState, Plugin, PluginKey } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 
 import { Block } from '../../blocks/defaultBlocks'
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import { UiElementPosition } from '../../extensions-shared/UiElementPosition'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { initializeESMDependencies } from '../../util/esmDependencies'
@@ -67,7 +67,7 @@ export class SideMenuView<BSchema extends BlockSchema, I extends InlineContentSc
   public menuFrozen = false
 
   constructor(
-    private readonly editor: MiaomaDocEditor<BSchema, I, S>,
+    private readonly editor: PageDocEditor<BSchema, I, S>,
     private readonly pmView: EditorView,
     emitUpdate: (state: SideMenuState<BSchema, I, S>) => void
   ) {
@@ -154,7 +154,7 @@ export class SideMenuView<BSchema extends BlockSchema, I extends InlineContentSc
   onDrop = (event: DragEvent) => {
     this.editor._tiptapEditor.commands.blur()
 
-    if ((event as any).synthetic || !event.dataTransfer?.types.includes('miaomadoc/html')) {
+    if ((event as any).synthetic || !event.dataTransfer?.types.includes('pagedoc/html')) {
       return
     }
 
@@ -185,7 +185,7 @@ export class SideMenuView<BSchema extends BlockSchema, I extends InlineContentSc
    * when dragging / dropping to the side of the editor
    */
   onDragOver = (event: DragEvent) => {
-    if ((event as any).synthetic || !event.dataTransfer?.types.includes('miaomadoc/html')) {
+    if ((event as any).synthetic || !event.dataTransfer?.types.includes('pagedoc/html')) {
       return
     }
     const pos = this.pmView.posAtCoords({
@@ -292,7 +292,7 @@ export class SideMenuProsemirrorPlugin<
   public view: SideMenuView<BSchema, I, S> | undefined
   public readonly plugin: Plugin
 
-  constructor(private readonly editor: MiaomaDocEditor<BSchema, I, S>) {
+  constructor(private readonly editor: PageDocEditor<BSchema, I, S>) {
     super()
     this.plugin = new Plugin({
       key: sideMenuPluginKey,

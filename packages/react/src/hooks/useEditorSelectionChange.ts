@@ -1,9 +1,9 @@
-import type { MiaomaDocEditor } from '@page-doc/core'
+import type { PageDocEditor } from '@page-doc/core'
 import { useEffect } from 'react'
 
 import { usePageDocContext } from '../editor/PageDocContext'
 
-export function useEditorSelectionChange(callback: () => void, editor?: MiaomaDocEditor<any, any, any>) {
+export function useEditorSelectionChange(callback: () => void, editor?: PageDocEditor<any, any, any>) {
   const editorContext = usePageDocContext()
   if (!editor) {
     editor = editorContext?.editor

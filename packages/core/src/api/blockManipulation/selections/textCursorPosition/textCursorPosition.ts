@@ -1,7 +1,7 @@
 import { Node } from 'prosemirror-model'
 
 import { TextCursorPosition } from '../../../../editor/cursorPositionTypes'
-import type { MiaomaDocEditor } from '../../../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../../../editor/PageDocEditor'
 import { BlockIdentifier, BlockSchema, InlineContentSchema, StyleSchema } from '../../../../schema/index'
 import { UnreachableCaseError } from '../../../../util/typescript'
 import { getBlockInfo, getBlockInfoFromSelection } from '../../../getBlockInfoFromPos'
@@ -9,7 +9,7 @@ import { nodeToBlock } from '../../../nodeConversions/nodeToBlock'
 import { getNodeById } from '../../../nodeUtil'
 
 export function getTextCursorPosition<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ): TextCursorPosition<BSchema, I, S> {
   const { blockContainer } = getBlockInfoFromSelection(editor._tiptapEditor.state)
 
@@ -56,7 +56,7 @@ export function getTextCursorPosition<BSchema extends BlockSchema, I extends Inl
 }
 
 export function setTextCursorPosition<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   targetBlock: BlockIdentifier,
   placement: 'start' | 'end' = 'start'
 ) {

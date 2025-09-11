@@ -1,10 +1,10 @@
 import { Node } from '@tiptap/core'
 
-import { MiaomaDocDOMAttributes } from '../schema/index'
+import { PageDocDOMAttributes } from '../schema/index'
 import { mergeCSSClasses } from '../util/browser'
 
 export const BlockGroup = Node.create<{
-  domAttributes?: MiaomaDocDOMAttributes
+  domAttributes?: PageDocDOMAttributes
 }>({
   name: 'blockGroup',
   group: 'blockGroup',

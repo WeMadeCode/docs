@@ -1,15 +1,15 @@
 /** Define the main block types **/
 import type { Extension, Node } from '@tiptap/core'
 
-import type { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../../editor/PageDocEditor'
 import type { InlineContent, InlineContentSchema, PartialInlineContent } from '../inlineContent/types'
 import type { Props, PropSchema } from '../propTypes'
 import type { StyleSchema } from '../styles/types'
 
-export type MiaomaDocDOMElement = 'editor' | 'block' | 'blockGroup' | 'blockContent' | 'inlineContent'
+export type PageDocDOMElement = 'editor' | 'block' | 'blockGroup' | 'blockContent' | 'inlineContent'
 
-export type MiaomaDocDOMAttributes = Partial<{
-  [DOMElement in MiaomaDocDOMElement]: Record<string, string>
+export type PageDocDOMAttributes = Partial<{
+  [DOMElement in PageDocDOMElement]: Record<string, string>
 }>
 
 export type FileBlockConfig = {
@@ -71,7 +71,7 @@ export type TiptapBlockImplementation<
     block: BlockFromConfigNoChildren<T, I, S> & {
       children: BlockNoDefaults<B, I, S>[]
     },
-    editor: MiaomaDocEditor<B, I, S>
+    editor: PageDocEditor<B, I, S>
   ) => {
     dom: HTMLElement
     contentDOM?: HTMLElement
@@ -80,7 +80,7 @@ export type TiptapBlockImplementation<
     block: BlockFromConfigNoChildren<T, I, S> & {
       children: BlockNoDefaults<B, I, S>[]
     },
-    editor: MiaomaDocEditor<B, I, S>
+    editor: PageDocEditor<B, I, S>
   ) => {
     dom: HTMLElement
     contentDOM?: HTMLElement

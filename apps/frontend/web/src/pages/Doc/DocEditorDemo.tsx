@@ -4,7 +4,7 @@ import {
   defaultStyleSpecs,
   filterSuggestionItems,
   locales,
-  MiaomaDocEditor,
+  PageDocEditor,
   PageDocSchema,
 } from '@page-doc/core'
 import { DefaultReactSuggestionItem, SuggestionMenuController, useCreatePageDoc } from '@page-doc/react'
@@ -29,7 +29,7 @@ const schema = PageDocSchema.create({
   },
 })
 
-const getMentionMenuItems = (editor: MiaomaDocEditor) => {
+const getMentionMenuItems = (editor: PageDocEditor) => {
   const menus = [
     {
       icon: <span>👽</span>,

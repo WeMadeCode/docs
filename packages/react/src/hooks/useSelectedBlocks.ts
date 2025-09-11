@@ -1,11 +1,11 @@
-import { Block, BlockSchema, InlineContentSchema, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
+import { Block, BlockSchema, InlineContentSchema, PageDocEditor, StyleSchema } from '@page-doc/core'
 import { useState } from 'react'
 
 import { usePageDocContext } from '../editor/PageDocContext'
 import { useEditorContentOrSelectionChange } from './useEditorContentOrSelectionChange'
 
 export function useSelectedBlocks<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema>(
-  editor?: MiaomaDocEditor<BSchema, ISchema, SSchema>
+  editor?: PageDocEditor<BSchema, ISchema, SSchema>
 ) {
   const editorContext = usePageDocContext<BSchema, ISchema, SSchema>()
   if (!editor) {

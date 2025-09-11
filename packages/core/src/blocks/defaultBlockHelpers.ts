@@ -1,5 +1,5 @@
 import { blockToNode } from '../api/nodeConversions/blockToNode'
-import type { MiaomaDocEditor } from '../editor/MiaomaDocEditor'
+import type { PageDocEditor } from '../editor/PageDocEditor'
 import type { BlockNoDefaults, BlockSchema, InlineContentSchema, StyleSchema } from '../schema/index'
 import { mergeCSSClasses } from '../util/browser'
 
@@ -45,7 +45,7 @@ export function createDefaultBlockDOMOutputSpec(
 // `DOMSerializer`.
 export const defaultBlockToHTML = <BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
   block: BlockNoDefaults<BSchema, I, S>,
-  editor: MiaomaDocEditor<BSchema, I, S>
+  editor: PageDocEditor<BSchema, I, S>
 ): {
   dom: HTMLElement
   contentDOM?: HTMLElement

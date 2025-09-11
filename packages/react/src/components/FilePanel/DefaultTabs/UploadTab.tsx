@@ -9,7 +9,7 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 
 import { useComponentsContext } from '../../../editor/ComponentsContext'
-import { useMiaomaDocEditor } from '../../../hooks/useMiaomaDocEditor'
+import { usePageDocEditor } from '../../../hooks/usePageDocEditor'
 import { useDictionary } from '../../../i18n/dictionary'
 import { FilePanelProps } from '../FilePanelProps'
 
@@ -27,7 +27,7 @@ export const UploadTab = <
 
   const { block, setLoading } = props
 
-  const editor = useMiaomaDocEditor<B, I, S>()
+  const editor = usePageDocEditor<B, I, S>()
 
   const [uploadFailed, setUploadFailed] = useState<boolean>(false)
 

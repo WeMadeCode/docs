@@ -1,7 +1,7 @@
 import type { Emoji, EmojiMartData } from '@emoji-mart/data'
 
 import { checkDefaultInlineContentTypeInSchema } from '../../blocks/defaultBlockTypeGuards'
-import { MiaomaDocEditor } from '../../editor/MiaomaDocEditor'
+import { PageDocEditor } from '../../editor/PageDocEditor'
 import { BlockSchema, InlineContentSchema, StyleSchema } from '../../schema/index'
 import { DefaultGridSuggestionItem } from './DefaultGridSuggestionItem'
 
@@ -14,7 +14,7 @@ let data:
 let emojiMart: typeof import('emoji-mart') | undefined
 
 export async function getDefaultEmojiPickerItems<BSchema extends BlockSchema, I extends InlineContentSchema, S extends StyleSchema>(
-  editor: MiaomaDocEditor<BSchema, I, S>,
+  editor: PageDocEditor<BSchema, I, S>,
   query: string
 ): Promise<DefaultGridSuggestionItem[]> {
   if (!checkDefaultInlineContentTypeInSchema('text', editor)) {

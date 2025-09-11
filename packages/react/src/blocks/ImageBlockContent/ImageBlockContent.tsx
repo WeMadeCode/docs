@@ -22,7 +22,7 @@ export const ImagePreview = (props: Omit<ReactCustomBlockRenderProps<FileBlockCo
       <img
         className={'bn-visual-media'}
         src={resolved.downloadUrl}
-        alt={props.block.props.caption || 'MiaomaDoc image'}
+        alt={props.block.props.caption || 'PageDoc image'}
         contentEditable={false}
         draggable={false}
         width={width}
@@ -39,7 +39,7 @@ export const ImageToExternalHTML = (props: Omit<ReactCustomBlockRenderProps<type
   const image = props.block.props.showPreview ? (
     <img
       src={props.block.props.url}
-      alt={props.block.props.name || props.block.props.caption || 'MiaomaDoc image'}
+      alt={props.block.props.name || props.block.props.caption || 'PageDoc image'}
       width={props.block.props.previewWidth}
     />
   ) : (

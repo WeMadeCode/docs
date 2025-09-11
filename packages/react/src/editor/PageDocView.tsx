@@ -1,6 +1,6 @@
 import './styles.css'
 
-import { BlockSchema, InlineContentSchema, mergeCSSClasses, MiaomaDocEditor, StyleSchema } from '@page-doc/core'
+import { BlockSchema, InlineContentSchema, mergeCSSClasses, PageDocEditor, StyleSchema } from '@page-doc/core'
 import React, { ComponentProps, HTMLAttributes, ReactNode, Ref, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useEditorChange } from '../hooks/useEditorChange'
@@ -9,14 +9,14 @@ import { usePrefersColorScheme } from '../hooks/usePrefersColorScheme'
 import { EditorContent } from './EditorContent'
 import { ElementRenderer } from './ElementRenderer'
 import { PageDocContext, usePageDocContext } from './PageDocContext'
-import { MiaomaDocDefaultUI, PageDocDefaultUIProps } from './PageDocDefaultUI'
+import { PageDocDefaultUI, PageDocDefaultUIProps } from './PageDocDefaultUI'
 
 const emptyFn = () => {
   // noop
 }
 
 export type PageDocViewProps<BSchema extends BlockSchema, ISchema extends InlineContentSchema, SSchema extends StyleSchema> = {
-  editor: MiaomaDocEditor<BSchema, ISchema, SSchema>
+  editor: PageDocEditor<BSchema, ISchema, SSchema>
 
   theme?: 'light' | 'dark'
 
@@ -83,7 +83,7 @@ function PageDocViewComponent<BSchema extends BlockSchema, ISchema extends Inlin
     return (
       <>
         {children}
-        <MiaomaDocDefaultUI
+        <PageDocDefaultUI
           formattingToolbar={formattingToolbar}
           linkToolbar={linkToolbar}
           slashMenu={slashMenu}

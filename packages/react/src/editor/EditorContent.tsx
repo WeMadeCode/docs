@@ -1,4 +1,4 @@
-import { MiaomaDocEditor } from '@page-doc/core'
+import { PageDocEditor } from '@page-doc/core'
 import { ReactRenderer } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -17,9 +17,9 @@ const Portals: React.FC<{ renderers: Record<string, ReactRenderer> }> = ({ rende
  * Replacement of https://github.com/ueberdosis/tiptap/blob/6676c7e034a46117afdde560a1b25fe75411a21d/packages/react/src/EditorContent.tsx
  * that only takes care of the Portals.
  *
- * Original implementation is messy, and we use a "mount" system in MiaomaDocTiptapEditor.tsx that makes this cleaner
+ * Original implementation is messy, and we use a "mount" system in PageDocTiptapEditor.tsx that makes this cleaner
  */
-export function EditorContent(props: { editor: MiaomaDocEditor<any, any, any>; children: any }) {
+export function EditorContent(props: { editor: PageDocEditor<any, any, any>; children: any }) {
   const [renderers, setRenderers] = useState<Record<string, ReactRenderer>>({})
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-import { useMiaomaDocEditor } from './useMiaomaDocEditor'
+import { usePageDocEditor } from './usePageDocEditor'
 
 export function useOnUploadStart(callback: (blockId?: string) => void) {
-  const editor = useMiaomaDocEditor()
+  const editor = usePageDocEditor()
 
   useEffect(() => {
     return editor.onUploadStart(callback)

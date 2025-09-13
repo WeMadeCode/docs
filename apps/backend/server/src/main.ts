@@ -18,8 +18,8 @@ async function bootstrap() {
 
   // 设置swagger文档相关配置
   const swaggerOptions = new DocumentBuilder()
-    .setTitle('妙码学院企业级文档编辑器 API 文档')
-    .setDescription('妙码学院企业级文档编辑器 API 文档')
+    .setTitle('企业级文档编辑器 API 文档')
+    .setDescription('企业级文档编辑器 API 文档')
     .setVersion('1.0')
     .addBearerAuth()
     .build()
